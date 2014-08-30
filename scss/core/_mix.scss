@@ -1,0 +1,117 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/* mixins */
+
+@mixin clearfix(){
+    &:after {
+        clear: both;
+        content: '';
+        display: table;
+        border-collapse: collapse;
+        /* clearfix */
+    }
+}
+@mixin nosel(){
+    -webkit-user-drag: none;
+    @include user-select(none);
+    // cursor: move;
+}
+@mixin rex($prop, $rem){
+    #{$prop}: $rem * $remx;
+    //#{$prop}: $rem * 1rem;
+}
+@mixin pos($x:0, $y:0){
+    @include rex('left', $x);
+    @include rex('top', $y);
+}
+@mixin siz($w:0, $h:0){
+    @include rex('width', $w);
+    @include rex('height', $h);
+}
+@mixin textshadow() {
+    text-shadow: 1px 1px 1px black;
+}
+@mixin outline($color: $hilite, $width: 4) {
+    outline: {
+        color: yellow; /* fallback */
+        color: $color;
+        offset: $width * -0.5px;
+        style: auto;
+        width: $width * 1px;
+    }
+}
+@mixin setTrans($color, $opacity: 0.5) {
+    background-color: $color; /* fallback2 */
+    background-color: lighten($color, percentage($opacity/2)); /* fallback1 */
+    background-color: setTrans($color, $opacity);
+}
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+@mixin font-archer() {
+    //font-family: 'Archer A', 'Archer B', Georgia, serif;
+    font-family: 'Archer SSm A', 'Archer SSm B', Georgia, serif;
+}
+@mixin font-plain() {
+    font-family: Helvetica, Arial, Geneva, sans-serif;
+}
+@mixin font-thick() {
+    font-family: Verdana, sans-serif;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+// GRADS
+@mixin buttongrad1(){
+    background-color: $button1;
+    @include background-image( linear-gradient(top, $button1 50%, $button2 53%) );
+}
+@mixin graygrad(){
+    background-color: #ddd;
+    @include vgrad( #fefefe, #ddd);
+}
+@mixin buttongrad2(){
+    background-color: $button2;
+    @include background-image( linear-gradient(top, $button2 50%, $button1 53%) );
+}
+@mixin vgrad($clr1: white, $clr2: black){
+    background-color: $clr1;
+    @include background-image( linear-gradient(top, $clr1 33%, $clr2 100%) );
+}
+@mixin hgrad($clr1: white, $clr2: black){
+    background-color: $clr1;
+    @include background-image( linear-gradient(left, $clr1 11%, $clr2 55%, $clr1 88%) );
+}
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+@mixin text-size-adjust ($foo: none) {
+    -webkit-text-size-adjust: $foo;
+    -moz-text-size-adjust: $foo;
+    -ms-text-size-adjust: $foo;
+    -o-text-size-adjust: $foo;
+    text-size-adjust: $foo;
+}
+@mixin ani(){
+    @include transition( all 0.25s ease-in-out 0 );
+}
+@mixin bulge(){
+    @include transform( translate(0px, 1px) scale(1.1)  );
+}
+@mixin fxreset(){
+    @include backface-visibility( hidden );
+    @include perspective( 1000px );
+    @include transform( scale(1) translate3d(0,0,0) rotate(0deg) );
+    @include transform-style( preserve-3d );
+}
+@mixin dotwhite(){
+    color: white;
+    border-bottom: 1px dotted white;
+    text-decoration: none;
+
+    &:hover {
+        border-bottom: 1px solid white;
+    }
+}
+@mixin columny($w: 16em){
+    -webkit-columns: $w;
+    -webkit-column-width: $w;
+    -webkit-column-count: auto;
+    -moz-columns: $w;
+    columns: $w;
+}
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

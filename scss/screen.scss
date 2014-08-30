@@ -1,0 +1,32 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+@import "animation";
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/css3/user-interface";
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+@import "core/_all";
+@import "roto/_all";
+
+.dev *:hover {
+    outline-color: rgba(255,0,0,0.5);
+    outline-offset: -1px;
+    outline-style: solid;
+    outline-width: 1px;
+}
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+@media print {
+    body {
+        background: none;
+    }
+    .noprint {
+        display: none;
+    }
+    #Popup {
+        display: block;
+    }
+    #Wrap {
+        display: none;
+    }
+}
+@import "_misc";
+/* >^º!º^< */

@@ -1,0 +1,21 @@
+{
+    "name": "arturitmo",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dvdrtrgn/arturitmo.git"
+    },
+    "version": "0.1.0",
+    "devDependencies": {
+        "glob": "~3.2.8",
+        "grunt": "~0.4.1",
+        "grunt-contrib-concat": "~0.5.0",
+        "grunt-contrib-connect": "~0.5.0",
+        "grunt-contrib-jshint": "~0.7.2",
+        "grunt-contrib-sass": "~0.8.1",
+        "grunt-contrib-uglify": "~0.3.2",
+        "grunt-contrib-watch": "~0.5.3"
+    },
+    "dependencies": {
+        "load-grunt-tasks": "~0.2.0"
+    }
+}

@@ -1,0 +1,13 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/* define */
+
+// PALETTES
+$wf_red:        #bb0826;    $wf_yellow:     #fcc60a;   $wf_gray:      #8f8f8f;
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+@include keyframes(throb) {
+    33% { opacity: 1.0; }
+    44% { opacity: 0.7; }
+    55% { opacity: 0.8; }
+    66% { opacity: 0.6; }
+    77% { opacity: 1.0; }
+}

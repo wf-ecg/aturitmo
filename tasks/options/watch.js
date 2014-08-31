@@ -30,8 +30,9 @@ module.exports = {
     },
     reloads: {
         options: {
-            livereload: 7999,
+            livereload: 7043,
         },
         files: ['app/**/*'],
+        tasks: ['sync'],
     },
 };

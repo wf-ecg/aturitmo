@@ -10,6 +10,7 @@ module.exports = {
         options: {
             sourceMap: false,
         },
+        dest: 'app/build/boot.js',
         src: [
             'libs/bootstrap/jquery.js',
             'libs/bootstrap/modernizr.js',
@@ -17,19 +18,16 @@ module.exports = {
             'libs/bootstrap/console.js',
             'libs/bootstrap/global.js',
         ],
-        dest: 'app/build/boot.js',
     },
     lib: {
-        src: [
-            'libs/*.js',
-        ],
-        dest: 'app/build/lib.js',
+        files: {
+            'app/build/lib.js': ['libs/*.js'],
+        }
     },
     src: {
-        src: [
-            'scripts/[a-z]*.js', 'scripts/_main.js',
-        ],
-        dest: 'app/build/src.js',
+        files: {
+            'app/build/src.js': ['scripts/[a-z]*.js', 'scripts/_main.js'],
+        }
     },
 };
 

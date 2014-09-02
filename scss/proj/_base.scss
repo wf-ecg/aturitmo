@@ -1,55 +1,66 @@
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 /* PROJ / Base */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+html {
+    font-size: 18px;
 
-$count: 5 !default;
-$peg: 1rem !default;
-
-.iS-port {
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-
-    .loading & {
-        visibility: hidden;
+    body {
+        background-color: black;
+        color: white;
+        font-family: Myriad Pro, sans-serif;
+        font-weight: 400;
     }
-    .iS-view {
-        @include text-size-adjust( none );
-        @include transition( 0.5s cubic() );
-        @include user-select( none );
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        -webkit-touch-callout: none;
-        height: 100%;
-        position: relative;
-        width: 100% * $count;
-
-        & > * {
-            background-color: #eee;
-            background-size: 100% 100%;
-            cursor: -webkit-grab;
-            float: left;
-            position: relative;
-            width: 100% / $count;
-        }
+    div {
+        background-color: gray;
+        clear: both;
+        float: left;
+        margin: 1em;
+        padding: 0.5em 1.5em;
     }
-    .iS-proxy {
-        background-color: rgba(255, 255, 255, 0.5);
-        bottom: $peg;
-        box-sizing: content-box;
-        cursor: pointer;
-        height: $peg;
-        left: $peg;
-        position: absolute;
-        width: $peg * 2 * $count;
-        z-index: 9;
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        line-height: 1;
+        margin: 0.25em 0;
     }
-    .iS-peg {
-        background-color: rgba(255, 255, 255, 0.5);
-        height: $peg;
-        left: 0;
-        position: absolute;
-        width: $peg;
+    h1, h2 {
+        font-family: Archer, Georgia, serif;
+    }
+    h1 {
+        text-transform: uppercase;
+    }
+    h3 {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    h4 {
+        font-weight: 500;
+        font-style: italic;
+    }
+    sup {
+        font-size: 60%;
+    }
+    strong {
+        font-weight: 600;
+    }
+    p {
+        font-size: 1;
+        margin: 0.5em 0;
+    }
+    button {
+        background-color: #be5a00;
+        border: 1px solid white;
+        color: white;
+        font-family: Verdana;
+        font-size: 14px;
+        font-weight: 200;
+        padding: 0.25em 0.5em;
+    }
+    button.play {
+        background-color: white;
+        border-radius: 6px / 12px;
+        color: gray;
+        opacity: 0.8;
+        padding: 0.25em 0.75em;
     }
 }
 

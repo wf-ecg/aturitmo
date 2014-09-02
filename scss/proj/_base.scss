@@ -2,20 +2,23 @@
 /* PROJ / Base */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 html {
-    font-size: 18px;
+    font-size: 20px;
 
     body {
-        background-color: black;
+        background-color: gray;
+        background-image: url('../images/simplified.jpg');
+        background-size: cover;
+        background-attachment: fixed;
         color: white;
         font-family: Myriad Pro, sans-serif;
         font-weight: 400;
     }
     div {
-        background-color: gray;
+        @include shadgrad();
         clear: both;
         float: left;
         margin: 1em;
-        padding: 0.5em 1.5em;
+        padding: 0.5em 1.5em 5em;
     }
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
@@ -26,7 +29,7 @@ html {
         font-family: Archer, Georgia, serif;
     }
     h1 {
-        text-transform: uppercase;
+        /*        text-transform: uppercase;*/
     }
     h3 {
         font-weight: 600;
@@ -43,7 +46,6 @@ html {
         font-weight: 600;
     }
     p {
-        font-size: 1;
         margin: 0.5em 0;
     }
     button {
@@ -53,7 +55,8 @@ html {
         font-family: Verdana;
         font-size: 14px;
         font-weight: 200;
-        padding: 0.25em 0.5em;
+        padding: 0.375em 0.75em;
+
     }
     button.play {
         background-color: white;
@@ -61,6 +64,14 @@ html {
         color: gray;
         opacity: 0.8;
         padding: 0.25em 0.75em;
+    }
+    .buttin {
+        whitespace: nowrap;
+
+        button {
+            float: left;
+            margin-right: 1em;
+        }
     }
 }
 

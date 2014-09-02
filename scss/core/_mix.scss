@@ -78,6 +78,10 @@
     background-color: $clr1;
     @include background-image( linear-gradient(left, $clr1 11%, $clr2 55%, $clr1 88%) );
 }
+@mixin shadgrad($clr1: rgba(0,0,0,0.5), $clr2: rgba(0,0,0,0)){
+/*    background-color: $clr1;*/
+    @include background-image( linear-gradient(top, $clr1 70%, $clr2 90%) );
+}
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 @mixin text-size-adjust ($foo: none) {
     -webkit-text-size-adjust: $foo;

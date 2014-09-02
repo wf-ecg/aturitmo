@@ -33,6 +33,5 @@ module.exports = {
             livereload: 7043,
         },
         files: ['app/**/*'],
-        tasks: ['sync'],
     },
 };

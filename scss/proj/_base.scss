@@ -13,12 +13,50 @@ html {
         font-family: Myriad Pro, sans-serif;
         font-weight: 400;
     }
-    div {
+    header, footer, #Text {
+        position: fixed;
+        text-align: center;
+        width: 100%;
+    }
+    header {
+        height: 10%;
+    }
+    footer {
         @include shadgrad();
-        clear: both;
-        float: left;
-        margin: 1em;
-        padding: 0.5em 1.5em 5em;
+        border-top: 3px solid gold;
+        bottom: 0;
+        height: 2.5%;
+
+        p {
+            background-color: #3e3e3e;
+            font-size: 60%;
+            margin-top: 1px;
+
+            a {
+                padding: 0.5em 2em;
+                line-height: 2;
+
+                &:hover {
+                    background-color: #555;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    #Text {
+        height: 90%;
+        overflow: auto;
+        text-align: left;
+        top: 10%;
+        -webkit-mask: -webkit-linear-gradient(transparent, black 20%, black 80%, transparent) top left / contain;
+
+        div {
+            @include shadgrad();
+            clear: both;
+            float: left;
+            margin: 11em;
+            padding: 0.5em 1.5em 5em;
+        }
     }
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;

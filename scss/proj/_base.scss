@@ -13,7 +13,17 @@ html {
         font-family: Myriad Pro, sans-serif;
         font-weight: 400;
     }
-    header, footer, #Text {
+    button {
+        background-color: #be5a00;
+        border: 1px solid white;
+        color: white;
+        font-family: Verdana;
+        font-size: 13px;
+        font-weight: 200;
+        margin: 0.25em;
+        padding: 0.375em 0.75em;
+    }
+    header, footer {
         position: fixed;
         text-align: center;
         width: 100%;
@@ -25,11 +35,11 @@ html {
         @include shadgrad();
         border-top: 3px solid gold;
         bottom: 0;
-        height: 2.5%;
+        height: 3%;
 
         p {
             background-color: #3e3e3e;
-            font-size: 60%;
+            font-size: 70%;
             margin-top: 1px;
 
             a {
@@ -43,73 +53,38 @@ html {
             }
         }
     }
-    #Text {
-        height: 90%;
-        overflow: auto;
-        text-align: left;
-        top: 10%;
-        -webkit-mask: -webkit-linear-gradient(transparent, black 20%, black 80%, transparent) top left / contain;
-
-        div {
-            @include shadgrad();
-            clear: both;
-            float: left;
-            margin: 11em;
-            padding: 0.5em 1.5em 5em;
-        }
-    }
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
         line-height: 1;
-        margin: 0.25em 0;
+        margin: 0.5em 0;
     }
     h1, h2 {
         font-family: Archer, Georgia, serif;
+        margin-bottom: 0.75em;
     }
     h1 {
-        /*        text-transform: uppercase;*/
+        font-size: 220%;
+    }
+    h2 {
+        font-size: 170%;
     }
     h3 {
         font-weight: 600;
+        margin-top: 0.75em;
         text-transform: uppercase;
     }
     h4 {
         font-weight: 500;
         font-style: italic;
     }
+    p {
+        margin: 0.5em 0;
+    }
     sup {
         font-size: 60%;
     }
     strong {
         font-weight: 600;
-    }
-    p {
-        margin: 0.5em 0;
-    }
-    button {
-        background-color: #be5a00;
-        border: 1px solid white;
-        color: white;
-        font-family: Verdana;
-        font-size: 14px;
-        font-weight: 200;
-        padding: 0.375em 0.75em;
-
-    }
-    button.play {
-        background-color: white;
-        border-radius: 6px / 12px;
-        color: gray;
-        opacity: 0.8;
-        padding: 0.25em 0.75em;
-    }
-    .buttin {
-        whitespace: nowrap;
-
-        button {
-            float: left;
-            margin-right: 1em;
-        }
     }
 }
 

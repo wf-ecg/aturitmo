@@ -2,23 +2,26 @@
 /* PROJ / Custom */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
 #Pics {
     text-align: center;
 }
-
 #Text {
-    height: 90%;
-    overflow: auto;
-    position: fixed;
-    top: 10%;
-    width: 101%;
+    //height: 90%;
+    //overflow: auto;
+    //position: fixed;
+    //top: 10%;
+    //width: 101%;
     -webkit-mask: -webkit-linear-gradient(transparent, black 20%, black 80%, transparent) top left / contain;
 
-    div {
+    div.grad {
         @include shadgrad();
         clear: both;
         float: left;
-        margin: 11em 10%;
         padding: 0.25em 1.5em 5em;
         position: relative;
 

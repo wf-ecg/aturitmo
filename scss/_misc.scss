@@ -1,7 +1,62 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* Misc */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-body {/* test */
-/*     border: 1em solid lime;*/
+* {
+    @include box-sizing( border-box );
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+.wrapper {
+    height: 100%;
+    position: relative;
+}
+.bkgrs {
+    .scroll {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        & > div {
+            position: absolute;
+            @include transform( translateZ(0) );
+        }
+        .touch {
+            @include user-select( none );
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-touch-callout: none;
+        }
+    }
+
+    $num: 8;
+
+    #Pics {
+        background-image: url('../images/full.jpg');
+        background-size: auto 100%;
+
+        > div {
+            height: $num * 100%;
+            $mist: rgba(33,33,33,0.3);
+
+            img {
+                display: inherit;
+                height: 100 / $num * 1%;
+            }
+        }
+    }
+    #Text {
+        $fact: 2;
+        $fract: $num - (1 - (1 / $fact));
+
+        > div {
+            height: $fract * 100 * $fact * 1%;
+            top: 33%;
+
+            > div {
+                height: 100 / $fract * 1%;
+            }
+        }
+    }
+}

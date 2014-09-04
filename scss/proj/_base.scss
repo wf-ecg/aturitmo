@@ -27,40 +27,6 @@ html {
         text-align: center;
         width: 100%;
     }
-    header {
-        height: 15%;
-        max-height: 142px;
-        top: 0;
-
-        img {
-            height: 100%;
-        }
-    }
-    footer {
-        @include shadgrad();
-        bottom: -1px;
-
-        div {
-            border-top: 3px solid gold;
-            height: 1.6rem;
-
-            p {
-                background-color: #3e3e3e;
-                font-size: 70%;
-                margin-top: 1px;
-
-                a {
-                    cursor: pointer;
-                    padding: 0.5em 2em;
-                    line-height: 1.5rem;
-
-                    &:hover {
-                        background-color: #555;
-                    }
-                }
-            }
-        }
-    }
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
         line-height: 1;

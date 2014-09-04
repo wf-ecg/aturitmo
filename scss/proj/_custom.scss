@@ -33,4 +33,39 @@ html, body {
     left: 50%;
     position: fixed;
 }
+header {
+    height: 15%;
+    max-height: 142px;
+    top: 0;
+
+    img {
+        height: 100%;
+    }
+}
+footer {
+    @include shadgrad();
+    bottom: -1px;
+
+    div {
+        border-top: 3px solid gold;
+        height: 1.6rem;
+
+        p {
+            background-color: #3e3e3e;
+            font-size: 70%;
+            margin-top: 1px;
+
+            a {
+                cursor: pointer;
+                line-height: 1.5rem;
+                padding: 0.5em 2em;
+
+                &:hover {
+                    background-color: #555;
+                }
+            }
+        }
+    }
+}
+
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

@@ -15,6 +15,7 @@ html {
         background-color: #be5a00;
         border: 1px solid white;
         color: white;
+        cursor: pointer;
         font-family: Verdana;
         font-size: 13px;
         font-weight: 200;
@@ -37,22 +38,25 @@ html {
     }
     footer {
         @include shadgrad();
-        border-top: 3px solid gold;
         bottom: -1px;
-        height: 1.6rem;
 
-        p {
-            background-color: #3e3e3e;
-            font-size: 70%;
-            margin-top: 1px;
+        div {
+            border-top: 3px solid gold;
+            height: 1.6rem;
 
-            a {
-                padding: 0.5em 2em;
-                line-height: 1.5rem;
+            p {
+                background-color: #3e3e3e;
+                font-size: 70%;
+                margin-top: 1px;
 
-                &:hover {
-                    background-color: #555;
+                a {
                     cursor: pointer;
+                    padding: 0.5em 2em;
+                    line-height: 1.5rem;
+
+                    &:hover {
+                        background-color: #555;
+                    }
                 }
             }
         }

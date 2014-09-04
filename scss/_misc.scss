@@ -61,10 +61,14 @@ body {
 
         > div {
             height: $fract * 100 * $fact * 1%;
-            top: 33%;
 
             > div {
                 height: 100 / $fract * 1%;
+                position: relative;
+
+                > div {
+                    bottom: 60%;
+                }
             }
         }
     }

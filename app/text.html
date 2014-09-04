@@ -21,9 +21,10 @@
         <link href="./build/screen.css" rel="stylesheet">
         <script defer src="./_load.js"></script>
     </head>
-    <body class="loading"><noscript> error: scripting is disabled </noscript>
+    <body class="loading wide"><noscript> error: scripting is disabled </noscript>
 
         <div class="wrapper">
+            <img class="wide gapper" src="../images/p1.jpg" style="visibility: hidden; width: 100%;">
 
             <div id="Pics" class="scroll">
                 <div class="">
@@ -155,7 +156,7 @@
                 </div>
             </div>
 
-            <img src="../images/p1.jpg" style="visibility: hidden; height: 100%;">
+            <img class="high gapper" src="../images/p1.jpg" style="visibility: hidden; height: 100%;">
             <!-- end wrapper -->
         </div>
 
@@ -210,7 +211,6 @@
 
                     myScroll.goToPage(0, (num - 1) * 2); //, time, offsetX, offsetY, easing
                 });
-
 
                 C.debug(myScroll);
             }, 666);

@@ -7,22 +7,36 @@
     margin: 0;
     padding: 0;
 }
-.wrapper {
-//    @include edger2(yellow);
-//    background-color: rgba(222,222,0,0.5);
-    display: inline-block;
-    height: 100%;
-    position: relative;
-    text-align: left;
-    width: auto;
-}
-
 body {
-    background-image: url('../images/full.jpg');
-    background-position: 50% 0%;
-    background-size: auto 100%;
     text-align: center;
 
+    &.high {
+        background-image: url('../images/full.jpg');
+        background-position: 50% 0%;
+        background-size: auto 100%;
+
+        .wrapper {
+            height: 100%;
+            width: auto;
+
+            img.wide {
+                display: none;
+            }
+        }
+    }
+    &.wide {
+        background-image: url('../images/p7.jpg');
+        background-size: 100%;
+
+        .wrapper {
+            height: auto;
+            width: 100%;
+
+            img.high {
+                display: none;
+            }
+        }
+    }
     .scroll {
         bottom: 0;
         left: 0;
@@ -33,6 +47,7 @@ body {
         & > div {
             @include transform( translateZ(0) );
             position: absolute;
+            width: 100%;
         }
         .touch {
             @include user-select( none );
@@ -40,8 +55,16 @@ body {
             -webkit-touch-callout: none;
         }
     }
+}
 
+.wrapper {
     $num: 8;
+
+    //    @include edger2(yellow);
+    //    background-color: rgba(222,222,0,0.5);
+    display: inline-block;
+    position: relative;
+    text-align: left;
 
     #Pics {
 
@@ -52,6 +75,10 @@ body {
             img {
                 display: inherit;
                 height: 100 / $num * 1%;
+
+                .wide & {
+                    width: 100%;
+                }
             }
         }
     }
@@ -63,6 +90,7 @@ body {
             height: $fract * 100 * $fact * 1%;
 
             > div {
+                @include edger2(yellow);
                 height: 100 / $fract * 1%;
                 position: relative;
 

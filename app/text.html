@@ -21,7 +21,7 @@
         <link href="./build/screen.css" rel="stylesheet">
         <script defer src="./_load.js"></script>
     </head>
-    <body class="loading wide"><noscript> error: scripting is disabled </noscript>
+    <body class="loading high"><noscript> error: scripting is disabled </noscript>
 
         <div class="wrapper">
             <img class="wide gapper" src="../images/p1.jpg" style="visibility: hidden; width: 100%;">
@@ -212,6 +212,11 @@
                     var me = $(this), num = me.data('page');
 
                     myScroll.goToPage(0, (num - 1) * 2); //, time, offsetX, offsetY, easing
+                });
+
+                $('img.down').on('click', function () {
+                    myScroll.next();
+                    myScroll.next();
                 });
 
                 C.debug(myScroll);

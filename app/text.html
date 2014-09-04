@@ -1,7 +1,7 @@
 <!--[if IE]><![endif]--><!DOCTYPE html>
 <!--[if lt IE 8]>       <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>          <html lang="en" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->  <html lang="en" class="no-js bkgrs test"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->  <html lang="en" class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta content="ie=edge" http-equiv="x-ua-compatible">
@@ -27,7 +27,7 @@
 
             <div id="Pics" class="scroll">
                 <div class="">
-                    <img src="../images/p1.jpg" style="visibility: hidden;">
+                    <img src="../images/p1.jpg">
                     <img src="../images/p2.jpg">
                     <img src="../images/p3.jpg">
                     <img src="../images/p4.jpg">
@@ -175,7 +175,7 @@
         <script>
             _.delay(function () {
                 var myScroll = new IScroll('#Text', {
-                    mouseWheel: true,
+                    mouseWheel: 0,
                     snap: true,
                     keyBindings: {
                         pageUp: 34,

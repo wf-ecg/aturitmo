@@ -6,7 +6,6 @@ html {
 
     body {
         background-color: gray;
-        background-size: cover;
         background-attachment: fixed;
         color: white;
         font-family: Myriad Pro, sans-serif;
@@ -28,14 +27,19 @@ html {
         width: 100%;
     }
     header {
-        height: 10%;
+        height: 15%;
+        max-height: 142px;
         top: 0;
+
+        img {
+            height: 100%;
+        }
     }
     footer {
         @include shadgrad();
         border-top: 3px solid gold;
-        bottom: 0;
-        height: 3%;
+        bottom: -1px;
+        height: 1.6rem;
 
         p {
             background-color: #3e3e3e;
@@ -44,7 +48,7 @@ html {
 
             a {
                 padding: 0.5em 2em;
-                line-height: 2;
+                line-height: 1.5rem;
 
                 &:hover {
                     background-color: #555;

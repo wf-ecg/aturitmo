@@ -7,11 +7,8 @@ html, body {
     overflow: hidden;
     width: 100%;
 }
-#Pics {
-    //text-align: center;
-}
 #Text {
-    -webkit-mask: -webkit-linear-gradient(transparent, black 20%, black 80%, transparent) top left / contain;
+    -webkit-mask: -webkit-linear-gradient(transparent 10%, black 20%, black 85%, transparent 95%) top left / contain;
 
     div.grad {
         @include shadgrad();

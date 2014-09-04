@@ -8,16 +8,22 @@
     padding: 0;
 }
 .wrapper {
-    @include edger2(yellow);
-    background-image: url('../images/full.jpg');
-    background-size: auto 100%;
+//    @include edger2(yellow);
+//    background-color: rgba(222,222,0,0.5);
+    display: inline-block;
     height: 100%;
     position: relative;
-    width: 99%;
+    text-align: left;
+    width: auto;
 }
-.bkgrs {
+
+body {
+    background-image: url('../images/full.jpg');
+    background-position: 50% 0%;
+    background-size: auto 100%;
+    text-align: center;
+
     .scroll {
-        @include edger(lime);
         bottom: 0;
         left: 0;
         position: absolute;
@@ -25,9 +31,8 @@
         top: 0;
 
         & > div {
-            @include edger(blue);
-            position: absolute;
             @include transform( translateZ(0) );
+            position: absolute;
         }
         .touch {
             @include user-select( none );

@@ -175,7 +175,7 @@
         <script>
             _.delay(function () {
                 var myScroll = new IScroll('#Text', {
-                    mouseWheel: 0,
+                    mouseWheel: true,
                     snap: true,
                     keyBindings: {
                         pageUp: 34,
@@ -190,12 +190,30 @@
                         }],
                 });
 
+                myScroll.on('beforeScrollStart', function (a,b,c) {C.debug('beforeScrollStart');});
+                myScroll.on('scrollCancel', function (a,b,c) {C.debug('scrollCancel');});
+                myScroll.on('scrollStart', function (a,b,c) {C.debug('scrollStart');});
+                myScroll.on('scrollEnd', function (a,b,c) {C.debug('scrollEnd');});
+
                 document.addEventListener('touchmove', function (e) {
                     e.preventDefault();
+                    C.debug('touchmove');
                 }, false);
 
                 C.debug(myScroll);
             }, 666);
+
+/*
+
+    touch ! move
+        beforeScrollStart
+        scrollCancel
+
+    touch & move
+        scrollStart
+        scrollEnd
+
+ */
         </script>
 
     </body>

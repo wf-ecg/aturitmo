@@ -41,13 +41,13 @@ nav.pager {
     $w: 15px;
     $h: 28px;
 
-    @include transition( right 0.5s );
+    @include transition( opacity 0.5s );
     bottom: 0;
     height: $num * $h;
     margin: auto;
     opacity: 0;
     position: absolute;
-    right: $w;
+    right: $w * 1.5;
     top: 0;
     width: $w;
 

@@ -208,6 +208,11 @@
                 jq.addClass('active');
             }
 
+            function activateNum(num) {
+                activate( $('nav.pager a').eq(num) );
+                activate( $('footer p a').eq(num) );
+            }
+
             function getCurrentPage() {
                 return num2page(myScroll.currentPage.pageY);
             }
@@ -238,8 +243,9 @@
                 myScroll.on('scrollStart', function () {C.debug('scrollStart');});
                 myScroll.on('scrollEnd', function () {
                     var page = getCurrentPage();
-
                     C.debug('scrollEnd', 'page', page);
+
+                    activateNum(page - 1);
 
                     if (page == 1) {
                         $('.pager').removeClass('active');

@@ -27,12 +27,6 @@ html, body {
         font-size: 80%;
     }
 }
-.down {
-    bottom: 5%;
-    cursor: pointer;
-    left: 50%;
-    position: fixed;
-}
 header {
     height: 15%;
     max-height: 142px;
@@ -72,6 +66,12 @@ footer {
     @include shadgrad();
     bottom: -1px;
 
+    .down {
+        bottom: 5%;
+        cursor: pointer;
+        left: 50%;
+        position: fixed;
+    }
     div {
         border-top: 3px solid gold;
         height: 1.6rem;

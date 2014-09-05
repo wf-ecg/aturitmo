@@ -207,6 +207,14 @@
                 jq.addClass('active');
             }
 
+            function getCurrentPage() {
+                return num2page(myScroll.currentPage.pageY);
+            }
+
+            function setCurrentPage(num) {
+                myScroll.goToPage(0, num2page(num, 'rev')); //, time, offsetX, offsetY, easing
+            }
+
             _.delay(function () {
                 myScroll = new IScroll('#Text', {
                     mouseWheel: true,
@@ -228,7 +236,7 @@
                 myScroll.on('scrollCancel', function () {C.debug('scrollCancel');});
                 myScroll.on('scrollStart', function () {C.debug('scrollStart');});
                 myScroll.on('scrollEnd', function () {
-                    C.debug('scrollEnd', 'page', num2page(myScroll.currentPage.pageY) );
+                    C.debug('scrollEnd', 'page', getCurrentPage() );
                 });
 
                 document.addEventListener('touchmove', function (e) {
@@ -239,7 +247,7 @@
                 $('nav.pager, footer p').on('click', 'a', function () {
                     var me = $(this), num = me.data('page');
 
-                    myScroll.goToPage(0, num2page(num, 'rev')); //, time, offsetX, offsetY, easing
+                    setCurrentPage(num);
                     activate(me);
                 });
 

@@ -279,6 +279,10 @@
                     W.open('http://www.prizelabs.com/atupasion', 'offsite');
                 });
 
+                $(W).on('resize', function (){
+                    _.delay(W.location.reload(), 99);
+                });
+
                 C.debug(myScroll);
             }, 666);
 

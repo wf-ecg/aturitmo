@@ -163,6 +163,17 @@
                 <img class="left" src="../images/heading-left.png">
                 <img class="right" src="../images/heading-right.png">
             </header>
+
+            <nav class="pager">
+                <a data-page="1" title="Home"></a>
+                <a data-page="2" title="Checking Package Features"></a>
+                <a data-page="3" title="Mobile Banking Tools"></a>
+                <a data-page="4" title="Online Banking Tools"></a>
+                <a data-page="5" title="Finacial Education"></a>
+                <a data-page="6" title="Small Business Checking Packages"></a>
+                <a data-page="7" title="Download"></a>
+            </nav>
+
             <!-- end wrapper -->
         </div>
 
@@ -189,6 +200,11 @@
                 } else {
                     return (num - 1) * iscale;
                 }
+            }
+
+            function activate(jq) {
+                jq.parent().children().removeClass('active');
+                jq.addClass('active');
             }
 
             _.delay(function () {
@@ -220,10 +236,11 @@
                     C.debug('touchmove');
                 }, false);
 
-                $('footer p').on('click', 'a', function () {
+                $('nav.pager, footer p').on('click', 'a', function () {
                     var me = $(this), num = me.data('page');
 
                     myScroll.goToPage(0, num2page(num, 'rev')); //, time, offsetX, offsetY, easing
+                    activate(me);
                 });
 
                 $('img.down').on('click', function () {

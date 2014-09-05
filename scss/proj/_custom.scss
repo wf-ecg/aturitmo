@@ -42,6 +42,32 @@ header {
         height: 100%;
     }
 }
+nav.pager {
+    $num: 8;
+    $w: 15px;
+    $h: 28px;
+
+    bottom: 0;
+    height: $num * $h;
+    margin: auto;
+    position: absolute;
+    right: $w;
+    top: 0;
+    width: $w;
+
+    a {
+        background-image: url('../images/dotted.png');
+        cursor: pointer;
+        display: inline-block;
+        height: $h;
+        opacity: 0.5;
+        width: $w;
+
+        &.active {
+            opacity: 1;
+        }
+    }
+}
 footer {
     @include shadgrad();
     bottom: -1px;
@@ -60,6 +86,9 @@ footer {
                 line-height: 1.5rem;
                 padding: 0.5em 2em;
 
+                &.active {
+                    opacity: 0.5;
+                }
                 &:hover {
                     background-color: #555;
                 }

@@ -181,6 +181,7 @@
             <img class="down" title="Next page" src="../images/down.png">
             <div>
                 <p>
+                    <a data-page="1" style="display: none;">^</a>
                     <a data-page="2">Checking Package Features</a>
                     <a data-page="3">Mobile Banking Tools</a>
                     <a data-page="4">Online Banking Tools</a>
@@ -239,9 +240,12 @@
                     var page = getCurrentPage();
 
                     C.debug('scrollEnd', 'page', page);
-                    if (page === 1) {
+
+                    if (page == 1) {
+                        $('.pager').removeClass('active');
                         $('footer').addClass('active');
                     } else {
+                        $('.pager').addClass('active');
                         $('footer').removeClass('active');
                     }
                 });

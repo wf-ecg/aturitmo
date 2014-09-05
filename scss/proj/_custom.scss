@@ -41,14 +41,19 @@ nav.pager {
     $w: 15px;
     $h: 28px;
 
+    @include transition( right 0.5s );
     bottom: 0;
     height: $num * $h;
     margin: auto;
+    opacity: 0;
     position: absolute;
     right: $w;
     top: 0;
     width: $w;
 
+    &.active {
+        opacity: 1;
+    }
     a {
         background-image: url('../images/dotted.png');
         cursor: pointer;

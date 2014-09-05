@@ -2,8 +2,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', [
         'connect', 'sass',
-        'jshint:precat', 'concat', 'jshint:postcat', 'uglify',
-        'sync', 'watch',
+        'jshint:precat', 'concat', 'jshint:postcat',
+        'uglify', 'sync', 'watch',
     ]);
 
     grunt.registerTask('easy', [

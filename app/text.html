@@ -177,8 +177,8 @@
             <!-- end wrapper -->
         </div>
 
-        <footer>
-            <img class="down" src="../images/down.png">
+        <footer class="active">
+            <img class="down" title="Next page" src="../images/down.png">
             <div>
                 <p>
                     <a data-page="2">Checking Package Features</a>
@@ -236,7 +236,14 @@
                 myScroll.on('scrollCancel', function () {C.debug('scrollCancel');});
                 myScroll.on('scrollStart', function () {C.debug('scrollStart');});
                 myScroll.on('scrollEnd', function () {
-                    C.debug('scrollEnd', 'page', getCurrentPage() );
+                    var page = getCurrentPage();
+
+                    C.debug('scrollEnd', 'page', page);
+                    if (page === 1) {
+                        $('footer').addClass('active');
+                    } else {
+                        $('footer').removeClass('active');
+                    }
                 });
 
                 document.addEventListener('touchmove', function (e) {

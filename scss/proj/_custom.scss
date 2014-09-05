@@ -63,14 +63,16 @@ nav.pager {
     }
 }
 footer {
-    @include shadgrad();
-    bottom: -1px;
+    @include transition( bottom 0.5s );
+    bottom: -2em;
 
+    &.active {
+        bottom: 0;
+    }
     .down {
-        bottom: 5%;
         cursor: pointer;
-        left: 50%;
-        position: fixed;
+        margin-bottom: 1em;
+        position: relative;
     }
     div {
         border-top: 3px solid gold;

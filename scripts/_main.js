@@ -124,6 +124,12 @@ var Main = (function ($, G, U) { // IIFE
             _.delay(W.location.reload(), 99);
         });
 
+        $('#Page8').on('inview', function (evt, vis, lr, tb) { // visi?, left+right, top+bottom
+            if (tb === 'top') {
+                setCurrentPage(0.5, 0);
+            }
+        });
+
         if (U.debug(1)) {
             C.debug(myScroll);
         }

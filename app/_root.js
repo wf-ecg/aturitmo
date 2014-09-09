@@ -11,15 +11,15 @@ W.ROOT = ({
     conf: {
         'www.wellsfargomedia.com': {
             nom: 'wfmedia',
-            sub: '/arturitmo',
+            sub: '/aturitmo',
         },
         '10.89.101.100': {
             nom: 'qla2',
-            sub: '/wf-ecg/arturitmo',
+            sub: '/wf-ecg/aturitmo',
         },
         'localhost:8000': {
             nom: 'localhost',
-            sub: '/wf-ecg/arturitmo',
+            sub: '/wf-ecg/aturitmo/app',
         },
         '127.0.0.1:8043': {
             nom: 'localhost',

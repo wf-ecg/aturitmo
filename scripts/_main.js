@@ -13,6 +13,14 @@ var Main = (function ($, G, U) { // IIFE
         inits: function () {
             body = $('body');
             html = $('html');
+            C.info(jsView.port.aspect());
+            if (jsView.port.aspect() > 1) {
+                body.removeClass('wide').addClass('high');
+            } else {
+                body.removeClass('high').addClass('wide');
+            }
+
+            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil);
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -121,7 +129,11 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         $(W).on('resize', function () {
-            _.delay(W.location.reload(), 99);
+            C.debug('resize', jsView.port.orientation(), jsView.port.aspect());
+
+            _.delay(function () {
+                W.location.reload();
+            }, 333);
         });
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { // visi?, left+right, top+bottom
@@ -143,7 +155,6 @@ var Main = (function ($, G, U) { // IIFE
         }
         Df.inits();
         self.serv = W.location.hostname;
-        C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil);
 
         _.delay(bindings);
     }

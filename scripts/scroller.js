@@ -11,8 +11,9 @@ var Scroller = (function ($, G, U) { // IIFE
 
     Df = { // DEFAULTS
         cfig: {
+            momentum: true,
             mouseWheel: true,
-            snap: true,
+            //snap: true,
             keyBindings: {
                 pageUp: 34,
                 pageDown: 33,
@@ -27,7 +28,7 @@ var Scroller = (function ($, G, U) { // IIFE
             }],
         },
         obj: null,
-        x:{
+        x: {
             eventPassthrough: false,
             momentum: true,
             scrollX: 1,
@@ -42,6 +43,10 @@ var Scroller = (function ($, G, U) { // IIFE
     /// HELPERS
     //  defaults dependancy only
 
+    function lilround(num) {
+        return Math.round(num * 10 | 0) / 10;
+    }
+
     function num2page(num, rev) {
         if (!rev) {
             return (num) / iscale + 1;
@@ -50,12 +55,41 @@ var Scroller = (function ($, G, U) { // IIFE
         }
     }
 
+    function page2pix(num, per) {
+        return -(num * per);
+    }
+
+    function pix2page(num, per) {
+        return lilround(-num / per);
+    }
+
+    IScroll.prototype.drtObj = function () {
+        return {
+            obj: this,
+            pageTot: this.maxScrollY / -this.wrapperHeight,
+            toBottom: this.y - this.maxScrollY,
+            page: lilround(-this.y / this.wrapperHeight),
+            percent: lilround(this.y / this.maxScrollY * 100),
+        };
+    };
+
+    IScroll.prototype._getCurrentPage = function () {
+        return pix2page(this.y, this.wrapperHeight);
+    };
+
     IScroll.prototype.getCurrentPage = function () {
+        if (U.undef(this.currentPage)) {
+            return num2page(this._getCurrentPage());
+        }
         return num2page(this.currentPage.pageY);
     };
 
     IScroll.prototype.setCurrentPage = function (num, time) {
-        this.goToPage(0, num2page(num, 'rev'), time); //, time, offsetX, offsetY, easing
+        if (U.undef(this.currentPage)) {
+            this.scrollTo(0, page2pix(num2page(num, 'rev'), this.wrapperHeight), 400);
+        } else {
+            this.goToPage(0, num2page(num, 'rev'), time); //, time, offsetX, offsetY, easing
+        }
     };
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

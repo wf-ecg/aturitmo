@@ -14,9 +14,10 @@
     float: right;
 }
 body {
+    position: relative;
     text-align: center;
 
-    &.high {
+    &.high, &.slim {
         background-image: url('../images/full.jpg');
         background-position: 50% 0%;
         background-size: auto 100%;
@@ -25,10 +26,20 @@ body {
             height: 100%;
             //min-height: 840px;
             width: auto;
-
-            img.wide {
-                display: none;
-            }
+        }
+    }
+    &.high {
+        img.wide {
+            display: none;
+        }
+    }
+    &.slim {
+        .bkgrs img {
+            position: relative;
+            float: right;
+        }
+        img.high {
+            display: none;
         }
     }
     &.wide {
@@ -100,7 +111,7 @@ body {
                 position: relative;
 
                 > div {
-                    bottom: 55%;
+                    bottom: 52.5%;
                 }
             }
         }

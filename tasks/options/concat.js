@@ -8,7 +8,7 @@ module.exports = {
     },
     bootstrap: {
         options: {
-            sourceMap: false,
+            sourceMap: false, // see uglify for map
         },
         dest: 'app/build/boot.js',
         src: [

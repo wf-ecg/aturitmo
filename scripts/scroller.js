@@ -6,119 +6,125 @@ var Scroller = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Scroller',
         self = new G.constructor(name, '(wrap iscroll controller)'),
+        myScroll, iscale = 2, total = 7,
         Df;
 
     Df = { // DEFAULTS
-        all: [],
-        speed: 7777,
-        /* auto advance */
-        iscroll: {
+        cfig: {
+            mouseWheel: true,
+            snap: true,
+            keyBindings: {
+                pageUp: 34,
+                pageDown: 33,
+                up: 40,
+                down: 38
+            },
             indicators: [{
-                el: null,
-                /* later */
+                el: $('#Pics')[0],
+                ignoreBoundaries: true,
+                // interactive: true,
                 resize: false,
-                interactive: true,
             }],
-            keyBindings: false,
+        },
+        obj: null,
+        x:{
             eventPassthrough: false,
             momentum: true,
             scrollX: 1,
             scrollY: 0,
-            snap: true,
             snapSpeed: 999,
         },
-        current: null,
-        inits: function () {},
+        inits: function () {
+            this.obj = myScroll = new IScroll('#Text', this.cfig);
+        },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// HELPERS
     //  defaults dependancy only
-    Scroller.wrap = function () {};
 
-    function scrollNext(scroller) {
-        if (U.debug(2)) {
-            C.debug(name, 'scrollNext', scroller);
+    function num2page(num, rev) {
+        if (!rev) {
+            return (num) / iscale + 1;
+        } else {
+            return (num - 1) * iscale;
         }
-        var ln, pg;
-
-        ln = scroller.pages.length;
-        pg = (1 + scroller.currentPage.pageX) % ln;
-        scroller._execEvent('scrollStart'); // polyfill event
-        _.delay(function () {
-            scroller.goToPage(pg, 0);
-        }, Df.iscroll.snapSpeed / 3);
     }
+
+    IScroll.prototype.getCurrentPage = function () {
+        return num2page(this.currentPage.pageY);
+    };
+
+    IScroll.prototype.setCurrentPage = function (num, time) {
+        this.goToPage(0, num2page(num, 'rev'), time); //, time, offsetX, offsetY, easing
+    };
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// INTERNAL
 
-    function _autoScroll(scroller) {
-        if (U.debug(2)) {
-            C.debug(name, '_autoScroll', scroller);
-        }
-        if (!scroller.pages) {
-            return;
-        }
-        return W.setInterval(function () {
-            scrollNext(scroller);
-        }, Df.speed);
+    function activate(jq) {
+        jq.parent().children().removeClass('active');
+        jq.addClass('active');
     }
 
-    function _attachPort(sel) {
-        var port, proxy, scroller;
+    function activateNum(num) {
+        activate($('nav.pager a').eq(num));
+        activate($('footer p a').eq(num));
+    }
 
-        self.init(); // bueller?
-        port = $(sel);
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    /// HANDLERS
 
-        if (U.debug(2)) {
-            C.debug(name, '_attachPort', sel);
-        }
-        if (!port.length) {
-            return {};
-        }
-        proxy = port.find('.iS-proxy');
+    function bindings() {
 
-        proxy.on('click', function (evt) {
-            var aprox = ({
-                pg: null,
-                w: proxy.outerWidth(),
-                x: evt.offsetX,
-                y: evt.offsetY,
-                ln: scroller.pages.length,
-                et: $(evt.target),
-                ev: evt,
-                calc: function () {
-                    this.pg = (this.x / this.w * this.ln) | 0;
-                    return this;
-                },
-            }).calc();
+        myScroll.on('beforeScrollStart', function () {
+            C.debug('beforeScrollStart');
+        });
+        myScroll.on('scrollCancel', function () {
+            C.debug('scrollCancel');
+        });
+        myScroll.on('scrollStart', function () {
+            C.debug('scrollStart', 'page', myScroll.getCurrentPage());
+        });
+        myScroll.on('scrollEnd', function () {
+            var page = myScroll.getCurrentPage();
 
-            if (U.debug(2)) {
-                C.debug(name, '_attachPort proxy calc', evt.type, aprox);
+            C.debug('scrollEnd', 'page', page);
+
+            activateNum(page - 1);
+
+            if (page == 1) {
+                $('.pager').removeClass('active');
+                $('footer').addClass('active');
+            } else {
+                $('.pager').addClass('active');
+                $('footer').removeClass('active');
             }
-            scroller._execEvent('scrollStart'); // polyfill event
-            scroller.goToPage(aprox.pg, 0);
+            if (page > total) {
+                myScroll.setCurrentPage(0.5, 0);
+            }
         });
 
-        proxy.on('advance.' + name, function () {
-            scrollNext(scroller);
+        $('nav.pager, footer p').on('click', 'a', function () {
+            var me = $(this), num = me.data('page');
+
+            myScroll.setCurrentPage(num);
+            activate(me);
         });
 
-        Df.iscroll.indicators[0].el = proxy.get(0);
-        scroller = new IScroll(port.get(0), Df.iscroll); //github.com/cubiq/iscroll
-        scroller.on('scrollStart', function () {
-            port.addClass('scrolling');
-        });
-        scroller.on('scrollEnd', function () {
-            port.removeClass('scrolling');
+        $('img.down').on('click', function () {
+            myScroll.setCurrentPage((myScroll.getCurrentPage() + 1) % (total + 0.5));
         });
 
-        // store IScroll (internally and as data on wrapper)
-        Df.all.push(scroller);
-        port.data(name, scroller);
-        return scroller;
+        $('#Page8').on('inview', function (evt, vis, lr, tb) { // visi?, left+right, top+bottom
+            if (tb === 'top') {
+                myScroll.setCurrentPage(0.5, 0);
+            }
+        });
+
+        if (U.debug(1)) {
+            C.debug(myScroll);
+        }
     }
-
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
     function _init() {
@@ -126,14 +132,13 @@ var Scroller = (function ($, G, U) { // IIFE
             return null;
         }
         Df.inits();
+        bindings();
         return self;
     }
 
     $.extend(self, {
         __: Df,
         init: _init,
-        attach: _attachPort,
-        auto: _autoScroll,
     });
 
     return self;

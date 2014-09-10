@@ -21,21 +21,21 @@
         <link href="./build/screen.css" rel="stylesheet">
         <script defer src="./_load.js"></script>
     </head>
-    <body class="loading high"><noscript> error: scripting is disabled </noscript>
+    <body class="loading wide"><noscript> error: scripting is disabled </noscript>
 
         <div class="wrapper">
             <img class="wide gapper" src="./images/p1.jpg" style="visibility: hidden; width: 100%;">
 
             <div id="Pics" class="scroll">
-                <div class="">
-                    <img src="./images/p1.jpg">
-                    <img src="./images/p2.jpg">
-                    <img src="./images/p3.jpg">
-                    <img src="./images/p4.jpg">
-                    <img src="./images/p5.jpg">
-                    <img src="./images/p6.jpg">
-                    <img src="./images/p7-cut.png">
-                    <img src="./images/p7b-end.png">
+                <div class="bkgrs">
+                    <img src="./images/p1.png" style="left: 35%;">
+                    <img src="./images/p2.jpg" style="left: 35%;">
+                    <img src="./images/p3.jpg" style="left: 10%;">
+                    <img src="./images/p4.jpg" style="left: 30%;">
+                    <img src="./images/p5.jpg" style="left: 15%;">
+                    <img src="./images/p6.jpg" style="left: 40%;">
+                    <img src="./images/p7.png" style="left: 35%;">
+                    <img src="./images/p8.png" style="left: 35%;">
                 </div>
             </div>
 
@@ -74,17 +74,16 @@
                     <!--
             3
                     -->
-                    <div id="Page3"><div class="grad" style="width: 50%;">
+                    <div id="Page3"><div class="grad">
                             <h2>Recurso de Banca Móvil</h2>
                             <h3>Banca Móvil de Wells Fargo: </h3>
                             <h4><em> En casi cualquier lugar o momento … y listo </em></h4>
-                            <img style="position: relative; left: -0.75rem;" class="left" src="./images/vid1.png">
-                            <p> <br>Podrás depositar cheques rápido, fácil <br>
+                            <img src="./images/vid1.png">
+                            <p>Podrás depositar cheques rápido, fácil <br>
                                 y seguro con tu teléfono inteligente.<br>
                             </p>
                             <br style="clear: both;">
-                            <br style="clear: both;">
-                            <img style="position: relative; left: -0.75rem;" class="left" src="./images/vid2.png">
+                            <img src="./images/vid2.png">
                             <p> Podrás enviar y recibir dinero desde <br>
                                 tu teléfono, dentro de los Estados <br>
                                 Unidos con Wells Fargo SurePay<sup>SM</sup></p>
@@ -184,7 +183,7 @@
                     <a data-page="2">Checking Package Features</a>
                     <a data-page="3">Mobile Banking Tools</a>
                     <a data-page="4">Online Banking Tools</a>
-                    <a data-page="5">Finacial Education</a>
+                    <a data-page="5">Financial Education</a>
                     <a data-page="6">Small Business Checking Packages</a>
                     <a data-page="7">Download</a>
                 </p>
@@ -192,110 +191,7 @@
         </footer>
 
         <script>
-            var myScroll, iscale = 2, total = 7;
 
-            function num2page(num, rev) {
-                if (!rev) {
-                    return (num) / iscale + 1 ;
-                } else {
-                    return (num - 1) * iscale;
-                }
-            }
-
-            function activate(jq) {
-                jq.parent().children().removeClass('active');
-                jq.addClass('active');
-            }
-
-            function activateNum(num) {
-                activate( $('nav.pager a').eq(num) );
-                activate( $('footer p a').eq(num) );
-            }
-
-            function getCurrentPage() {
-                return num2page(myScroll.currentPage.pageY);
-            }
-
-            function setCurrentPage(num, time) {
-                myScroll.goToPage(0, num2page(num, 'rev'), time); //, time, offsetX, offsetY, easing
-            }
-
-            _.delay(function () {
-                myScroll = new IScroll('#Text', {
-                    mouseWheel: true,
-                    snap: true,
-                    keyBindings: {
-                        pageUp: 34,
-                        pageDown: 33,
-                        up: 40,
-                        down: 38
-                    },
-                    indicators: [{
-                            el: $('#Pics')[0],
-                            ignoreBoundaries: true,
-                            resize: false,
-                        }],
-                });
-
-                myScroll.on('beforeScrollStart', function () {C.debug('beforeScrollStart');});
-                myScroll.on('scrollCancel', function () {C.debug('scrollCancel');});
-                myScroll.on('scrollStart', function () {C.debug('scrollStart');});
-                myScroll.on('scrollEnd', function () {
-                    var page = getCurrentPage();
-                    C.debug('scrollEnd', 'page', page);
-
-                    activateNum(page - 1);
-
-                    if (page == 1) {
-                        $('.pager').removeClass('active');
-                        $('footer').addClass('active');
-                    } else {
-                        $('.pager').addClass('active');
-                        $('footer').removeClass('active');
-                    }
-                    if (page > total) {
-                        setCurrentPage(0.5, 0);
-                    }
-                });
-
-                document.addEventListener('touchmove', function (e) {
-                    e.preventDefault();
-                    C.debug('touchmove');
-                }, false);
-
-                $('nav.pager, footer p').on('click', 'a', function () {
-                    var me = $(this), num = me.data('page');
-
-                    setCurrentPage(num);
-                    activate(me);
-                });
-
-                $('img.down').on('click', function () {
-                    setCurrentPage((getCurrentPage() + 1) % (total + 0.5));
-                });
-
-                $('button').on('click', function () {
-                    W.open('http://www.prizelabs.com/atupasion', 'offsite');
-                });
-
-                $(W).on('resize', function (){
-                    _.delay(W.location.reload(), 99);
-                });
-
-                C.debug(myScroll);
-            }, 666);
-
-/*
-
-    touch ! move
-        beforeScrollStart
-        scrollCancel
-
-    touch & move
-        scrollStart
-        scrollEnd
-
- */
         </script>
 
     </body>

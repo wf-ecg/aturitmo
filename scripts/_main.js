@@ -1,6 +1,6 @@
 /*jslint white:false, evil:true */
-/*globals _, C, W, Glob, Util, jQuery,
-        Scroller, Projector, */
+/*globals _, C, W, Glob, ROOT, Util, jQuery,
+        IScroll, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Main = (function ($, G, U) { // IIFE
     'use strict';
@@ -9,29 +9,49 @@ var Main = (function ($, G, U) { // IIFE
         Df, body, html;
 
     Df = { // DEFAULTS
-        projector: null,
+        myScroll: null,
         inits: function () {
+            var shape = jsView.port.orientation();
+
             body = $('body');
             html = $('html');
+
+            if (shape === 'landscape') {
+                body.removeClass('wide').addClass('high');
+            } else if (shape === 'portrait') {
+                body.removeClass('wide').addClass('slim');
+            }
+
+            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape);
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     // HELPERS (defaults dependancy only)
     // func to contextualize content
 
-    function bindProjector() {
-        Df.projector = Projector.attach('.iS-port');
-
-        if (U.debug()) {
-            Df.projector.toggle();
-        }
-    }
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    /// INTERNAL
+    /// HANDLERS
 
     function bindings() {
-        bindProjector();
+
+        W.document.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+            C.debug('touchmove');
+        }, false);
+
+        $(W).on('resize', function () {
+            C.debug('resize', jsView.port.orientation(), jsView.port.aspect());
+
+            _.delay(function () {
+                W.location.reload();
+            }, 333);
+        });
+
+        $('button').on('click', function () {
+            W.open('http://www.prizelabs.com/atupasion', 'offsite');
+        });
     }
+
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// INTERNAL
 
@@ -41,9 +61,9 @@ var Main = (function ($, G, U) { // IIFE
         }
         Df.inits();
         self.serv = W.location.hostname;
-        C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil);
 
         _.delay(bindings);
+        Df.myScroll = Scroller.init();
     }
 
     $.extend(self, {
@@ -62,6 +82,13 @@ var Main = (function ($, G, U) { // IIFE
 
 /*
 
+    touch ! move
+        beforeScrollStart
+        scrollCancel
+
+    touch & move
+        scrollStart
+        scrollEnd
 
 
  */

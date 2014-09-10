@@ -43,13 +43,9 @@ var Main = (function ($, G, U) { // IIFE
             C.debug('touchmove');
         }, false);
 
-        $(W).on('resize', function () {
-            C.debug('resize', jsView.port.orientation(), jsView.port.aspect());
-
-            _.delay(function () {
-                W.location.reload();
-            }, 333);
-        });
+        $(W).on('resize', _.debounce(function () {
+            W.location.reload();
+        }, 333, false));
 
         $('button').on('click', function (evt) {
             var me = $(evt.target);

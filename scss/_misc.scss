@@ -13,6 +13,16 @@
 .right {
     float: right;
 }
+html.esp {
+    .eng {
+        display: none;
+    }
+}
+html.eng {
+    .esp {
+        display: none;
+    }
+}
 body {
     position: relative;
     text-align: center;

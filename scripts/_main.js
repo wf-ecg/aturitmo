@@ -16,6 +16,10 @@ var Main = (function ($, G, U) { // IIFE
             body = $('body');
             html = $('html');
 
+            if (jsView.mobile.agent()) {
+                html.addClass('mini');
+                jsView.mobile.addBug();
+            }
             if (shape === 'landscape') {
                 body.removeClass('wide').addClass('high');
             } else if (shape === 'portrait') {
@@ -47,9 +51,19 @@ var Main = (function ($, G, U) { // IIFE
             }, 333);
         });
 
-        $('button').on('click', function () {
-            W.open('http://www.prizelabs.com/atupasion', 'offsite');
+        $('button').on('click', function (evt) {
+            var me = $(evt.target);
+
+            W.open(me.data('url'), 'offsite');
         });
+
+        $('.grad').on('click', function () {
+            if (html.is('.esp')) {
+                html.removeClass('esp').addClass('eng');
+            } else {
+                html.removeClass('eng').addClass('esp');
+            }
+        })
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

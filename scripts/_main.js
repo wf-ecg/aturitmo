@@ -11,16 +11,18 @@ var Main = (function ($, G, U) { // IIFE
     Df = { // DEFAULTS
         myScroll: null,
         inits: function () {
+            var shape = jsView.port.orientation();
+
             body = $('body');
             html = $('html');
 
-            if (jsView.port.aspect() > 1) {
+            if (shape === 'landscape') {
                 body.removeClass('wide').addClass('high');
-            } else {
-                body.removeClass('high').addClass('wide');
+            } else if (shape === 'portrait') {
+                body.removeClass('wide').addClass('slim');
             }
 
-            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil);
+            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape);
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

@@ -8,7 +8,7 @@ html, body {
     width: 100%;
 }
 #Text {
-    -webkit-mask: -webkit-linear-gradient(transparent 10%, black 20%, black 85%, transparent 95%) top left / contain;
+    -webkit-mask: -webkit-linear-gradient(transparent 10%, black 20%, black 90%, transparent 99%) top left / contain;
 
     div.grad {
         @include shadgrad();
@@ -18,7 +18,7 @@ html, body {
         position: absolute;
 
         aside {
-            left: 120%;
+            left: 105%;
             position: absolute;
             top: 20%;
         }
@@ -76,7 +76,7 @@ footer {
     }
     .down {
         cursor: pointer;
-        margin-bottom: 1em;
+        margin: -5em 0 0.5em;
         position: relative;
     }
     div {
@@ -85,13 +85,14 @@ footer {
 
         p {
             background-color: #3e3e3e;
-            font-size: 70%;
+            font-size: 65%;
             margin-top: 1px;
 
             a {
                 cursor: pointer;
                 line-height: 1.5rem;
-                padding: 0.5em 2em;
+                padding: 0.5em 1em;
+                white-space: nowrap;
 
                 &.active {
                     opacity: 0.5;

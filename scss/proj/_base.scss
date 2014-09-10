@@ -5,10 +5,10 @@ html {
     font-size: 20px;
 
     body {
+        @include font-plain();
         background-color: gray;
         background-attachment: fixed;
         color: white;
-        font-family: Myriad Pro, sans-serif;
         font-weight: 400;
     }
     button {
@@ -28,19 +28,19 @@ html {
         width: 100%;
     }
     h1, h2, h3, h4, h5, h6 {
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1;
         margin: 0.5em 0;
     }
     h1, h2 {
-        font-family: Archer, Georgia, serif;
+        @include font-archer();
         margin-bottom: 0.75em;
     }
     h1 {
-        font-size: 220%;
+        font-size: 200%;
     }
     h2 {
-        font-size: 170%;
+        font-size: 150%;
     }
     h3 {
         font-weight: 600;

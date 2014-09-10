@@ -16,6 +16,10 @@ var Main = (function ($, G, U) { // IIFE
             body = $('body');
             html = $('html');
 
+            if (jsView.mobile.agent()) {
+                html.addClass('mini');
+                jsView.mobile.addBug();
+            }
             if (shape === 'landscape') {
                 body.removeClass('wide').addClass('high');
             } else if (shape === 'portrait') {

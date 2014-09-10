@@ -1,0 +1,26 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/* PROJ / Text */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+#Text {
+    -webkit-mask: -webkit-linear-gradient(transparent 10%, black 20%, black 90%, transparent 99%) top left / contain;
+
+    div.grad {
+        @include shadgrad();
+        clear: both;
+        float: left;
+        padding: 0.5em 2em 4em;
+        position: absolute;
+
+        aside {
+            left: 105%;
+            position: absolute;
+            top: 20%;
+        }
+    }
+    p {
+        font-size: 80%;
+    }
+}
+
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

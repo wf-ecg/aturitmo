@@ -7,26 +7,6 @@ html, body {
     overflow: hidden;
     width: 100%;
 }
-#Text {
-    -webkit-mask: -webkit-linear-gradient(transparent 10%, black 20%, black 90%, transparent 99%) top left / contain;
-
-    div.grad {
-        @include shadgrad();
-        clear: both;
-        float: left;
-        padding: 0.5em 2em 4em;
-        position: absolute;
-
-        aside {
-            left: 105%;
-            position: absolute;
-            top: 20%;
-        }
-    }
-    p {
-        font-size: 80%;
-    }
-}
 header {
     height: 15%;
     max-height: 100px;
@@ -35,38 +15,6 @@ header {
     img {
         @include nosel();
         height: 100%;
-    }
-}
-nav.pager {
-    @include nosel();
-    $num: 8;
-    $w: 15px;
-    $h: 28px;
-
-    @include transition( opacity 0.5s );
-    bottom: 0;
-    height: $num * $h;
-    margin: auto;
-    opacity: 0;
-    position: absolute;
-    right: $w * 1.5;
-    top: 0;
-    width: $w;
-
-    &.active {
-        opacity: 1;
-    }
-    a {
-        background-image: url('../images/dotted.png');
-        cursor: pointer;
-        display: inline-block;
-        height: $h;
-        opacity: 0.5;
-        width: $w;
-
-        &.active {
-            opacity: 1;
-        }
     }
 }
 footer {

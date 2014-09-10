@@ -1,10 +1,13 @@
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
-/* ROTO */
+/* PROJ */
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 $count: 4;
 $peg: 17.4px;
 $gap: $peg * 1.1;
 
+@mixin shadgrad($clr1: rgba(11, 11, 11, 0.5), $clr2: rgba(0, 0, 0, 0) ){
+    @include background-image( linear-gradient(top, $clr1 80%, $clr2 95%) );
+}
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 @import "_base";
 @import "_custom";

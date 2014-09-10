@@ -1,0 +1,107 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/* PROJ / Custom */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+#Text {
+    -webkit-mask: -webkit-linear-gradient(transparent 10%, black 20%, black 85%, transparent 95%) top left / contain;
+
+    div.grad {
+        @include shadgrad();
+        clear: both;
+        float: left;
+        padding: 0.5em 2em 4em;
+        position: absolute;
+
+        aside {
+            left: 120%;
+            position: absolute;
+            top: 20%;
+        }
+    }
+    p {
+        font-size: 80%;
+    }
+}
+header {
+    height: 15%;
+    max-height: 142px;
+    top: 0;
+
+    img {
+        height: 100%;
+    }
+}
+nav.pager {
+    $num: 8;
+    $w: 15px;
+    $h: 28px;
+
+    @include transition( opacity 0.5s );
+    bottom: 0;
+    height: $num * $h;
+    margin: auto;
+    opacity: 0;
+    position: absolute;
+    right: $w * 1.5;
+    top: 0;
+    width: $w;
+
+    &.active {
+        opacity: 1;
+    }
+    a {
+        background-image: url('../images/dotted.png');
+        cursor: pointer;
+        display: inline-block;
+        height: $h;
+        opacity: 0.5;
+        width: $w;
+
+        &.active {
+            opacity: 1;
+        }
+    }
+}
+footer {
+    @include transition( bottom 0.5s );
+    bottom: -2em;
+
+    &.active {
+        bottom: 0;
+    }
+    .down {
+        cursor: pointer;
+        margin-bottom: 1em;
+        position: relative;
+    }
+    div {
+        border-top: 3px solid gold;
+        height: 1.6rem;
+
+        p {
+            background-color: #3e3e3e;
+            font-size: 70%;
+            margin-top: 1px;
+
+            a {
+                cursor: pointer;
+                line-height: 1.5rem;
+                padding: 0.5em 2em;
+
+                &.active {
+                    opacity: 0.5;
+                }
+                &:hover {
+                    background-color: #555;
+                }
+            }
+        }
+    }
+}
+
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

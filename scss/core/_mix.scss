@@ -30,6 +30,18 @@
 @mixin textshadow() {
     text-shadow: 1px 1px 1px black;
 }
+@mixin edger($color: rgb(255,155,5)) {
+    outline-color: setTrans($color, 0.5);
+    outline-offset: 0.5px;
+    outline-style: solid;
+    outline-width: 1px;
+}
+@mixin edger2($color: rgb(255,155,5)) {
+    outline-color: setTrans($color, 0.5);
+    outline-offset: 1px;
+    outline-style: solid;
+    outline-width: 2px;
+}
 @mixin outline($color: $hilite, $width: 4) {
     outline: {
         color: yellow; /* fallback */

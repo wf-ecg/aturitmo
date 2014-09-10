@@ -1,7 +1,108 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* Misc */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-body {/* test */
-/*     border: 1em solid lime;*/
+* {
+    @include box-sizing( border-box );
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+body {
+    text-align: center;
+
+    &.high {
+        background-image: url('../images/full.jpg');
+        background-position: 50% 0%;
+        background-size: auto 100%;
+
+        .wrapper {
+            height: 100%;
+            //min-height: 840px;
+            width: auto;
+
+            img.wide {
+                display: none;
+            }
+        }
+    }
+    &.wide {
+        background-image: url('../images/p7.jpg');
+        background-size: 100%;
+
+        .wrapper {
+            height: auto;
+            width: 100%;
+            //min-width: 1024px;
+
+            img.high {
+                display: none;
+            }
+        }
+    }
+    .scroll {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        & > div {
+            @include transform( translateZ(0) );
+            position: absolute;
+            width: 100%;
+        }
+    }
+}
+.touch {
+    @include user-select( none );
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+.wrapper {
+    $num: 8;
+    // @include edger2(yellow);
+    // background-color: rgba(222,222,0,0.5);
+    display: inline-block;
+    position: relative;
+    text-align: left;
+
+    #Pics {
+
+        > div {
+            height: $num * 100%;
+            $mist: rgba(33,33,33,0.3);
+
+            img {
+                display: inherit;
+                height: 100 / $num * 1%;
+
+                .wide & {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    #Text {
+        $fact: 2;
+        $fract: $num - (1 - (1 / $fact));
+
+        > div {
+            height: $fract * 100 * $fact * 1%;
+
+            > div {
+                height: 100 / $fract * 1%;
+                position: relative;
+
+                > div {
+                    bottom: 55%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/* PROJ / Base */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+html {
+    font-size: 20px;
+
+    body {
+        background-color: gray;
+        background-attachment: fixed;
+        color: white;
+        font-family: Myriad Pro, sans-serif;
+        font-weight: 400;
+    }
+    button {
+        background-color: #be5a00;
+        border: 1px solid white;
+        color: white;
+        cursor: pointer;
+        font-family: Verdana;
+        font-size: 13px;
+        font-weight: 200;
+        margin: 0.25em;
+        padding: 0.375em 0.75em;
+    }
+    header, footer {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        line-height: 1;
+        margin: 0.5em 0;
+    }
+    h1, h2 {
+        font-family: Archer, Georgia, serif;
+        margin-bottom: 0.75em;
+    }
+    h1 {
+        font-size: 220%;
+    }
+    h2 {
+        font-size: 170%;
+    }
+    h3 {
+        font-weight: 600;
+        margin-top: 0.75em;
+        text-transform: uppercase;
+    }
+    h4 {
+        font-weight: 500;
+        font-style: italic;
+    }
+    p {
+        margin: 0.5em 0;
+    }
+    sup {
+        font-size: 60%;
+    }
+    strong {
+        font-weight: 600;
+    }
+}
+
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

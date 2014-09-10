@@ -12,9 +12,13 @@ header {
     max-height: 100px;
     top: 0;
 
+    .mini & {
+        height: 12.5%;
+    }
     img {
         @include nosel();
         height: 100%;
+        margin: 0 0.5em;
     }
 }
 footer {
@@ -22,7 +26,7 @@ footer {
     @include transition( bottom 0.5s );
     bottom: -2em;
 
-    &.active {
+    html:not(.mini) &.active {
         bottom: 0;
     }
     .down {

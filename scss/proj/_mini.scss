@@ -3,10 +3,12 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 .mini {
-    nav.pager {
+    font-size: 75%;
+
+    /* hide all... */
+    br, header .right, footer p, nav.pager {
         display: none;
     }
-
 }
 
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

@@ -12,6 +12,19 @@
         padding: 0.5em 2em 4em;
         position: absolute;
 
+        .mini & {
+            @include shadgrad(rgba(11, 11, 11, 0.75));
+            padding: 0.25em 1.5em 4em;
+
+            img {
+                width: 50%;
+            }
+            h3, h4, p {
+                font-size: 120%;
+                line-height: 1.4;
+            }
+        }
+
         aside {
             left: 105%;
             position: absolute;

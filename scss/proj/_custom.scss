@@ -29,14 +29,16 @@ html, body {
 }
 header {
     height: 15%;
-    max-height: 142px;
+    max-height: 100px;
     top: 0;
 
     img {
+        @include nosel();
         height: 100%;
     }
 }
 nav.pager {
+    @include nosel();
     $num: 8;
     $w: 15px;
     $h: 28px;
@@ -68,6 +70,7 @@ nav.pager {
     }
 }
 footer {
+    @include nosel();
     @include transition( bottom 0.5s );
     bottom: -2em;
 

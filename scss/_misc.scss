@@ -52,7 +52,7 @@ body {
         }
     }
     &.fillX {
-        background-image: url('../images/p7.jpg');
+        background-image: url('../images/pages/p7.jpg');
         background-size: 100%;
 
         .wrapper {
@@ -74,6 +74,9 @@ body {
             width: 100%;
         }
     }
+}
+.gapper {
+    visibility: hidden;
 }
 .touch {
     @include user-select( none );

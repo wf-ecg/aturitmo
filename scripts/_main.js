@@ -6,27 +6,26 @@ var Main = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Main',
         self = new G.constructor(name, '(kicker and binder)'),
-        Df, body, html;
+        Df, body, html, shape, agent;
 
     Df = { // DEFAULTS
         myScroll: null,
         inits: function () {
-            var shape = jsView.port.orientation();
-
+            shape = jsView.port.orientation();
+            agent = jsView.mobile.agent();
             body = $('body');
             html = $('html');
 
-            if (jsView.mobile.agent()) {
+            if (agent) {
                 html.addClass('mini');
                 jsView.mobile.addBug();
             }
             if (shape === 'landscape') {
-                body.removeClass('wide').addClass('high');
+                //body.removeClass('wide').addClass('high');
             } else if (shape === 'portrait') {
                 body.removeClass('wide').addClass('slim');
             }
-
-            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape);
+            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -59,7 +58,7 @@ var Main = (function ($, G, U) { // IIFE
             } else {
                 html.removeClass('eng').addClass('esp');
             }
-        })
+        });
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

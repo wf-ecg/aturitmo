@@ -18,7 +18,7 @@ $gap: $peg * 1.1;
 }
 
 @mixin shadgrad($clr1: rgba(11, 11, 11, 0.5), $clr2: rgba(0, 0, 0, 0) ){
-    @include background-image( linear-gradient(top, $clr1 80%, $clr2 95%) );
+    @include background-image( linear-gradient(top, $clr1 75%, $clr2 100%) );
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 @import "_base";

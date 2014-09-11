@@ -85,8 +85,16 @@ body {
 }
 .wrapper {
     $num: 8;
+    $fact: 2;
+    $fract: 1 / $fact;
+    $fracto: $num - (1 - ($fract));
+
+    _num: $num;
+    _fact: $fact;
+    _fract: $fract;
+    _fracto: $fracto;
+
     // @include edger2(yellow);
-    // background-color: rgba(222,222,0,0.5);
     display: inline-block;
     position: relative;
     text-align: left;
@@ -108,18 +116,17 @@ body {
         }
     }
     #Text {
-        $fact: 2;
-        $fract: $num - (1 - (1 / $fact));
 
         > div {
-            height: $fract * 100 * $fact * 1%;
+            height: $fracto * $fact * 100% ;
 
-            > div {
-                height: 100 / $fract * 1%;
+            section {
+                height: 100% / $fracto;
                 position: relative;
 
-                > div {
-                    bottom: 52.5%;
+                article {
+                    bottom: 100% / $fact;
+                    min-height: 100% / ($fact * 2); // 50%
                 }
             }
         }

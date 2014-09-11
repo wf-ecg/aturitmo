@@ -119,6 +119,52 @@ var Util = (function ($) { /// IIFE
     $.fn.filterAll = function (sel) {
         return this.filter(sel).add(this.find(sel));
     };
+    // <scrolls> roughly find how much scrolling can happen
+    $.fn.scrolls = function () {
+        var me = this.first();
+        return {
+            horz: me.scrollLeft(1e6).scrollLeft(),
+            vert: me.scrollTop(1e6).scrollTop(),
+        };
+    };
+    // <fitContents> fit content by enlarging and report if enlarged
+    $.fn.fitContents = function () {
+        var me = this.first();
+        var sc = me.scrolls();
+        var act = Boolean(sc.horz || sc.vert);
+
+        if (act) {
+            me.width(me.width() + sc.horz + 1);
+            me.height(me.height() + sc.vert + 1);
+        }
+        return act;
+    };
+    // <scrollInfo> find out all about the scroll situation
+    $.fn.scrollInfo = function (dirty) {
+        var me = this.first();
+
+        var l0 = me.scrollLeft();
+        var l1 = me.scrollLeft(1);
+        var ln = dirty ? (l0 || l1): me.scrollLeft(1e6).scrollLeft();
+
+        var t0 = me.scrollTop();
+        var t1 = me.scrollTop(1);
+        var tn = dirty ? (t0 || t1): me.scrollTop(1e6).scrollTop();
+
+        if (!dirty) {
+            me.scrollLeft(l0);
+            me.scrollTop(t0);
+        }
+        return {
+            x: l0,
+            y: t0,
+            xMax: dirty ? NaN : ln,
+            yMax: dirty ? NaN : tn,
+            carefully: !dirty,
+            horz: Boolean(ln),
+            vert: Boolean(tn),
+        };
+    };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
     function _fixIE() {

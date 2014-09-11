@@ -78,7 +78,6 @@ var jsView = (function (W, $) { // IIFE
                 (vis < 973 && vis % 10 === 3) && // webdev responsive layouts add 13px
                 (/chrome/i).test(W.navigator.userAgent)) {
                 mob = true;
-                this.addBug();
             }
             if (mob) {
                 mob = W.navigator.platform;

@@ -6,27 +6,28 @@ var Main = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Main',
         self = new G.constructor(name, '(kicker and binder)'),
-        Df, body, html;
+        Df, body, html, shape, agent;
 
     Df = { // DEFAULTS
-        myScroll: null,
+        scroll: null,
         inits: function () {
-            var shape = jsView.port.orientation();
-
+            shape = jsView.port.orientation();
+            agent = jsView.mobile.agent();
             body = $('body');
             html = $('html');
 
-            if (jsView.mobile.agent()) {
+            if (agent) {
                 html.addClass('mini');
                 jsView.mobile.addBug();
             }
             if (shape === 'landscape') {
-                body.removeClass('wide').addClass('high');
+                body.removeClass().addClass('fillY');
+            } else if (shape === 'square') {
+                body.removeClass().addClass('fillX');
             } else if (shape === 'portrait') {
-                body.removeClass('wide').addClass('slim');
+                body.removeClass().addClass('slim');
             }
-
-            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape);
+            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -43,13 +44,9 @@ var Main = (function ($, G, U) { // IIFE
             C.debug('touchmove');
         }, false);
 
-        $(W).on('resize', function () {
-            C.debug('resize', jsView.port.orientation(), jsView.port.aspect());
-
-            _.delay(function () {
-                W.location.reload();
-            }, 333);
-        });
+        $(W).on('resize', _.debounce(function () {
+            W.location.reload();
+        }, 333, false));
 
         $('button').on('click', function (evt) {
             var me = $(evt.target);
@@ -57,13 +54,13 @@ var Main = (function ($, G, U) { // IIFE
             W.open(me.data('url'), 'offsite');
         });
 
-        $('.grad').on('click', function () {
+        $('article.esp, article.eng').on('click', function (evt) {
             if (html.is('.esp')) {
                 html.removeClass('esp').addClass('eng');
             } else {
                 html.removeClass('eng').addClass('esp');
             }
-        })
+        });
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -77,7 +74,8 @@ var Main = (function ($, G, U) { // IIFE
         self.serv = W.location.hostname;
 
         _.delay(bindings);
-        Df.myScroll = Scroller.init();
+        Df.scroll = Scroller.init();
+        Df.modal = Modal.init();
     }
 
     $.extend(self, {

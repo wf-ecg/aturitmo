@@ -2,6 +2,7 @@
 /*globals _, C, W, Glob, Util, jQuery,
         Scroller:true, IScroll, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+//  requires jq-inview
 var Scroller = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Scroller',
@@ -11,8 +12,9 @@ var Scroller = (function ($, G, U) { // IIFE
 
     Df = { // DEFAULTS
         cfig: {
-            mouseWheel: true,
-            snap: true,
+            momentum: true,
+            mouseWheel: !false,
+            snap: !true,
             keyBindings: {
                 pageUp: 34,
                 pageDown: 33,
@@ -27,7 +29,7 @@ var Scroller = (function ($, G, U) { // IIFE
             }],
         },
         obj: null,
-        x:{
+        x: {
             eventPassthrough: false,
             momentum: true,
             scrollX: 1,
@@ -42,6 +44,10 @@ var Scroller = (function ($, G, U) { // IIFE
     /// HELPERS
     //  defaults dependancy only
 
+    function lilround(num) {
+        return Math.round(num * 10 | 0) / 10;
+    }
+
     function num2page(num, rev) {
         if (!rev) {
             return (num) / iscale + 1;
@@ -50,12 +56,41 @@ var Scroller = (function ($, G, U) { // IIFE
         }
     }
 
+    function page2pix(num, per) {
+        return -(num * per);
+    }
+
+    function pix2page(num, per) {
+        return lilround(-num / per);
+    }
+
+    IScroll.prototype.drtObj = function () {
+        return {
+            obj: this,
+            pageTot: this.maxScrollY / -this.wrapperHeight,
+            toBottom: this.y - this.maxScrollY,
+            page: lilround(-this.y / this.wrapperHeight),
+            percent: lilround(this.y / this.maxScrollY * 100),
+        };
+    };
+
+    IScroll.prototype._getCurrentPage = function () {
+        return pix2page(this.y, this.wrapperHeight);
+    };
+
     IScroll.prototype.getCurrentPage = function () {
+        if (U.undef(this.currentPage)) {
+            return num2page(this._getCurrentPage());
+        }
         return num2page(this.currentPage.pageY);
     };
 
     IScroll.prototype.setCurrentPage = function (num, time) {
-        this.goToPage(0, num2page(num, 'rev'), time); //, time, offsetX, offsetY, easing
+        if (U.undef(this.currentPage)) {
+            this.scrollTo(0, page2pix(num2page(num, 'rev'), this.wrapperHeight), 400);
+        } else {
+            this.goToPage(0, num2page(num, 'rev'), time); //, time, offsetX, offsetY, easing
+        }
     };
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -83,7 +118,11 @@ var Scroller = (function ($, G, U) { // IIFE
             C.debug('scrollCancel');
         });
         myScroll.on('scrollStart', function () {
-            C.debug('scrollStart', 'page', myScroll.getCurrentPage());
+            var page = myScroll.getCurrentPage();
+
+            activateNum(page - 1);
+
+            C.debug('scrollStart', 'page', page);
         });
         myScroll.on('scrollEnd', function () {
             var page = myScroll.getCurrentPage();
@@ -99,8 +138,8 @@ var Scroller = (function ($, G, U) { // IIFE
                 $('.pager').addClass('active');
                 $('footer').removeClass('active');
             }
-            if (page > total) {
-                myScroll.setCurrentPage(0.5, 0);
+            if (page - 0.5 > total) {
+                myScroll.setCurrentPage(1, 0, 0);
             }
         });
 
@@ -108,11 +147,10 @@ var Scroller = (function ($, G, U) { // IIFE
             var me = $(this), num = me.data('page');
 
             myScroll.setCurrentPage(num);
-            activate(me);
         });
 
         $('img.down').on('click', function () {
-            myScroll.setCurrentPage((myScroll.getCurrentPage() + 1) % (total + 0.5));
+            myScroll.setCurrentPage(((myScroll.getCurrentPage() | 0) + 1) % (total + 0.5));
         });
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { // visi?, left+right, top+bottom

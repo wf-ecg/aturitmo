@@ -3,19 +3,20 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 #Text {
-    -webkit-mask: -webkit-linear-gradient(transparent 10%, black 20%, black 90%, transparent 99%) top left / contain;
+    $lite: rgba(0,0,0,0.1);
+
+    -webkit-mask: -webkit-linear-gradient($lite 10%, black 20%, black 90%, $lite 99%) top left / contain;
 
     div.grad {
         @include shadgrad();
         clear: both;
         float: left;
         max-width: 30em;
-        padding: 0.5em 2em 4em;
+        padding: 0.5em 1.5em 4em;
         position: absolute;
 
         .mini & {
             @include shadgrad(rgba(11, 11, 11, 0.75));
-            padding: 0.25em 1.5em 4em;
 
             img {
                 width: 50%;

@@ -1,6 +1,6 @@
 /*jslint white:false, evil:true */
 /*globals _, C, W, Glob, ROOT, Util, jQuery,
-        IScroll, */
+        IScroll, Main:true, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Main = (function ($, G, U) { // IIFE
     'use strict';

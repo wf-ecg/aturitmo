@@ -1,0 +1,83 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/* PROJ / Modal */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+$shad1: rgba( 22,  22,  22, 0.8);
+$shad2: rgba( 33,  33,  33, 0.7);
+
+#Legal {
+    /*    display: none;*/
+
+    article {
+        @include abscent(33%, 33%);
+        box-shadow: 0em 0em 10em black, inset -1px -1px 9px gray;
+        overflow: hidden;
+    }
+}
+#Video {
+    display: none;
+
+    video {
+        @include abscent(640px, 360px);
+        box-shadow: 0em 0em 10em black;
+    }
+}
+
+.modal {
+    background-color: $shad1;
+    /*    display: none;*/
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+
+    & > article {
+        min-width: 400px;
+    }
+    .text {
+        background-color: white;
+        border: 1px solid gray;
+        border-radius: 3px;
+        color: black;
+        font-size: 10pt;
+        line-height: 140%;
+        padding: 1em 1.5em;
+        text-align: left;
+    }
+    div.closer {
+        background-image: url(../images/controls/close.png);
+        background-repeat: no-repeat;
+        color: transparent;
+        cursor: pointer;
+        display: inline-block;
+        float: right;
+        height: 32px;
+        margin: 0.5em 1em;
+        opacity: 0.75;
+        width: 32px;
+        z-index: 9;
+
+        &:hover {
+            opacity: 1;
+        }
+        &:before {
+            //content: 'X';
+        }
+    }
+    div.notice {
+        background-color: gray;
+        background-color: $shad2;
+        color: white;
+        padding: 0.5em 1em;
+        position: relative;
+        text-align: center;
+        top: 0%;
+        z-index: -1;
+
+        &:before {
+            content: 'Click to dismiss / Eliminar superposición';
+        }
+    }
+}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

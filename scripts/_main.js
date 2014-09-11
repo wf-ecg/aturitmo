@@ -54,7 +54,7 @@ var Main = (function ($, G, U) { // IIFE
             W.open(me.data('url'), 'offsite');
         });
 
-        $('body .esp, body .eng').on('click', function (evt) {
+        $('article.esp, article.eng').on('click', function (evt) {
             if (html.is('.esp')) {
                 html.removeClass('esp').addClass('eng');
             } else {

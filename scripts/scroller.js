@@ -2,6 +2,7 @@
 /*globals _, C, W, Glob, Util, jQuery,
         Scroller:true, IScroll, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+//  requires jq-inview
 var Scroller = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Scroller',
@@ -12,8 +13,8 @@ var Scroller = (function ($, G, U) { // IIFE
     Df = { // DEFAULTS
         cfig: {
             momentum: true,
-            mouseWheel: true,
-            //snap: true,
+            mouseWheel: !false,
+            snap: !true,
             keyBindings: {
                 pageUp: 34,
                 pageDown: 33,
@@ -117,7 +118,11 @@ var Scroller = (function ($, G, U) { // IIFE
             C.debug('scrollCancel');
         });
         myScroll.on('scrollStart', function () {
-            C.debug('scrollStart', 'page', myScroll.getCurrentPage());
+            var page = myScroll.getCurrentPage();
+
+            activateNum(page - 1);
+
+            C.debug('scrollStart', 'page', page);
         });
         myScroll.on('scrollEnd', function () {
             var page = myScroll.getCurrentPage();
@@ -133,8 +138,8 @@ var Scroller = (function ($, G, U) { // IIFE
                 $('.pager').addClass('active');
                 $('footer').removeClass('active');
             }
-            if (page > total) {
-                myScroll.setCurrentPage(0.5, 0);
+            if (page - 0.5 > total) {
+                myScroll.setCurrentPage(1, 0, 0);
             }
         });
 
@@ -142,11 +147,10 @@ var Scroller = (function ($, G, U) { // IIFE
             var me = $(this), num = me.data('page');
 
             myScroll.setCurrentPage(num);
-            activate(me);
         });
 
         $('img.down').on('click', function () {
-            myScroll.setCurrentPage((myScroll.getCurrentPage() + 1) % (total + 0.5));
+            myScroll.setCurrentPage(((myScroll.getCurrentPage() | 0) + 1) % (total + 0.5));
         });
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { // visi?, left+right, top+bottom

@@ -1,5 +1,5 @@
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
-/* PROJ / Mini */
+/* PROJ / Page */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 nav.pager {
@@ -30,7 +30,10 @@ nav.pager {
         width: $w;
 
         &.active {
-            opacity: 1;
+            opacity: 1.0;
+        }
+        &:hover {
+            opacity: 0.6;
         }
     }
 }

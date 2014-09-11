@@ -9,7 +9,7 @@ var Main = (function ($, G, U) { // IIFE
         Df, body, html, shape, agent;
 
     Df = { // DEFAULTS
-        myScroll: null,
+        scroll: null,
         inits: function () {
             shape = jsView.port.orientation();
             agent = jsView.mobile.agent();
@@ -74,7 +74,8 @@ var Main = (function ($, G, U) { // IIFE
         self.serv = W.location.hostname;
 
         _.delay(bindings);
-        Df.myScroll = Scroller.init();
+        Df.scroll = Scroller.init();
+        Df.modal = Modal.init();
     }
 
     $.extend(self, {

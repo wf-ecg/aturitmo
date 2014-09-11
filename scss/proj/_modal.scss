@@ -5,8 +5,6 @@ $shad1: rgba( 22,  22,  22, 0.8);
 $shad2: rgba( 33,  33,  33, 0.7);
 
 #Legal {
-    /*    display: none;*/
-
     article {
         @include abscent(33%, 33%);
         box-shadow: 0em 0em 10em black, inset -1px -1px 9px gray;
@@ -14,8 +12,6 @@ $shad2: rgba( 33,  33,  33, 0.7);
     }
 }
 #Video {
-    display: none;
-
     video {
         @include abscent(640px, 360px);
         box-shadow: 0em 0em 10em black;
@@ -24,7 +20,7 @@ $shad2: rgba( 33,  33,  33, 0.7);
 
 .modal {
     background-color: $shad1;
-    /*    display: none;*/
+    display: none;
     height: 100%;
     left: 0;
     position: fixed;
@@ -50,11 +46,11 @@ $shad2: rgba( 33,  33,  33, 0.7);
         background-repeat: no-repeat;
         color: transparent;
         cursor: pointer;
-        display: inline-block;
-        float: right;
         height: 32px;
-        margin: 0.5em 1em;
         opacity: 0.75;
+        position: absolute;
+        right: 1em;
+        top: 0.5em;
         width: 32px;
         z-index: 9;
 

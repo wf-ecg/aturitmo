@@ -21,9 +21,11 @@ var Main = (function ($, G, U) { // IIFE
                 jsView.mobile.addBug();
             }
             if (shape === 'landscape') {
-                //body.removeClass('wide').addClass('high');
+                body.removeClass().addClass('fillY');
+            } else if (shape === 'square') {
+                body.removeClass().addClass('fillX');
             } else if (shape === 'portrait') {
-                body.removeClass('wide').addClass('slim');
+                body.removeClass().addClass('slim');
             }
             C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
         },

@@ -3,11 +3,10 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 nav.pager {
-    @include nosel();
-    $num: 8;
     $w: 15px;
     $h: 28px;
 
+    @include nosel();
     * {
         @include transition( opacity 0.5s );
     }
@@ -40,6 +39,50 @@ nav.pager {
         }
         &:hover {
             opacity: 1.6;
+        }
+    }
+}
+.wrapper {
+    _num: $num;
+    _fact: $fact;
+    _fract: $fract;
+    _fracto: $fracto;
+
+    // @include edger2(yellow);
+    display: inline-block;
+    position: relative;
+    text-align: left;
+
+    #Pics {
+
+        > div {
+            height: $num * 100%;
+            $mist: rgba(33,33,33,0.3);
+
+            img {
+                display: inherit;
+                height: 100 / $num * 1%;
+
+                .fillX & {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    #Text {
+
+        > div {
+            height: $fracto * $fact * 100% ;
+
+            section {
+                height: 100% / $fracto;
+                position: relative;
+
+                article {
+                    bottom: 100% / $fact;
+                    min-height: 100% / ($fact * 2); // 50%
+                }
+            }
         }
     }
 }

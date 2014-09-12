@@ -72,7 +72,9 @@ var Data, Glob = new Global('Glob');
             'build/src.js',
         ],
         complete: function () {
-            ROOT.loaded($);
+            _.delay(function () {
+                ROOT.loaded($);
+            }, 333);
             evil(W.Main && W.Main.init());
         },
     };

@@ -1,0 +1,36 @@
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/* PROJ */
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+$num: 8;
+$fact: 2;
+$fract: 1 / $fact;
+$fracto: $num - (1 - ($fract));
+
+@mixin abscent($w: 50%, $h: 50%) {
+    bottom: 0;
+    height: $h;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: $w;
+}
+.loading {
+    visibility: hidden;
+}
+@mixin shadgrad($clr1: rgba(11, 11, 11, 0.5), $clr2: rgba(0, 0, 0, 0) ) {
+    .msie & {
+        background-image: url(../images/masq.png);
+    }
+    @include background-image( linear-gradient(top, $clr1 75%, $clr2 100%) );
+}
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+@import "_base";
+@import "_custom";
+@import "_modal";
+@import "_page";
+@import "_text";
+@import "_mini";
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //

@@ -3,7 +3,7 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var W = window,
 C = W.console;
-W.debug = Number(new Date('2014/08/29') > new Date());
+W.debug = Number(new Date('2014/09/29') > new Date());
 W.ROOT = ({
     evil: "eval('var x=0'),(typeof(x)!=='number'?'':'non-')+'strict'",
     base: 0,
@@ -11,7 +11,7 @@ W.ROOT = ({
     conf: {
         'www.wellsfargomedia.com': {
             nom: 'wfmedia',
-            sub: '/aturitmo',
+            sub: '/aturitmo/test',
         },
         '10.89.101.100': {
             nom: 'qla2',
@@ -66,7 +66,7 @@ W.ROOT = ({
     },
     loaded: function ($) {
         $('body').removeClass('loading');
-        if (W.debug > 0) {
+        if (W.debug > 1) {
             $('html').addClass('dev');
         }
         if (C && C.groupCollapsed) {

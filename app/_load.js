@@ -39,13 +39,15 @@ var Data, Glob = new Global('Glob');
     Load.base = {
         test: W.isIE,
         yep: [
-        G.lib + 'ie/split.js',
+            G.lib + 'ie/split.js',
             G.lib + 'iscroll/5.0.4/iscroll.js',
         ],
         nope: [
             G.lib + 'iscroll/5.1.1/iscroll.js',
         ],
         both: [
+            G.lib + 'video-js/4.2.1/video-js.css',
+            G.lib + 'video-js/4.2.1/video.dev.js',
             'build/lib.js',
         ],
         complete: function () {
@@ -55,14 +57,14 @@ var Data, Glob = new Global('Glob');
 
     Load.font = {
         test: ROOT.conf.nom === 'localhost' || ROOT.conf.nom === 'qla1',
-        yep: [/*
+        yep: [
             G.lib + 'fonts/archer.ssm.css',
             G.lib + 'fonts/archer.ssm.itl.css',
-        */],
+        ],
         nope: [/*
-            '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal
+            '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal */
             '//cloud.typography.com/6819872/633184/css/fonts.css', // ScrnSmrt
-        */],
+        ],
     };
 
     Load.main = {
@@ -70,7 +72,9 @@ var Data, Glob = new Global('Glob');
             'build/src.js',
         ],
         complete: function () {
-            ROOT.loaded($);
+            _.delay(function () {
+                ROOT.loaded($);
+            }, 333);
             evil(W.Main && W.Main.init());
         },
     };

@@ -7,7 +7,7 @@ module.exports = {
         options: {
             base: ['app', '.', '../..'],
             //hostname: 'localhost', // Change this to '0.0.0.0' to access the server from outside
-            //open: true,
+            open: true,
             livereload: 7043,
             port: 8043,
         },

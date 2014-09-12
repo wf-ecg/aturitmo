@@ -59,10 +59,12 @@
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 @mixin font-archer() {
     //font-family: 'Archer A', 'Archer B', Georgia, serif;
-    font-family: 'Archer SSm A', 'Archer SSm B', Georgia, serif;
+    font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
 }
 @mixin font-plain() {
-    font-family: Myriad Pro, Helvetica, Arial, Geneva, sans-serif;
+    font-family: 'MyriadPro', 'Myriad Pro',
+    'MyriadProRegular', 'MyriadPro-Regular', 'Myriad Pro Regular',
+    'PT Sans', Helvetica, Arial, Geneva, sans-serif;
 }
 @mixin font-thick() {
     font-family: Verdana, sans-serif;

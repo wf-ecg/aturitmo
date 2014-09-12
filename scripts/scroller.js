@@ -87,9 +87,9 @@ var Scroller = (function ($, G, U) { // IIFE
 
     IScroll.prototype.setCurrentPage = function (num, time) {
         if (U.undef(this.currentPage)) {
-            this.scrollTo(0, page2pix(num2page(num, 'rev'), this.wrapperHeight), 400);
+            this.scrollTo(0, page2pix(num2page(num, 'rev'), this.wrapperHeight), time || 0);
         } else {
-            this.goToPage(0, num2page(num, 'rev'), time); //, time, offsetX, offsetY, easing
+            this.goToPage(0, num2page(num, 'rev'), time || 0); //, time, offsetX, offsetY, easing
         }
     };
 
@@ -140,24 +140,29 @@ var Scroller = (function ($, G, U) { // IIFE
                 $('.pager').addClass('active');
                 $('footer').removeClass('active');
             }
-            if (page - 0.5 > total) {
-                myScroll.setCurrentPage(1, 0, 0);
+            if (page > total) {
+                myScroll.setCurrentPage(1, 0);
             }
         });
 
         $('nav.pager, footer p').on('click', 'a', function () {
             var me = $(this), num = me.data('page');
 
-            myScroll.setCurrentPage(num);
+            myScroll.setCurrentPage(num, 400);
         });
 
         $('img.down').on('click', function () {
-            myScroll.setCurrentPage(((myScroll.getCurrentPage() | 0) + 1) % (total + 0.5));
+            var num = (myScroll.getCurrentPage() | 0) + 1;
+            num = (num >= 1) ? num : 1;
+            myScroll.setCurrentPage(num, num === 1 ? 0 : 400);
         });
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { // visi?, left+right, top+bottom
-            if (tb === 'top') {
-                myScroll.setCurrentPage(0.5, 0);
+            if (tb) {
+                myScroll.setCurrentPage(1, 0);
+                _.delay(function () {
+                    myScroll.setCurrentPage(1.1, 400);
+                }, 99);
             }
         });
 

@@ -30,7 +30,7 @@ var jsView = (function (W, $) { // IIFE
             return this.ie ? this._e.offsetWidth : this._w.innerWidth;
         },
         visualHeight: function () {
-            return this.ie ? this.e.offsetHeight : this._w.innerHeight;
+            return this.ie ? this._e.offsetHeight : this._w.innerHeight;
         },
         orientation: function () {
             var diff = this.aspect();

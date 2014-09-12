@@ -52,12 +52,20 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function vidplay(sel) {
-        $('.modal').trigger('show');
-        $('#Video ' + sel).show().click(function (evt) {
-            evt.stopPropagation();
-        });
+//        $('.modal').trigger('show');
+//        $(sel).show().click(function (evt) {
+//            evt.stopPropagation();
+//        });
     }
+    function switchLang(lang) {
+        var lang1 = 'eng', lang2 = 'esp';
 
+        if (lang === 'en') {
+            lang1 = 'esp', lang2 = 'eng';
+        }
+        html.attr('lang', lang);
+        html.removeClass(lang1).addClass(lang2);
+    }
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// HANDLERS
 
@@ -67,7 +75,7 @@ var Main = (function ($, G, U) { // IIFE
 
         switch (H) {
             case '#EngLang':
-                html.removeClass('esp').addClass('eng');
+                switchLang('en');
                 break;
             case '#EngDisc':
                 disclose('.eng.legal');
@@ -76,7 +84,7 @@ var Main = (function ($, G, U) { // IIFE
                 disclose('.eng.exit');
                 break;
             case '#EspLang':
-                html.removeClass('eng').addClass('esp');
+                switchLang('es');
                 break;
             case '#EspDisc':
                 disclose('.esp.legal');
@@ -103,12 +111,14 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
+                switchLang('es');
+
         $(W).on('hashchange', _hashListen);
 
-        W.document.addEventListener('touchmove', function (e) {
+        $(W.document).on('touchmove', function (e) {
             e.preventDefault();
             C.debug('touchmove');
-        }, false);
+        });
 
         $(W).on('resize', _.debounce(function () {
             W.location.reload();
@@ -124,6 +134,28 @@ var Main = (function ($, G, U) { // IIFE
             W.open(url, 'offsite');
         });
 
+
+        $('a.vid').on('click', function (evt) {
+            evt.preventDefault();
+
+            var vid = $(evt.currentTarget).data('vid'),
+                vidjs = videojs(vid),
+                vidiv = $('#' + vid);
+
+            $('#Video').children().hide();
+
+            vidiv.show().click(function (evt) {
+                evt.stopPropagation();
+            });
+
+            $('.modal').trigger('show.Modal') //
+            .on('hide.Modal', function () {
+                vidjs.pause();
+                vidiv.hide();
+            });
+
+            vidjs.currentTime(0).play();
+        });
         duper();
     }
 

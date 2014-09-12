@@ -5,7 +5,7 @@
 #Text {
     $lite: rgba(0,0,0,0.1);
 
-    -webkit-mask: -webkit-linear-gradient($lite 5%, black 20%) top left / contain;
+    -webkit-mask-image: -webkit-linear-gradient($lite 5%, black 20%); // top left / contain;
 
     article.grad {
         @include shadgrad();

@@ -12,7 +12,7 @@ var Modal = (function ($, G, U) { // IIFE
         dat: {},
         delay: null,
         all: '.modal',
-        autohide: 'video, article',
+        autohide: 'article',
         inits: function () {
             this.delay = Main.delay || 333;
             this.all = $(this.all);

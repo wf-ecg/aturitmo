@@ -46,10 +46,45 @@ var Main = (function ($, G, U) { // IIFE
         b.empty().append(a);
     }
 
+    function disclose(sel) {
+        $('.modal').trigger('show');
+        $('#Legal ' + sel).show().fitContents();
+    }
+
+    function _hashListen(evt) {
+        var L = W.location;
+        var H = L.hash;
+
+        switch (H) {
+            case '#EngLang':
+                html.removeClass('esp').addClass('eng');
+                break;
+            case '#EngDisc':
+                disclose('.eng.legal');
+                break;
+            case '#EngDown':
+                disclose('.eng.exit');
+                break;
+            case '#EspLang':
+                html.removeClass('eng').addClass('esp');
+                break;
+            case '#EspDisc':
+                disclose('.esp.legal');
+                break;
+            case '#EspDown':
+                disclose('.esp.exit');
+                break;
+        }
+        _.delay(function () {
+            L.hash = '';
+        }, 3333);
+    }
+
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// HANDLERS
 
     function bindings() {
+        $(W).on('hashchange', _hashListen);
 
         W.document.addEventListener('touchmove', function (e) {
             e.preventDefault();
@@ -61,17 +96,13 @@ var Main = (function ($, G, U) { // IIFE
         }, 333, false));
 
         $('button').on('click', function (evt) {
-            var me = $(evt.target);
+            var url = $(evt.target).data('url');
 
-            W.open(me.data('url'), 'offsite');
-        });
-
-        $('footer .legal').on('click', function (evt) {
-            if (html.is('.esp')) {
-                html.removeClass('esp').addClass('eng');
-            } else {
-                html.removeClass('eng').addClass('esp');
+            if (url.charAt(0) === '#') {
+                W.location.hash = url.slice(1);
+                return;
             }
+            W.open(url, 'offsite');
         });
 
         duper();

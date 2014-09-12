@@ -39,13 +39,15 @@ var Data, Glob = new Global('Glob');
     Load.base = {
         test: W.isIE,
         yep: [
-        G.lib + 'ie/split.js',
+            G.lib + 'ie/split.js',
             G.lib + 'iscroll/5.0.4/iscroll.js',
         ],
         nope: [
             G.lib + 'iscroll/5.1.1/iscroll.js',
         ],
         both: [
+            G.lib + 'video-js/4.2.1/video-js.css',
+            G.lib + 'video-js/4.2.1/video.dev.js',
             'build/lib.js',
         ],
         complete: function () {

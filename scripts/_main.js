@@ -52,10 +52,10 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function vidplay(sel) {
-        $('.modal').trigger('show');
-        $('#Video ' + sel).show().click(function (evt) {
-            evt.stopPropagation();
-        });
+//        $('.modal').trigger('show');
+//        $(sel).show().click(function (evt) {
+//            evt.stopPropagation();
+//        });
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -124,6 +124,28 @@ var Main = (function ($, G, U) { // IIFE
             W.open(url, 'offsite');
         });
 
+
+        $('a.vid').on('click', function (evt) {
+            evt.preventDefault();
+
+            var vid = $(evt.currentTarget).data('vid'),
+                vidjs = videojs(vid),
+                vidiv = $('#' + vid);
+
+            $('#Video').children().hide();
+
+            vidiv.show().click(function (evt) {
+                evt.stopPropagation();
+            });
+
+            $('.modal').trigger('show.Modal') //
+            .on('hide.Modal', function () {
+                vidjs.pause();
+                vidiv.hide();
+            });
+
+            vidjs.currentTime(0).play();
+        });
         duper();
     }
 

@@ -103,12 +103,14 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
+        html.addClass('esp');
+
         $(W).on('hashchange', _hashListen);
 
-        W.document.addEventListener('touchmove', function (e) {
+        $(W.document).on('touchmove', function (e) {
             e.preventDefault();
             C.debug('touchmove');
-        }, false);
+        });
 
         $(W).on('resize', _.debounce(function () {
             W.location.reload();

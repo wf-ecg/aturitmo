@@ -11,6 +11,7 @@ header {
     height: 15%;
     max-height: 100px;
     top: 0;
+    z-index: 9;
 
     .mini & {
         height: 12.5%;

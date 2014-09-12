@@ -19,7 +19,7 @@ html {
         font-family: Verdana;
         font-size: 13px;
         font-weight: 200;
-        margin: 0.25em;
+        margin: 0.125em;
         padding: 0.375em 0.75em;
     }
     header, footer {
@@ -40,16 +40,19 @@ html {
         font-size: 180%;
     }
     h2 {
-        font-size: 140%;
+        font-size: 150%;
+        font-weight: 800;
     }
     h3 {
+        font-size: 120%;
         font-weight: 600;
         margin-top: 0.75em;
         text-transform: uppercase;
     }
     h4 {
-        font-weight: 500;
+        font-size: 100%;
         font-style: italic;
+        font-weight: 500;
     }
     p {
         margin: 0.5em 0;

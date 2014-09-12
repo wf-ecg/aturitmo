@@ -51,6 +51,16 @@ var Main = (function ($, G, U) { // IIFE
         $('#Legal ' + sel).show().fitContents();
     }
 
+    function vidplay(sel) {
+        $('.modal').trigger('show');
+        $('#Video ' + sel).show().click(function (evt) {
+            evt.stopPropagation();
+        });
+    }
+
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    /// HANDLERS
+
     function _hashListen(evt) {
         var L = W.location;
         var H = L.hash;
@@ -74,14 +84,23 @@ var Main = (function ($, G, U) { // IIFE
             case '#EspDown':
                 disclose('.esp.exit');
                 break;
+            case '#EngVid1':
+                vidplay('#MobileDeposit_Demo');
+                break;
+            case '#EngVid2':
+                vidplay('#SurePay_Demo');
+                break;
+            case '#EspVid1':
+                vidplay('#MobileDeposit_Demo_Spanish');
+                break;
+            case '#EspVid2':
+                vidplay('#SurePay_Demo_Spanish');
+                break;
         }
         _.delay(function () {
             L.hash = '';
         }, 3333);
     }
-
-    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    /// HANDLERS
 
     function bindings() {
         $(W).on('hashchange', _hashListen);

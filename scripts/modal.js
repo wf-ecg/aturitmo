@@ -51,10 +51,10 @@ var Modal = (function ($, G, U) { // IIFE
     function bindings() {
         Df.all.each(function () {
             var me = $(this)
-            .on('show.Modal', _show) //
-            .on('hide.Modal', _hide) //
+            .on('show.' + name, _show) //
+            .on('hide.' + name, _hide) //
             .on('click', function () {
-                me.trigger('hide.Modal');
+                me.trigger('hide.' + name);
             });
 
             if (U.debug(1)) {
@@ -78,7 +78,7 @@ var Modal = (function ($, G, U) { // IIFE
         __: Df,
         init: _init,
         hide: function () {
-            Df.all.trigger('hide.Modal');
+            Df.all.trigger('hide.' + name);
         },
     });
 

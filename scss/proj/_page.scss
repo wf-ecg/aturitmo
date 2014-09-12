@@ -8,7 +8,9 @@ nav.pager {
     $w: 15px;
     $h: 28px;
 
-    @include transition( opacity 0.5s );
+    * {
+        @include transition( opacity 0.5s );
+    }
     bottom: 0;
     height: $num * $h;
     margin: auto;
@@ -19,6 +21,9 @@ nav.pager {
     width: $w;
 
     &.active {
+        opacity: 0.8;
+    }
+    &:hover {
         opacity: 1;
     }
     a {
@@ -33,7 +38,7 @@ nav.pager {
             opacity: 1.0;
         }
         &:hover {
-            opacity: 0.6;
+            opacity: 1.6;
         }
     }
 }

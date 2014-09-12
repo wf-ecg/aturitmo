@@ -66,7 +66,7 @@ var Main = (function ($, G, U) { // IIFE
             W.open(me.data('url'), 'offsite');
         });
 
-        $('article.esp, article.eng').on('click', function (evt) {
+        $('footer .legal').on('click', function (evt) {
             if (html.is('.esp')) {
                 html.removeClass('esp').addClass('eng');
             } else {

@@ -61,7 +61,8 @@ var Main = (function ($, G, U) { // IIFE
         var lang1 = 'eng', lang2 = 'esp';
 
         if (lang === 'en') {
-            lang1 = 'esp', lang2 = 'eng';
+            lang1 = 'esp';
+            lang2 = 'eng';
         }
         html.attr('lang', lang);
         html.removeClass(lang1).addClass(lang2);

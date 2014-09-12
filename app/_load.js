@@ -56,15 +56,15 @@ var Data, Glob = new Global('Glob');
     };
 
     Load.font = {
-        test: ROOT.conf.nom === 'localhost' || ROOT.conf.nom === 'qla2',
+        test: ROOT.conf.nom === 'localhost' || ROOT.conf.nom === 'qla1',
         yep: [
             G.lib + 'fonts/archer.ssm.css',
             G.lib + 'fonts/archer.ssm.itl.css',
         ],
         nope: [/*
-            '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal
+            '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal */
             '//cloud.typography.com/6819872/633184/css/fonts.css', // ScrnSmrt
-        */],
+        ],
     };
 
     Load.main = {

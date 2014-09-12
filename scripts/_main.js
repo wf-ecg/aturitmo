@@ -34,6 +34,18 @@ var Main = (function ($, G, U) { // IIFE
     // HELPERS (defaults dependancy only)
     // func to contextualize content
 
+    function duper() {
+        var a, b;
+
+        a = $('#Page1');
+        b = $('#Page8');
+
+        a = a.find('article').clone().css({
+            top: '-33%',
+        });
+        b.empty().append(a);
+    }
+
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// HANDLERS
 
@@ -61,6 +73,8 @@ var Main = (function ($, G, U) { // IIFE
                 html.removeClass('eng').addClass('esp');
             }
         });
+
+        duper();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

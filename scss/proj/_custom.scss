@@ -11,6 +11,7 @@ header {
     height: 15%;
     max-height: 100px;
     top: 0;
+    z-index: 9;
 
     .mini & {
         height: 12.5%;
@@ -25,6 +26,7 @@ footer {
     @include nosel();
     @include transition( bottom 0.5s );
     bottom: -2em;
+    font-size: 65%;
     padding-top: 1em;
 
     html:not(.mini) &.active, &:hover {
@@ -32,7 +34,7 @@ footer {
     }
     .down {
         cursor: pointer;
-        margin: -2em -1em 0.5em;
+        margin: -4em -2em 1em;
         position: fixed;
     }
     div {
@@ -41,7 +43,6 @@ footer {
 
         p {
             background-color: #3e3e3e;
-            font-size: 65%;
             margin-top: 0;
 
             a {
@@ -56,6 +57,23 @@ footer {
                 &:hover {
                     background-color: #555;
                 }
+            }
+        }
+    }
+    .legal {
+        height: 0;
+        margin: 0 2em;
+        position: relative;
+        text-shadow: 0px 1px 2px black;
+        top: -2em;
+
+        a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
             }
         }
     }

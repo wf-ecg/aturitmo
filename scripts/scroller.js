@@ -103,7 +103,9 @@ var Scroller = (function ($, G, U) { // IIFE
 
     function activateNum(num) {
         activate($('nav.pager a').eq(num));
-        activate($('footer p a').eq(num));
+        $('footer p').each(function () {
+            activate($(this).find('a').eq(num));
+        });
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

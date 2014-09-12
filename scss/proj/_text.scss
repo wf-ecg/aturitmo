@@ -28,8 +28,14 @@
             }
         }
     }
+    #Page1, #Page8 {
+        article.grad {
+            max-width: 32em;
+        }
+    }
     p {
         font-size: 80%;
+        max-width: 90%;
     }
 }
 

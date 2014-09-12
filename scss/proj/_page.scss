@@ -3,12 +3,13 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 nav.pager {
-    @include nosel();
-    $num: 8;
     $w: 15px;
     $h: 28px;
 
-    @include transition( opacity 0.5s );
+    @include nosel();
+    * {
+        @include transition( opacity 0.5s );
+    }
     bottom: 0;
     height: $num * $h;
     margin: auto;
@@ -17,8 +18,12 @@ nav.pager {
     right: $w * 1.5;
     top: 0;
     width: $w;
+    z-index: 7;
 
     &.active {
+        opacity: 0.8;
+    }
+    &:hover {
         opacity: 1;
     }
     a {
@@ -33,7 +38,51 @@ nav.pager {
             opacity: 1.0;
         }
         &:hover {
-            opacity: 0.6;
+            opacity: 1.6;
+        }
+    }
+}
+.wrapper {
+    _num: $num;
+    _fact: $fact;
+    _fract: $fract;
+    _fracto: $fracto;
+
+    // @include edger2(yellow);
+    display: inline-block;
+    position: relative;
+    text-align: left;
+
+    #Pics {
+
+        > div {
+            height: $num * 100%;
+            $mist: rgba(33,33,33,0.3);
+
+            img {
+                display: inherit;
+                height: 100 / $num * 1%;
+
+                .fillX & {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    #Text {
+
+        > div {
+            height: $fracto * $fact * 100% ;
+
+            section {
+                height: 100% / $fracto;
+                position: relative;
+
+                article {
+                    bottom: 100% / $fact;
+                    min-height: 100% / ($fact * 2); // 50%
+                }
+            }
         }
     }
 }

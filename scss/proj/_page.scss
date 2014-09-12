@@ -19,6 +19,7 @@ nav.pager {
     right: $w * 1.5;
     top: 0;
     width: $w;
+    z-index: 7;
 
     &.active {
         opacity: 0.8;

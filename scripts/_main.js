@@ -57,7 +57,15 @@ var Main = (function ($, G, U) { // IIFE
 //            evt.stopPropagation();
 //        });
     }
+    function switchLang(lang) {
+        var lang1 = 'eng', lang2 = 'esp';
 
+        if (lang === 'en') {
+            lang1 = 'esp', lang2 = 'eng';
+        }
+        html.attr('lang', lang);
+        html.removeClass(lang1).addClass(lang2);
+    }
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// HANDLERS
 
@@ -67,7 +75,7 @@ var Main = (function ($, G, U) { // IIFE
 
         switch (H) {
             case '#EngLang':
-                html.removeClass('esp').addClass('eng');
+                switchLang('en');
                 break;
             case '#EngDisc':
                 disclose('.eng.legal');
@@ -76,7 +84,7 @@ var Main = (function ($, G, U) { // IIFE
                 disclose('.eng.exit');
                 break;
             case '#EspLang':
-                html.removeClass('eng').addClass('esp');
+                switchLang('es');
                 break;
             case '#EspDisc':
                 disclose('.esp.legal');
@@ -103,7 +111,7 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
-        html.addClass('esp');
+                switchLang('es');
 
         $(W).on('hashchange', _hashListen);
 

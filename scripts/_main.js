@@ -20,12 +20,13 @@ var Main = (function ($, G, U) { // IIFE
                 html.addClass('mini');
                 jsView.mobile.addBug();
             }
+            body.removeClass('fillX fillY slim');
             if (shape === 'landscape') {
-                body.removeClass().addClass('fillY');
+                body.addClass('fillY');
             } else if (shape === 'square') {
-                body.removeClass().addClass('fillX');
+                body.addClass('fillX');
             } else if (shape === 'portrait') {
-                body.removeClass().addClass('slim');
+                body.addClass('slim');
             }
             C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
         },
@@ -61,7 +62,8 @@ var Main = (function ($, G, U) { // IIFE
         var lang1 = 'eng', lang2 = 'esp';
 
         if (lang === 'en') {
-            lang1 = 'esp', lang2 = 'eng';
+            lang1 = 'esp';
+            lang2 = 'eng';
         }
         html.attr('lang', lang);
         html.removeClass(lang1).addClass(lang2);

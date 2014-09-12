@@ -11,7 +11,7 @@ W.ROOT = ({
     conf: {
         'www.wellsfargomedia.com': {
             nom: 'wfmedia',
-            sub: '/aturitmo',
+            sub: '/aturitmo/test',
         },
         '10.89.101.100': {
             nom: 'qla2',

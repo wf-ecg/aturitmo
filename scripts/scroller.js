@@ -103,7 +103,7 @@ var Scroller = (function ($, G, U) { // IIFE
 
     function activateNum(num) {
         activate($('nav.pager a').eq(num));
-        $('footer p').each(function () {
+        $('footer nav').each(function () {
             activate($(this).find('a').eq(num));
         });
     }
@@ -112,7 +112,7 @@ var Scroller = (function ($, G, U) { // IIFE
     /// HANDLERS
 
     function bindings() {
-        var foot = $('footer.touch');
+        var foot = $('footer');
         var page = $('.pager');
 
         myScroll.on('beforeScrollStart', function () {
@@ -147,9 +147,7 @@ var Scroller = (function ($, G, U) { // IIFE
             }
         });
 
-        foot.on('mouseover mouseout', function (evt) {
-            var me = $(evt.target);
-
+        foot.on('mouseover mouseout', 'section.touch', function (evt) {
             if (evt.type === 'mouseover') {
                 foot.addClass('active');
             } else {
@@ -157,7 +155,7 @@ var Scroller = (function ($, G, U) { // IIFE
             }
         });
 
-        $('nav.pager, footer p').on('click', 'a', function () {
+        $('nav.pager, footer nav').on('click', 'a', function () {
             var me = $(this), num = me.data('page');
 
             myScroll.setCurrentPage(num, 400);

@@ -41,12 +41,12 @@ footer {
         nav {
             background-color: #3e3e3e;
             border-top: 3px solid gold;
+            white-space: nowrap;
 
             a {
                 cursor: pointer;
                 line-height: $foot;
                 padding: 0.5em 1em;
-                white-space: nowrap;
 
                 &.active {
                     opacity: 0.5;
@@ -61,6 +61,7 @@ footer {
         bottom: 1em;
         cursor: pointer;
         left: 50%;
+        margin-left: -24px; // half width
         position: absolute;
     }
     .legal {

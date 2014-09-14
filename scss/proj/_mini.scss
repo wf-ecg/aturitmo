@@ -6,8 +6,16 @@
     font-size: 75%;
 
     /* hide all... */
-    br, header .right, footer p, nav.pager {
+    br, .down, footer nav, nav.pager {
         display: none;
+    }
+    header {
+        height: 10%;
+        max-height: 60px;
+
+        img.right {
+            margin-left: -3em;
+        }
     }
 }
 

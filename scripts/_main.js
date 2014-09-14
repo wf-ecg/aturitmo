@@ -20,14 +20,8 @@ var Main = (function ($, G, U) { // IIFE
                 html.addClass('mini');
                 jsView.mobile.addBug();
             }
-            body.removeClass('fillX fillY slim');
-            if (shape === 'landscape') {
-                body.addClass('fillY');
-            } else if (shape === 'square') {
-                body.addClass('fillX');
-            } else if (shape === 'portrait') {
-                body.addClass('slim');
-            }
+            shapeReset();
+
             C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
         },
     };
@@ -50,6 +44,17 @@ var Main = (function ($, G, U) { // IIFE
     function disclose(sel) {
         $('.modal').trigger('show');
         $('#Legal ' + sel).show().fitContents();
+    }
+
+    function shapeReset() {
+        body.removeClass('fillX fillY slim');
+        if (shape === 'landscape') {
+            body.addClass('fillY');
+        } else if (shape === 'square') {
+            body.addClass('fillX');
+        } else if (shape === 'portrait') {
+            body.addClass('slim');
+        }
     }
 
     function vidplay(sel) {
@@ -123,7 +128,9 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         $(W).on('resize', _.debounce(function () {
-            W.location.reload();
+            if (shape !== jsView.port.orientation()) {
+                W.location.reload();
+            }
         }, 333, false));
 
         $('button').on('click', function (evt) {

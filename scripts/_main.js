@@ -1,6 +1,6 @@
 /*jslint white:false, evil:true */
 /*globals _, C, W, Glob, ROOT, Util, jQuery,
-        IScroll, Main:true, */
+        IScroll, Main:true, Modal, Scroller, jsView, videojs, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Main = (function ($, G, U) { // IIFE
     'use strict';
@@ -113,7 +113,7 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
-                switchLang('es');
+        switchLang('es');
 
         $(W).on('hashchange', _hashListen);
 
@@ -140,9 +140,10 @@ var Main = (function ($, G, U) { // IIFE
         $('a.vid').on('click', function (evt) {
             evt.preventDefault();
 
-            var vid = $(evt.currentTarget).data('vid'),
-                vidjs = videojs(vid),
-                vidiv = $('#' + vid);
+            var vid, vidjs, vidiv;
+            vid = $(evt.currentTarget).data('vid');
+            vidjs = videojs(vid);
+            vidiv = $('#' + vid);
 
             $('#Video').children().hide();
 

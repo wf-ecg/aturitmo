@@ -135,7 +135,7 @@ var Scroller = (function ($, G, U) { // IIFE
 
             activateNum(pg - 1);
 
-            if (pg == 1) {
+            if (pg === 1) {
                 page.removeClass('active');
                 foot.addClass('active');
             } else {

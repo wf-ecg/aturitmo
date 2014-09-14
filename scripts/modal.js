@@ -1,11 +1,11 @@
 /*jslint white:false */
 /*globals _, C, W, Glob, Util, jQuery,
-        Main, */
+        Modal:true, Main, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Modal = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Modal',
-        self = new Global(name, '(enable modal selections)'),
+        self = new G.constructor(name, '(enable modal selections)'),
         Df;
 
     Df = { // DEFAULTS

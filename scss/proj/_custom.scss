@@ -1,6 +1,7 @@
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 /* PROJ / Custom */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+$foot: 2.5em;
 
 html, body {
     height: 100%;
@@ -24,23 +25,20 @@ header {
 }
 footer {
     @include nosel();
-    @include transition( bottom 0.5s );
-    bottom: -2em;
+    @include transition( max-height 0.5s );
+    bottom: 0;
     font-size: 65%;
+    max-height: $foot / 2;
     padding-top: 1em;
 
-    html:not(.mini) &.active, &:hover {
-        bottom: 0;
-    }
-    .down {
-        cursor: pointer;
-        left: 50%;
-        margin: -4em -2em 1em;
-        position: fixed;
+    html:not(.mini) &.active {
+        max-height: $foot * 2;
     }
     div {
         border-top: 3px solid gold;
-        height: 1.6rem;
+        height: $foot;
+        position: relative;
+        z-index: 1;
 
         p {
             background-color: #3e3e3e;
@@ -48,7 +46,7 @@ footer {
 
             a {
                 cursor: pointer;
-                line-height: 1.5rem;
+                line-height: $foot;
                 padding: 0.5em 1em;
                 white-space: nowrap;
 
@@ -61,12 +59,17 @@ footer {
             }
         }
     }
+    .down {
+        bottom: 0;
+        cursor: pointer;
+        left: 50%;
+        position: absolute;
+    }
     .legal {
-        height: 0;
+        bottom: $foot / 2;
         margin: 0 2em;
-        position: relative;
+        position: absolute;
         text-shadow: 0px 1px 2px black;
-        top: -2em;
 
         a {
             color: white;

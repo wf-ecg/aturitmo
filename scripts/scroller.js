@@ -147,6 +147,16 @@ var Scroller = (function ($, G, U) { // IIFE
             }
         });
 
+        foot.on('mouseover mouseout', function (evt) {
+            var me = $(evt.target);
+
+            if (evt.type === 'mouseover') {
+                foot.addClass('active');
+            } else {
+                foot.removeClass('active');
+            }
+        });
+
         $('nav.pager, footer p').on('click', 'a', function () {
             var me = $(this), num = me.data('page');
 

@@ -6,7 +6,7 @@ $shad2: rgba( 33,  33,  33, 0.7);
 
 #Legal {
     article {
-        @include abscent(33%, 33%);
+        @include abscent(33%, 11%);
         box-shadow: 0em 0em 10em black, inset -1px -1px 9px gray;
         overflow: hidden;
     }

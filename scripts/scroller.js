@@ -103,7 +103,7 @@ var Scroller = (function ($, G, U) { // IIFE
 
     function activateNum(num) {
         activate($('nav.pager a').eq(num));
-        $('footer p').each(function () {
+        $('footer nav').each(function () {
             activate($(this).find('a').eq(num));
         });
     }
@@ -112,6 +112,8 @@ var Scroller = (function ($, G, U) { // IIFE
     /// HANDLERS
 
     function bindings() {
+        var foot = $('footer');
+        var page = $('.pager');
 
         myScroll.on('beforeScrollStart', function () {
             C.debug('beforeScrollStart');
@@ -127,25 +129,33 @@ var Scroller = (function ($, G, U) { // IIFE
             C.debug('scrollStart', 'page', page);
         });
         myScroll.on('scrollEnd', function () {
-            var page = myScroll.getCurrentPage();
+            var pg = myScroll.getCurrentPage();
 
-            C.debug('scrollEnd', 'page', page);
+            C.debug('scrollEnd', 'page', pg);
 
-            activateNum(page - 1);
+            activateNum(pg - 1);
 
-            if (page == 1) {
-                $('.pager').removeClass('active');
-                $('footer').addClass('active');
+            if (pg == 1) {
+                page.removeClass('active');
+                foot.addClass('active');
             } else {
-                $('.pager').addClass('active');
-                $('footer').removeClass('active');
+                page.addClass('active');
+                foot.removeClass('active');
             }
-            if (page > total) {
+            if (pg > total) {
                 myScroll.setCurrentPage(1, 0);
             }
         });
 
-        $('nav.pager, footer p').on('click', 'a', function () {
+        foot.on('mouseover mouseout', 'section.touch', function (evt) {
+            if (evt.type === 'mouseover') {
+                foot.addClass('active');
+            } else {
+                foot.removeClass('active');
+            }
+        });
+
+        $('nav.pager, footer nav').on('click', 'a', function () {
             var me = $(this), num = me.data('page');
 
             myScroll.setCurrentPage(num, 400);

@@ -7,7 +7,7 @@ module.exports = {
         files: [ {
             cwd: 'app',
             src: ['**/*'],
-            dest: '/web/docs/wf-ecg/aturitmo/1/'
+            dest: '/web/docs/wf-ecg/aturitmo/2/'
         }],
         //pretend: true,
         updateOnly: true, // Don't remove any files from `dest` (works around 30% faster)

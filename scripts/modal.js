@@ -6,17 +6,17 @@ var Modal = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Modal',
         self = new G.constructor(name, '(enable modal selections)'),
-        Df;
+        Df, active;
 
     Df = { // DEFAULTS
         dat: {},
         delay: null,
-        all: '.modal',
+        div: '.modal',
         autohide: 'article',
         inits: function () {
             this.delay = Main.delay || 333;
-            this.all = $(this.all);
-            this.autohide = this.all.find(this.autohide);
+            this.div = $(this.div);
+            this.autohide = this.div.find(this.autohide);
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -37,19 +37,21 @@ var Modal = (function ($, G, U) { // IIFE
         });
 
         Df.autohide.hide();
+        active = true;
     }
 
     function _hide(evt) {
         var me = $(evt.target);
 
         me.slideUp(Df.delay);
+        active = false;
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// HANDLERS
 
     function bindings() {
-        Df.all.each(function () {
+        Df.div.each(function () {
             var me = $(this)
             .on('show.' + name, _show) //
             .on('hide.' + name, _hide) //
@@ -58,7 +60,7 @@ var Modal = (function ($, G, U) { // IIFE
             });
 
             if (U.debug(1)) {
-                C.debug(name + '_binding', '\n', me);
+                C.debug(name, '_binding', '\n', me);
             }
         });
     }
@@ -78,7 +80,14 @@ var Modal = (function ($, G, U) { // IIFE
         __: Df,
         init: _init,
         hide: function () {
-            Df.all.trigger('hide.' + name);
+            Df.div.trigger('hide.' + name);
+        },
+        show: function () {
+            Df.div.trigger('show.' + name);
+            return self;
+        },
+        status: function () {
+            return Boolean(active);
         },
     });
 

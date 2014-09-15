@@ -130,7 +130,10 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         $(W).on('resize', _.debounce(function () {
-            if (shape !== jsView.port.orientation()) {
+            var keepStill = Df.modal.status(); // could be going fullscreen
+            var shapeChange = (shape !== jsView.port.orientation());
+
+            if (!keepStill && shapeChange) {
                 W.location.reload();
             }
         }, 333, false));
@@ -181,9 +184,9 @@ var Main = (function ($, G, U) { // IIFE
         Df.inits();
         self.serv = W.location.hostname;
 
-        _.delay(bindings);
         Df.scroll = Scroller.init();
         Df.modal = Modal.init();
+        _.delay(bindings);
     }
 
     $.extend(self, {

@@ -188,7 +188,7 @@ var Scroller = (function ($, G, U) { // IIFE
         }
         Df.inits();
         bindings();
-        return self;
+        return myScroll;
     }
 
     $.extend(self, {

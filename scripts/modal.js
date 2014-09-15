@@ -10,11 +10,11 @@ var Modal = (function ($, G, U) { // IIFE
 
     Df = { // DEFAULTS
         dat: {},
-        delay: null,
+        delay: 333,
         div: '.modal',
         autohide: 'article',
         inits: function () {
-            this.delay = Main.delay || 333;
+            this.delay = Main.delay || this.delay;
             this.div = $(this.div);
             this.autohide = this.div.find(this.autohide);
         },

@@ -9,6 +9,7 @@ var Main = (function ($, G, U) { // IIFE
         Df, body, html, shape, agent;
 
     Df = { // DEFAULTS
+        delay: 400,
         scroll: null,
         inits: function () {
             shape = jsView.port.orientation();
@@ -116,7 +117,7 @@ var Main = (function ($, G, U) { // IIFE
         }
         _.delay(function () {
             L.hash = '';
-        }, 3333);
+        }, Df.delay * 10);
     }
 
     function bindings() {
@@ -148,6 +149,9 @@ var Main = (function ($, G, U) { // IIFE
             W.open(url, 'offsite');
         });
 
+        $('header img.left').on('click', function () {
+            Df.scroll.setCurrentPage(1);
+        });
 
         $('a.vid').on('click', function (evt) {
             evt.preventDefault();
@@ -195,6 +199,7 @@ var Main = (function ($, G, U) { // IIFE
         },
         __: Df,
         init: _init,
+        delay: Df.delay, // expose for other inits
         mode: eval(U.testrict),
     });
 

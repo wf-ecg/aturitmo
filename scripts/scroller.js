@@ -106,10 +106,10 @@ var Scroller = (function ($, G, U) { // IIFE
     }
 
     function activateNum(num) {
-        activate($('nav.pager a').eq(num));
+        activate($('nav.pager a').eq(num - 1));
 
         $('footer nav').each(function () {
-            activate($(this).find('a').eq(num));
+            activate($(this).find('a').eq(num - 1));
         });
     }
 
@@ -127,7 +127,7 @@ var Scroller = (function ($, G, U) { // IIFE
         myScroll.on('scrollStart', function () {
             var page = myScroll.getCurrentPage();
 
-            activateNum(page - 1);
+            activateNum(page);
 
             C.debug('scrollStart', 'page', page);
         });
@@ -136,7 +136,7 @@ var Scroller = (function ($, G, U) { // IIFE
 
             C.debug('scrollEnd', 'page', pg);
 
-            activateNum(pg - 1);
+            activateNum(pg);
 
             if (pg === 1) {
                 page.removeClass('active');
@@ -162,7 +162,7 @@ var Scroller = (function ($, G, U) { // IIFE
             var me = $(this), num = me.data('page');
 
             myScroll.setCurrentPage(num, 0);
-            activateNum(num - 1);
+            activateNum(num);
         });
 
         $('img.down').on('click', function () { //                              scroll to next page /or/ jump to top and crawl
@@ -174,8 +174,10 @@ var Scroller = (function ($, G, U) { // IIFE
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
             if (tb) {
+                if (U.debug(1)) {
+                    C.debug('inview');
+                }
                 myScroll.setCurrentPage(1, 0);
-
                 _.delay(function () {
                     myScroll.setCurrentPage(1.1);
                 }, 99);

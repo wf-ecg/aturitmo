@@ -38,6 +38,12 @@ var jsView = (function (W, $) { // IIFE
             if (diff > 0.9 && diff < 1.1) {
                 return 'square';
             }
+            if (diff < 0.5) {
+                return 'thin';
+            }
+            if (diff > 1.666) {
+                return 'wide';
+            }
             return diff > 1 ? 'landscape' : 'portrait';
         },
         scrollbarWidth: function () {

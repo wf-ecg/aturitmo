@@ -21,6 +21,7 @@ var Main = (function ($, G, U) { // IIFE
                 jsView.mobile.addBug();
             }
             shapeReset();
+            C.groupEnd(); // compensate for ROOT.loaded delay
 
             C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
         },
@@ -48,11 +49,12 @@ var Main = (function ($, G, U) { // IIFE
 
     function shapeReset() {
         body.removeClass('fillX fillY slim');
-        if (shape === 'landscape') {
+
+        if (_.contains(['landscape', 'wide'], shape)) {
             body.addClass('fillY');
         } else if (shape === 'square') {
             body.addClass('fillX');
-        } else if (shape === 'portrait') {
+        } else if (_.contains(['portrait', 'thin'], shape)) {
             body.addClass('slim');
         }
     }

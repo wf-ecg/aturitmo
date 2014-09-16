@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('easy', [
         'connect:base',
-        'sync:base', 'watch',
+        'watch',
     ]);
 
     grunt.registerTask('custom', 'Say hello!', function() {

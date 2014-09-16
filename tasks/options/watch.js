@@ -6,6 +6,10 @@ module.exports = {
     options: {
         livereload: false,
     },
+    base: {
+        files: ['libs/*.js', 'scripts/*.js', 'app/**/*.html', 'scss/**/*.scss'],
+        tasks: ['jshint:precat', 'concat:baselib', 'concat:basesrc', 'sass:base'],
+    },
     lib: {
         files: ['libs/*.js'],
         tasks: ['jshint', 'concat:lib'],
@@ -16,7 +20,7 @@ module.exports = {
     },
     css: {
         files: ['scss/**/*.scss'],
-        tasks: ['sass:base'],
+        tasks: ['sass'],
     },
     html: {
         files: ['app/**/*.html'],

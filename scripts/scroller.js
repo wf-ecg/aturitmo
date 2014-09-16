@@ -142,8 +142,7 @@ var Scroller = (function ($, G, U) { // IIFE
                 page.removeClass('active');
                 foot.addClass('active');
             } else {
-                page.addClass('active');
-                foot.removeClass('active');
+                page.addClass('active'); // foot.removeClass('active');
             }
             if (pg > total + 0.333) {
                 myScroll.setCurrentPage(1.025, 0);
@@ -161,7 +160,7 @@ var Scroller = (function ($, G, U) { // IIFE
         $('nav.pager, footer nav').on('click', 'a', function () { //            set triggers directly to pages
             var me = $(this), num = me.data('page');
 
-            myScroll.setCurrentPage(num, 0);
+            myScroll.setCurrentPage(num);
             activateNum(num);
         });
 
@@ -170,7 +169,7 @@ var Scroller = (function ($, G, U) { // IIFE
 
             num = (num >= 1) ? num : 1;
             myScroll.setCurrentPage(num, num === 1 ? 0 : undefined);
-        });
+        }).css('position', 'fixed');
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
             if (tb) {

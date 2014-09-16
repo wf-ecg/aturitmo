@@ -6,28 +6,24 @@ module.exports = {
     options: {
         livereload: false,
     },
-    base: {
-        files: ['libs/*.js', 'scripts/*.js', 'app/**/*.html', 'scss/**/*.scss'],
-        tasks: ['jshint:precat', 'concat:baselib', 'concat:basesrc', 'sass:base'],
-    },
     lib: {
         files: ['libs/*.js'],
-        tasks: ['jshint', 'concat:lib'],
+        tasks: ['jshint', 'concat:base'],
     },
     src: {
         files: ['scripts/*.js'],
-        tasks: ['jshint', 'concat:src'],
+        tasks: ['jshint', 'concat:base'],
     },
     css: {
         files: ['scss/**/*.scss'],
-        tasks: ['sass'],
+        tasks: ['sass:base'],
     },
     html: {
         files: ['app/**/*.html'],
     },
-    config: {
+    test: {
         options: {
-            reload: true,
+            //reload: true,
         },
         files: ['Gruntfile.js', 'tasks/*.js', 'tasks/options/*.js'],
         tasks: ['default'],

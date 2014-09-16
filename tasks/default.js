@@ -1,13 +1,14 @@
 module.exports = function(grunt) {
 
     grunt.registerTask('default', [
-        'connect:full', 'sass',
-        'jshint:precat', 'concat', 'jshint:postcat',
-        'uglify', 'sync', 'watch',
+        'connect:full', 'sass:full',
+        'jshint:precat', 'concat', 'jshint:postcat', 'uglify',
+        'sync:full', 'watch',
     ]);
 
     grunt.registerTask('easy', [
-        'connect:base', 'watch:base',
+        'connect:base',
+        'sync:base', 'watch',
     ]);
 
     grunt.registerTask('custom', 'Say hello!', function() {

@@ -18,20 +18,17 @@ module.exports = {
             'libs/bootstrap/console.js',
             'libs/bootstrap/global.js',
         ],
+        tasks: ['sync'],
     },
-    baselib: {
-        files: { 'app/build/lib.js': ['libs/*.js'] },
+    base: {
+        options: { sourceMap: false, },
+        'app/build/lib.js': ['libs/*.js'] ,
+        'app/build/src.js': ['scripts/[a-z]*.js', 'scripts/_main.js'] ,
     },
-    basesrc: {
-        files: { 'app/build/src.js': ['scripts/[a-z]*.js', 'scripts/_main.js'] },
-    },
-    lib: {
+    full: {
         options: { sourceMap: true, },
-        files: { 'app/build/lib.js': ['libs/*.js'] },
-    },
-    src: {
-        options: { sourceMap: true, },
-        files: { 'app/build/src.js': ['scripts/[a-z]*.js', 'scripts/_main.js'] },
+        'app/build/lib.js': ['libs/*.js'] ,
+        'app/build/src.js': ['scripts/[a-z]*.js', 'scripts/_main.js'] ,
     },
 };
 

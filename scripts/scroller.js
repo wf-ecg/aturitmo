@@ -184,6 +184,26 @@ var Scroller = (function ($, G, U) { // IIFE
             }
         });
 
+        var tip = $('<span>').addClass('tip');
+
+        $('nav.pager a').each(function () {
+            var me, txt, eng, esp;
+
+            me = $(this);
+            txt = me.attr('title');
+            me.attr({
+                title: '',
+                alt: txt,
+            });
+
+            txt = txt.split('/');
+            if (!W.msie) {
+                eng = tip.clone().text(txt[0]).addClass('eng');
+                esp = tip.clone().text(txt[1]).addClass('esp');
+                me.append(eng, esp);
+            }
+        });
+
         if (U.debug(1)) {
             C.debug(myScroll);
         }

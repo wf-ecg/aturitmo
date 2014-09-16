@@ -6,11 +6,10 @@ var Main = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Main',
         self = new G.constructor(name, '(kicker and binder)'),
-        Df, body, html, shape, agent;
+        Df, agent, body, html, modal, scroll, shape;
 
     Df = { // DEFAULTS
         delay: 400,
-        scroll: null,
         inits: function () {
             shape = jsView.port.orientation();
             agent = jsView.mobile.agent();
@@ -81,43 +80,32 @@ var Main = (function ($, G, U) { // IIFE
 
     function _hashListen(evt) {
         var L = W.location;
-        var H = L.hash;
+        var H = L.hash.slice(1);
 
-        switch (H) {
-            case '#EngLang':
-                switchLang('en');
-                break;
-            case '#EngDisc':
-                disclose('.eng.legal');
-                break;
-            case '#EngDown':
-                disclose('.eng.exit');
-                break;
-            case '#EspLang':
-                switchLang('es');
-                break;
-            case '#EspDisc':
-                disclose('.esp.legal');
-                break;
-            case '#EspDown':
-                disclose('.esp.exit');
-                break;
-            case '#EngVid1':
-                vidplay('#MobileDeposit_Demo');
-                break;
-            case '#EngVid2':
-                vidplay('#SurePay_Demo');
-                break;
-            case '#EspVid1':
-                vidplay('#MobileDeposit_Demo_Spanish');
-                break;
-            case '#EspVid2':
-                vidplay('#SurePay_Demo_Spanish');
-                break;
+        if (!H) {
+            return;
+        } else {
+            _.delay(function () {
+                L.hash = '';
+            }, Df.delay * 10);
         }
-        _.delay(function () {
-            L.hash = '';
-        }, Df.delay * 10);
+        H = parseInt(H) == H ? H|0 : H;
+        if (typeof H === 'number') {
+            C.warn(H);
+            return scroll.setCurrentPage(H);
+        }
+        switch (H) {
+            case 'EngLang': return switchLang('en');
+            case 'EspLang': return switchLang('es');
+            case 'EngDisc': return disclose('.eng.legal');
+            case 'EngDown': return disclose('.eng.exit');
+            case 'EspDisc': return disclose('.esp.legal');
+            case 'EspDown': return disclose('.esp.exit');
+            case 'EngVid1': return vidplay('#MobileDeposit_Demo');
+            case 'EngVid2': return vidplay('#SurePay_Demo');
+            case 'EspVid1': return vidplay('#MobileDeposit_Demo_Spanish');
+            case 'EspVid2': return vidplay('#SurePay_Demo_Spanish');
+        }
     }
 
     function bindings() {
@@ -131,7 +119,7 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         $(W).on('resize', _.debounce(function () {
-            var keepStill = Df.modal.status(); // could be going fullscreen
+            var keepStill = modal.status(); // could be going fullscreen
             var shapeChange = (shape !== jsView.port.orientation());
 
             if (!keepStill && shapeChange) {
@@ -150,7 +138,7 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         $('header img.left').on('click', function () {
-            Df.scroll.setCurrentPage(1);
+            scroll.setCurrentPage(1);
         });
 
         $('a.vid').on('click', function (evt) {
@@ -188,8 +176,8 @@ var Main = (function ($, G, U) { // IIFE
         Df.inits();
         self.serv = W.location.hostname;
 
-        Df.scroll = Scroller.init();
-        Df.modal = Modal.init();
+        scroll = Scroller.init();
+        modal = Modal.init();
         _.delay(bindings);
     }
 

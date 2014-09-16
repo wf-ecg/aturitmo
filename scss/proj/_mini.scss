@@ -6,7 +6,7 @@
     font-size: 75%;
 
     /* hide all... */
-    br, .down, footer nav, nav.pager {
+    br, footer nav, nav.pager {
         display: none;
     }
     header {
@@ -15,6 +15,11 @@
 
         img.right {
             margin-left: -3em;
+        }
+    }
+    #Legal {
+        article {
+            min-width: 66%;
         }
     }
 }

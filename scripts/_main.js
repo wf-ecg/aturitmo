@@ -85,16 +85,17 @@ var Main = (function ($, G, U) { // IIFE
         if (!H) {
             return;
         } else {
+            H = (parseInt(H) == H) ? H|0 : H; // coerce to number?
+
             _.delay(function () {
-                L.hash = '';
+                L.hash = ''; // rehash soon
             }, Df.delay * 10);
         }
-        H = parseInt(H) == H ? H|0 : H;
+
         if (typeof H === 'number') {
             C.warn(H);
             return scroll.setCurrentPage(H);
-        }
-        switch (H) {
+        } else switch (H) {
             case 'EngLang': return switchLang('en');
             case 'EspLang': return switchLang('es');
             case 'EngDisc': return disclose('.eng.legal');

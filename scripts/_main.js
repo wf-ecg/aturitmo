@@ -140,6 +140,7 @@ var Main = (function ($, G, U) { // IIFE
 
         $('header img.left').on('click', function () {
             scroll.setCurrentPage(1);
+            html.removeClass('dev');
         });
 
         $('a.vid').on('click', function (evt) {

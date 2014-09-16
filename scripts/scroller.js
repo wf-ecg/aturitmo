@@ -176,9 +176,9 @@ var Scroller = (function ($, G, U) { // IIFE
                 if (U.debug(1)) {
                     C.debug('inview');
                 }
-                myScroll.setCurrentPage(1, 0);
+                myScroll.setCurrentPage(1.1, 0);
                 _.delay(function () {
-                    myScroll.setCurrentPage(1.1);
+                    myScroll.setCurrentPage(1.2);
                 }, 99);
             }
         });

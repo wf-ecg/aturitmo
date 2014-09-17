@@ -30,9 +30,6 @@ footer {
     font-size: 65%;
     max-height: $foot / 2;
 
-    .esp {
-        font-family: 'Arial Narrow';
-    }
     html:not(.mini) &.active {
         max-height: $foot * 2;
     }
@@ -64,11 +61,12 @@ footer {
         bottom: 3em;
         cursor: pointer;
         left: 50%;
-        margin-left: -24px; // half width
+        margin-left: -1.5em; // half width
         position: absolute;
     }
     .legal {
-        bottom: $foot / 2;
+        bottom: $foot;
+        &.left { bottom: $foot / 2; }
         margin: 0 2em;
         position: absolute;
         text-shadow: 0px 1px 2px black;

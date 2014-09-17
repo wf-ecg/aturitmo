@@ -5,7 +5,7 @@
 #Text {
     $lite: rgba(0,0,0,0.1);
 
-    -webkit-mask-image: -webkit-linear-gradient(transparent, $lite 10%, black 20%); // top left / contain;
+    -webkit-mask-image: -webkit-linear-gradient(transparent, $lite 10%, black 20%, black 90%, $lite 100%); // top left / contain;
 
     article.grad {
         @include shadgrad();
@@ -19,18 +19,18 @@
         .mini & {
             @include shadgrad(rgba(11, 11, 11, 0.75));
 
-            img {
-                width: 50%;
-            }
             h3, h4, p {
                 font-size: 120%;
-                line-height: 1.4;
+                line-height: 1.2;
             }
         }
     }
-    #Page1, #Page8 {
+    #Page1, #Page7, #Page8 {
+        img {
+            width: 50%;
+        }
         article.grad {
-            max-width: 32em;
+            max-width: 31em;
         }
     }
     p {

@@ -119,6 +119,7 @@ var Scroller = (function ($, G, U) { // IIFE
     function bindings() {
         var foot = $('footer');
         var page = $('.pager');
+        var tip = $('<span>').addClass('tip');
 
         //myScroll.on('beforeScrollStart', function () { C.debug('beforeScrollStart'); });
 
@@ -128,13 +129,10 @@ var Scroller = (function ($, G, U) { // IIFE
             var page = myScroll.getCurrentPage();
 
             activateNum(page);
-
-            C.debug('scrollStart', 'page', page);
         });
+
         myScroll.on('scrollEnd', function () {
             var pg = myScroll.getCurrentPage();
-
-            C.debug('scrollEnd', 'page', pg);
 
             activateNum(pg);
 
@@ -171,20 +169,26 @@ var Scroller = (function ($, G, U) { // IIFE
             myScroll.setCurrentPage(num, num === 1 ? 0 : undefined);
         }).css('position', 'fixed');
 
-        $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
-            if (tb) {
-                if (U.debug(1)) {
-                    C.debug('inview', tb);
-                }
+        $('section').on('inview', function (evt, vis, lr, tb) {
+            var id = evt.currentTarget.id;
 
-                myScroll.setCurrentPage(1, 0);
+            if (id === 'Page8') {
+                myScroll.setCurrentPage(0.95, 0);
+
                 _.delay(function () {
-                    myScroll.setCurrentPage(1.05);
-                }, 33);
+                    myScroll.setCurrentPage(1.0);
+                }, 99);
+
+                Stats.update('Loopback:Page1:scroll');
+            } else if (tb === 'top' && id) {
+                Stats.update('Viewing:' + evt.currentTarget.id + ':scroll');
             }
         });
 
-        var tip = $('<span>').addClass('tip');
+        $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
+            if (tb) {
+            }
+        });
 
         $('nav.pager a').each(function () {
             var me, txt, eng, esp;

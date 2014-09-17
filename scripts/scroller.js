@@ -173,10 +173,10 @@ var Scroller = (function ($, G, U) { // IIFE
             var id = evt.currentTarget.id;
 
             if (id === 'Page8') {
-                myScroll.setCurrentPage(1, 0);
+                myScroll.setCurrentPage(0.95, 0);
 
                 _.delay(function () {
-                    myScroll.setCurrentPage(1.05);
+                    myScroll.setCurrentPage(1.0);
                 }, 99);
 
                 Stats.update('Loopback:Page1:scroll');

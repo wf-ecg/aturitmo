@@ -30,6 +30,9 @@ body {
             position: relative;
             float: right;
         }
+        button {
+            @extend .squeeze;
+        }
     }
     &.fillX {
         background-image: url('../images/pages/p7.jpg');

@@ -30,9 +30,6 @@ footer {
     font-size: 65%;
     max-height: $foot / 2;
 
-    .esp {
-        font-family: 'Arial Narrow';
-    }
     html:not(.mini) &.active {
         max-height: $foot * 2;
     }

@@ -51,7 +51,7 @@ var Main = (function ($, G, U) { // IIFE
         body.removeClass('fillX fillY slim');
 
         if (_.contains(['landscape', 'wide'], shape)) {
-            body.addClass('fillY');
+            body.addClass(agent ? 'fillX' : 'fillY');
         } else if (shape === 'square') {
             body.addClass('fillX');
         } else if (_.contains(['portrait', 'thin'], shape)) {

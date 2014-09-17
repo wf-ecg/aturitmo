@@ -51,7 +51,7 @@ var Stats = (function ($, G, U) { // IIFE
         tag = me.prop('tagName');
         type = evt.type;
 
-        if (!msg) switch(tag) {
+        if (!msg) switch (tag) {
             case 'A':
                 msg = ('Link:' + str); break;
             case 'BUTTON':

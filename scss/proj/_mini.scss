@@ -19,8 +19,12 @@
     }
     #Legal {
         article {
+            @extend .squeeze;
             min-width: 66%;
         }
+    }
+    .down {
+        bottom: 1em !important;
     }
 }
 

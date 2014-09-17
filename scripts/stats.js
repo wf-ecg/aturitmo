@@ -18,7 +18,7 @@ var Stats = (function ($, G, U) { // IIFE
 
     function dump(msg) {
         if (msg) {
-            C.info(name, 'DUMP', msg);
+            C.info(name, '(dump)', [Df.key, msg]);
         }
     }
 
@@ -43,18 +43,21 @@ var Stats = (function ($, G, U) { // IIFE
     }
 
     function makeMessage(evt) {
-        var me, msg, str, type;
+        var me, msg, str, tag, type;
 
         me = $(evt.currentTarget);
         msg = me.data('stat') || '';
-        str = (me.children()[0] || me.get(0)).innerText;
+        str = (me.children()[0] || me.get(0)).innerText || me.attr('href');
+        tag = me.prop('tagName');
         type = evt.type;
 
-        if (!msg && me.prop('tagName') === 'A') {
-            msg = ('Link:' + str);
-        }
-        if (!msg) {
-            msg = me.parent().get(0).className;
+        if (!msg) switch(tag) {
+            case 'A':
+                msg = ('Link:' + str); break;
+            case 'BUTTON':
+                msg = ('Button:' + me.get(0).textContent); break;
+            default:
+                msg = me.parent().get(0).className;
         }
         if (msg) {
             msg = msg + ':' + type;
@@ -79,7 +82,7 @@ var Stats = (function ($, G, U) { // IIFE
             return Df;
         },
         init: _.once(_init),
-        update: _.throttle(_update, 500),
+        update: _.debounce(_update, 1500),
     });
 
     return self.init();

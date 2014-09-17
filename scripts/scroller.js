@@ -107,7 +107,6 @@ var Scroller = (function ($, G, U) { // IIFE
 
     function activateNum(num) {
         activate($('nav.pager a').eq(num - 1));
-        if ((num|0) === num) Stats.update(name + ' activateNum ' + num);
 
         $('footer nav').each(function () {
             activate($(this).find('a').eq(num - 1));
@@ -145,7 +144,6 @@ var Scroller = (function ($, G, U) { // IIFE
             }
             if (pg > total) {
                 myScroll.setCurrentPage(7.45);
-                Stats.update(name + ' loopback');
             }
         });
 
@@ -171,16 +169,24 @@ var Scroller = (function ($, G, U) { // IIFE
             myScroll.setCurrentPage(num, num === 1 ? 0 : undefined);
         }).css('position', 'fixed');
 
-        $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
-            if (tb) {
-                if (U.debug(1)) {
-                    C.debug('inview', tb);
-                }
+        $('section').on('inview', function (evt, vis, lr, tb) {
+            var id = evt.currentTarget.id;
 
+            if (id === 'Page8') {
                 myScroll.setCurrentPage(1, 0);
+
                 _.delay(function () {
                     myScroll.setCurrentPage(1.05);
-                }, 33);
+                }, 99);
+
+                Stats.update('Loopback:Page1:scroll');
+            } else if (tb === 'top' && id) {
+                Stats.update('Viewing:' + evt.currentTarget.id + ':scroll');
+            }
+        });
+
+        $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
+            if (tb) {
             }
         });
 

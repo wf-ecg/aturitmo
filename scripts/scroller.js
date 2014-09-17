@@ -107,6 +107,7 @@ var Scroller = (function ($, G, U) { // IIFE
 
     function activateNum(num) {
         activate($('nav.pager a').eq(num - 1));
+        if ((num|0) === num) Stats.update(name + ' activateNum ' + num);
 
         $('footer nav').each(function () {
             activate($(this).find('a').eq(num - 1));
@@ -119,6 +120,7 @@ var Scroller = (function ($, G, U) { // IIFE
     function bindings() {
         var foot = $('footer');
         var page = $('.pager');
+        var tip = $('<span>').addClass('tip');
 
         //myScroll.on('beforeScrollStart', function () { C.debug('beforeScrollStart'); });
 
@@ -128,13 +130,10 @@ var Scroller = (function ($, G, U) { // IIFE
             var page = myScroll.getCurrentPage();
 
             activateNum(page);
-
-            C.debug('scrollStart', 'page', page);
         });
+
         myScroll.on('scrollEnd', function () {
             var pg = myScroll.getCurrentPage();
-
-            C.debug('scrollEnd', 'page', pg);
 
             activateNum(pg);
 
@@ -146,6 +145,7 @@ var Scroller = (function ($, G, U) { // IIFE
             }
             if (pg > total) {
                 myScroll.setCurrentPage(7.45);
+                Stats.update(name + ' loopback');
             }
         });
 
@@ -183,8 +183,6 @@ var Scroller = (function ($, G, U) { // IIFE
                 }, 33);
             }
         });
-
-        var tip = $('<span>').addClass('tip');
 
         $('nav.pager a').each(function () {
             var me, txt, eng, esp;

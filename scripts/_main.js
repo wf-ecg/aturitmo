@@ -1,6 +1,6 @@
 /*jslint white:false, evil:true */
 /*globals _, C, W, Glob, ROOT, Util, jQuery,
-        IScroll, Main:true, Modal, Scroller, jsView, videojs, */
+        IScroll, Main:true, Modal, Scroller, Stats, jsView, videojs, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Main = (function ($, G, U) { // IIFE
     'use strict';
@@ -110,7 +110,7 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
-        switchLang('es');
+        switchLang(U.debug() ? 'en': 'es');
 
         $(W).on('hashchange', _hashListen);
 
@@ -165,7 +165,9 @@ var Main = (function ($, G, U) { // IIFE
 
             vidjs.currentTime(0).play();
         });
+
         duper();
+        Stats.init();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -180,6 +182,7 @@ var Main = (function ($, G, U) { // IIFE
 
         scroll = Scroller.init();
         modal = Modal.init();
+        //genGAstrings();
         _.delay(bindings);
     }
 
@@ -210,3 +213,23 @@ var Main = (function ($, G, U) { // IIFE
 
 
  */
+
+    function genGAstrings() { // google analytics
+        var all = $('a').not('[data-stat]'); // links without data-stat
+
+        all.each(function () {
+            var st, me = $(this);
+
+            // take nearest header and text value of link
+            st = me.closest('article').find(':header').first().text();
+            st = st + ' > ' + (me.text() || me.attr('title') || '[OX]');
+
+            // generate data-stat value
+            st = st.replace(/^\s|(\s){2,}|\s$/g, '$1');
+            me.attr('data-stat', st);
+        });
+
+        if (U.debug(1)) {
+            C.debug('genGAstrings', all);
+        }
+    }

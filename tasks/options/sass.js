@@ -24,7 +24,7 @@ module.exports = {
     },
     full: {
         options: {
-            update: false,
+            update: !false,
         },
         files: {
             'app/build/screen.css': 'scss/screen.scss',

@@ -62,6 +62,9 @@
     font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
 }
 @mixin font-plain() {
+    font-family: 'myriad-pro', Helvetica, Arial, Geneva, sans-serif; // 'PT Sans'
+}
+@mixin font-myriad() {
     font-family: 'MyriadPro', 'Myriad Pro',
     'MyriadProRegular', 'MyriadPro-Regular', 'Myriad Pro Regular',
     'PT Sans', Helvetica, Arial, Geneva, sans-serif;
@@ -129,3 +132,16 @@
     columns: $w;
 }
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
+/*
+h1 {
+    font-family: 'myriad-pro', sans-serif;
+}
+@font-face {
+    font-family: 'myriad-pro'; font-style: italic; font-weight: 400;
+    font-family: 'myriad-pro'; font-style: italic; font-weight: 700;
+
+    font-family: 'myriad-pro'; font-style: normal; font-weight: 300;
+    font-family: 'myriad-pro'; font-style: normal; font-weight: 400;
+    font-family: 'myriad-pro'; font-style: normal; font-weight: 700;
+}
+*/

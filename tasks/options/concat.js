@@ -4,7 +4,7 @@ module.exports = {
     // https://github.com/gruntjs/grunt-contrib-concat
 
     options: {
-        sourceMap: true,
+        sourceMap: false,
     },
     bootstrap: {
         options: {
@@ -18,16 +18,21 @@ module.exports = {
             'libs/bootstrap/console.js',
             'libs/bootstrap/global.js',
         ],
+//        tasks: ['sync'],
     },
-    lib: {
+    base: {
+        options: { sourceMap: false, },
         files: {
             'app/build/lib.js': ['libs/*.js'],
-        }
-    },
-    src: {
-        files: {
             'app/build/src.js': ['scripts/[a-z]*.js', 'scripts/_main.js'],
-        }
+        },
+    },
+    full: {
+        options: { sourceMap: true, },
+        files: {
+            'app/build/lib.js': ['libs/*.js'],
+            'app/build/src.js': ['scripts/[a-z]*.js', 'scripts/_main.js'],
+        },
     },
 };
 

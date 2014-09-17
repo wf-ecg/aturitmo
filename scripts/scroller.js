@@ -1,6 +1,6 @@
 /*jslint white:false */
 /*globals _, C, W, Glob, Util, jQuery,
-        Scroller:true, IScroll, */
+        Main, Scroller:true, IScroll, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 //  requires jq-inview
 var Scroller = (function ($, G, U) { // IIFE
@@ -28,7 +28,7 @@ var Scroller = (function ($, G, U) { // IIFE
                 resize: false,
             }],
         },
-        time: 400,
+        delay: 400,
         obj: null,
         x: {
             eventPassthrough: false,
@@ -38,6 +38,7 @@ var Scroller = (function ($, G, U) { // IIFE
             snapSpeed: 999,
         },
         inits: function () {
+            this.delay = Main.delay || this.delay;
             this.obj = myScroll = new IScroll('#Text', this.cfig);
         },
     };
@@ -87,10 +88,12 @@ var Scroller = (function ($, G, U) { // IIFE
     };
 
     IScroll.prototype.setCurrentPage = function (num, time) {
+        time = U.undef(time) ? Df.delay : time;
+
         if (U.undef(this.currentPage)) {
-            this.scrollTo(0, page2pix(num2page(num, 'rev'), this.wrapperHeight), time || 0);
+            this.scrollTo(0, page2pix(num2page(num, 'rev'), this.wrapperHeight), time);
         } else {
-            this.goToPage(0, num2page(num, 'rev'), time || 0); //, offsetX, offsetY, easing
+            this.goToPage(0, num2page(num, 'rev'), time); //, offsetX, offsetY, easing
         }
     };
 
@@ -103,10 +106,10 @@ var Scroller = (function ($, G, U) { // IIFE
     }
 
     function activateNum(num) {
-        activate($('nav.pager a').eq(num));
+        activate($('nav.pager a').eq(num - 1));
 
         $('footer nav').each(function () {
-            activate($(this).find('a').eq(num));
+            activate($(this).find('a').eq(num - 1));
         });
     }
 
@@ -124,7 +127,7 @@ var Scroller = (function ($, G, U) { // IIFE
         myScroll.on('scrollStart', function () {
             var page = myScroll.getCurrentPage();
 
-            activateNum(page - 1);
+            activateNum(page);
 
             C.debug('scrollStart', 'page', page);
         });
@@ -133,17 +136,16 @@ var Scroller = (function ($, G, U) { // IIFE
 
             C.debug('scrollEnd', 'page', pg);
 
-            activateNum(pg - 1);
+            activateNum(pg);
 
             if (pg === 1) {
                 page.removeClass('active');
                 foot.addClass('active');
             } else {
-                page.addClass('active');
-                foot.removeClass('active');
+                page.addClass('active'); // foot.removeClass('active');
             }
             if (pg > total) {
-                myScroll.setCurrentPage(1, 0);
+                myScroll.setCurrentPage(7.45);
             }
         });
 
@@ -158,21 +160,47 @@ var Scroller = (function ($, G, U) { // IIFE
         $('nav.pager, footer nav').on('click', 'a', function () { //            set triggers directly to pages
             var me = $(this), num = me.data('page');
 
-            myScroll.setCurrentPage(num, Df.time);
+            myScroll.setCurrentPage(num);
+            activateNum(num);
         });
 
         $('img.down').on('click', function () { //                              scroll to next page /or/ jump to top and crawl
             var num = (myScroll.getCurrentPage() | 0) + 1;
-            num = (num >= 1) ? num : 1;
-            myScroll.setCurrentPage(num, num === 1 ? 0 : Df.time);
-        });
+
+            num = (num > 0) ? num : 1;
+            myScroll.setCurrentPage(num, num === 1 ? 0 : undefined);
+        }).css('position', 'fixed');
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
             if (tb) {
+                if (U.debug(1)) {
+                    C.debug('inview', tb);
+                }
+
                 myScroll.setCurrentPage(1, 0);
                 _.delay(function () {
-                    myScroll.setCurrentPage(1.1, Df.time);
-                }, 99);
+                    myScroll.setCurrentPage(1.05);
+                }, 33);
+            }
+        });
+
+        var tip = $('<span>').addClass('tip');
+
+        $('nav.pager a').each(function () {
+            var me, txt, eng, esp;
+
+            me = $(this);
+            txt = me.attr('title');
+            me.attr({
+                title: '',
+                alt: txt,
+            });
+
+            txt = txt.split('/');
+            if (!W.msie) {
+                eng = tip.clone().text(txt[0]).addClass('eng');
+                esp = tip.clone().text(txt[1]).addClass('esp');
+                me.append(eng, esp);
             }
         });
 
@@ -188,7 +216,7 @@ var Scroller = (function ($, G, U) { // IIFE
         }
         Df.inits();
         bindings();
-        return self;
+        return myScroll;
     }
 
     $.extend(self, {

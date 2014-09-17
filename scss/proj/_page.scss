@@ -39,6 +39,27 @@ nav.pager {
         }
         &:hover {
             opacity: 1.6;
+
+            .tip {
+                display: initial;
+            }
+        }
+        .tip {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 1em;
+            display: none;
+            font-size: 10pt;
+            opacity: 0;
+            padding: 4px 2em 2px 1em;
+            position: absolute;
+            right: -3px;
+            text-align: right;
+            white-space: nowrap;
+            z-index: -1;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }

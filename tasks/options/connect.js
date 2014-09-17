@@ -3,7 +3,15 @@ module.exports = {
     // CONNECT
     // https://github.com/gruntjs/grunt-contrib-connect
 
-    server: {
+    base: {
+        options: {
+            base: ['app', '.', '../..'],
+            open: false,
+            livereload: 7043,
+            port: 8043,
+        },
+    },
+    full: {
         options: {
             base: ['app', '.', '../..'],
             //hostname: 'localhost', // Change this to '0.0.0.0' to access the server from outside

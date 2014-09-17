@@ -64,6 +64,8 @@ var Data, Glob = new Global('Glob');
         nope: [/*
             '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal */
             '//cloud.typography.com/6819872/633184/css/fonts.css', // ScrnSmrt
+        ],
+        both: [
             G.lib + 'fonts/myriad.css',
         ],
     };

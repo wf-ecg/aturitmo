@@ -31,5 +31,5 @@ html.eng {
     -webkit-touch-callout: none;
 }
 .squeeze {
-    font-family: 'Arial Narrow';
+    @include font-thin();
 }

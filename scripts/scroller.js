@@ -144,8 +144,8 @@ var Scroller = (function ($, G, U) { // IIFE
             } else {
                 page.addClass('active'); // foot.removeClass('active');
             }
-            if (pg > total + 0.333) {
-                myScroll.setCurrentPage(1.025, 0);
+            if (pg > total) {
+                myScroll.setCurrentPage(7.45);
             }
         });
 
@@ -167,19 +167,20 @@ var Scroller = (function ($, G, U) { // IIFE
         $('img.down').on('click', function () { //                              scroll to next page /or/ jump to top and crawl
             var num = (myScroll.getCurrentPage() | 0) + 1;
 
-            num = (num >= 1) ? num : 1;
+            num = (num > 0) ? num : 1;
             myScroll.setCurrentPage(num, num === 1 ? 0 : undefined);
         }).css('position', 'fixed');
 
         $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
             if (tb) {
                 if (U.debug(1)) {
-                    C.debug('inview');
+                    C.debug('inview', tb);
                 }
-                myScroll.setCurrentPage(1.1, 0);
+
+                myScroll.setCurrentPage(1, 0);
                 _.delay(function () {
-                    myScroll.setCurrentPage(1.2);
-                }, 99);
+                    myScroll.setCurrentPage(1.05);
+                }, 33);
             }
         });
 

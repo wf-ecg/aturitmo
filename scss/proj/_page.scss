@@ -39,20 +39,22 @@ nav.pager {
 
             .tip {
                 max-width: 50em;
+                visibility: visible;
             }
         }
         .tip {
             background-color: rgba(11, 11, 11, 0.5);
             border-radius: 1em;
             font-size: 10pt;
+            max-width: 0;
             opacity: 0;
             overflow: hidden;
             padding: 2px 2em 4px 1em;
             position: absolute;
             right: -3px;
             text-align: right;
+            visibility: hidden;
             white-space: nowrap;
-            max-width: 0;
             z-index: -1;
 
             &:hover {

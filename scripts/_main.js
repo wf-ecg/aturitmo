@@ -167,6 +167,7 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         duper();
+        $(':header, p').widorph();
         Stats.init();
     }
 

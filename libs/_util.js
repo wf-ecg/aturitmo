@@ -189,6 +189,13 @@ var Util = (function ($) { /// IIFE
             vert: Boolean(tn),
         };
     };
+    // <widorph> glue last 2 words
+    $.fn.widorph = function () {
+        return this.each(function () {
+            var me = $(this);
+            me.html(me.html().replace(/\s+(\S+)\s*$/, '&nbsp;$1'));
+        });
+    };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
     function _fixIE() {

@@ -129,7 +129,7 @@ var Main = (function ($, G, U) { // IIFE
         }, 333, false));
 
         $('button').on('click', function (evt) {
-            var url = $(evt.target).data('url');
+            var url = $(evt.currentTarget).data('url');
 
             if (url.charAt(0) === '#') {
                 W.location.hash = url.slice(1);
@@ -167,7 +167,9 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         duper();
+        Scroller.page(0);
         Stats.init();
+        $(':header, p').widorph();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

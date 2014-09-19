@@ -1,5 +1,6 @@
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 /* mixins */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
 @mixin clearfix(){
     &:after {
@@ -69,7 +70,6 @@
     'MyriadProRegular', 'MyriadPro-Regular', 'Myriad Pro Regular',
     'PT Sans', Helvetica, Arial, Geneva, sans-serif;
 }
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 @mixin font-thin() {
     font-family: 'Arial Narrow', ArialNarrow, 'Open Sans Condensed', sans-serif;
 }

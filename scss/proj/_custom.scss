@@ -24,6 +24,7 @@ header {
     }
 }
 footer {
+    //@include font-thin();
     @include nosel();
     @include transition( max-height 0.5s );
     bottom: 0;

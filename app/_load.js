@@ -1,5 +1,5 @@
-/*jslint es5:true, white:false */
-/*globals _, C, W, Glob, Util, jQuery,
+/*jslint white:false */
+/*globals _, C, W, Glob:true, Util, jQuery,
         Global, Modernizr, ROOT, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Data, Glob = new Global('Glob');

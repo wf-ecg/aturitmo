@@ -29,7 +29,7 @@ var Modal = (function ($, G, U) { // IIFE
     function _show(evt) {
         var me, button;
 
-        me = $(evt.target);
+        me = $(evt.currentTarget);
         button = $('.closer').hide();
 
         me.fadeIn(Df.delay, function () {
@@ -41,7 +41,7 @@ var Modal = (function ($, G, U) { // IIFE
     }
 
     function _hide(evt) {
-        var me = $(evt.target);
+        var me = $(evt.currentTarget);
 
         me.slideUp(Df.delay);
         active = false;

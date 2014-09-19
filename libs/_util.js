@@ -8,6 +8,7 @@ var Util = (function ($) { /// IIFE
     var name = 'Util',
         self = new Global(name, '(limited utils)'),
         U;
+    var urlParseRE = /^\s*(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/;
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// CONSTANTS
     U = {
@@ -77,12 +78,35 @@ var Util = (function ($) { /// IIFE
     };
     // <parseUrl> like Location for hrefs... superparse
     $.parseUrl = function (str) {
-        if (!$.mobile) {
-            throw new Error('Where is jqm?');
+        var parseUrl = function ( url ) { // from jquery.mobile.1.4.2
+            if ( $.type( url ) === "object" ) {
+                return url;
+            }
+            var matches = urlParseRE.exec( url || "" ) || [];
+            return {
+                href:         matches[  0 ] || "",
+                hrefNoHash:   matches[  1 ] || "",
+                hrefNoSearch: matches[  2 ] || "",
+                domain:       matches[  3 ] || "",
+                protocol:     matches[  4 ] || "",
+                doubleSlash:  matches[  5 ] || "",
+                authority:    matches[  6 ] || "",
+                username:     matches[  8 ] || "",
+                password:     matches[  9 ] || "",
+                host:         matches[ 10 ] || "",
+                hostname:     matches[ 11 ] || "",
+                port:         matches[ 12 ] || "",
+                pathname:     matches[ 13 ] || "",
+                directory:    matches[ 14 ] || "",
+                filename:     matches[ 15 ] || "",
+                search:       matches[ 16 ] || "",
+                hash:         matches[ 17 ] || ""
+            };
         }
-        var url = $.mobile.path.parseUrl(str);
+        var url = parseUrl(str);
 
         url.hashstring = url.hash.slice(1);
+        url.hashbang = /^!/.exec(url.hashstring) && url.hashstring.slice(1);
         url.params = (function () {
             var ret = {},
             seg = url.search.replace(/^\?/, '').split('&'),

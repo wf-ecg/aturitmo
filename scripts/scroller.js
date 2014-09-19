@@ -101,7 +101,7 @@ var Scroller = (function ($, G, U) { // IIFE
     /// INTERNAL
 
     function activate(jq) {
-        jq.parent().children().removeClass('active');
+        jq.siblings().removeClass('active');
         jq.addClass('active');
     }
 

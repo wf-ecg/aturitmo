@@ -31,7 +31,7 @@ footer {
     font-size: 65%;
     max-height: $foot / 2;
 
-    html:not(.mini) &.active {
+    &.active {
         max-height: $foot * 2;
     }
     section.touch {

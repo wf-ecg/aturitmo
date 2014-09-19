@@ -110,6 +110,7 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
+        $(':header, p').widorph();
         switchLang(U.debug() ? 'en': 'es');
 
         $(W).on('hashchange', _hashListen);
@@ -169,7 +170,6 @@ var Main = (function ($, G, U) { // IIFE
         duper();
         Scroller.page(0);
         Stats.init();
-        $(':header, p').widorph();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

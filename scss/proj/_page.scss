@@ -20,10 +20,7 @@ nav.pager {
     width: $w;
     z-index: 7;
 
-    &.active {
-        opacity: 0.8;
-    }
-    &:hover {
+    &.active, &:hover {
         opacity: 1;
     }
     a {

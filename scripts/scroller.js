@@ -13,7 +13,7 @@ var Scroller = (function ($, G, U) { // IIFE
     Df = { // DEFAULTS
         cfig: {
             momentum: true,
-            mouseWheel: !false,
+            mouseWheel: false,
             snap: !true,
             keyBindings: {
                 pageUp: 37,
@@ -87,13 +87,26 @@ var Scroller = (function ($, G, U) { // IIFE
         return num2page(this.currentPage.pageY);
     };
 
-    IScroll.prototype.setCurrentPage = function (num, time) {
+    IScroll.prototype._setCurrentPage = function (num, time) {
         time = U.undef(time) ? Df.delay : time;
 
         if (U.undef(this.currentPage)) {
             this.scrollTo(0, page2pix(num2page(num, 'rev'), this.wrapperHeight), time);
         } else {
             this.goToPage(0, num2page(num, 'rev'), time); //, offsetX, offsetY, easing
+        }
+    };
+
+    IScroll.prototype.setCurrentPage = function (num, time) {
+        var that = this;
+
+        if (num > (total + 0.2)) {
+            this._setCurrentPage(0.66, 0);
+            _.delay(function () {
+                that._setCurrentPage(1.0);
+            }, 99);
+        } else {
+            this._setCurrentPage(num, time);
         }
     };
 
@@ -140,10 +153,15 @@ var Scroller = (function ($, G, U) { // IIFE
                 page.removeClass('active');
                 foot.addClass('active');
             } else {
-                page.addClass('active'); // foot.removeClass('active');
+                page.addClass('active');
+                foot.removeClass('active');
             }
             if (pg > total) {
-                myScroll.setCurrentPage(7.45);
+                myScroll.setCurrentPage(0.66, 0);
+
+                _.delay(function () {
+                    myScroll.setCurrentPage(1.0);
+                }, 99);
             }
         });
 
@@ -176,17 +194,12 @@ var Scroller = (function ($, G, U) { // IIFE
                 myScroll.setCurrentPage(0.95, 0);
 
                 _.delay(function () {
-                    myScroll.setCurrentPage(1.0);
+                    myScroll.setCurrentPage(1.1);
                 }, 99);
 
                 Stats.update('Loopback:Page1:scroll');
             } else if (tb === 'top' && id) {
                 Stats.update('Viewing:' + evt.currentTarget.id + ':scroll');
-            }
-        });
-
-        $('#Page8').on('inview', function (evt, vis, lr, tb) { //               pretend to wrap around (back to top)
-            if (tb) {
             }
         });
 
@@ -226,6 +239,9 @@ var Scroller = (function ($, G, U) { // IIFE
     $.extend(self, {
         __: Df,
         init: _init,
+        page: function (n) {
+            myScroll.setCurrentPage(n);
+        },
     });
 
     return self;

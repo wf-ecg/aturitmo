@@ -167,8 +167,9 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         duper();
-        $(':header, p').widorph();
+        Scroller.page(0);
         Stats.init();
+        $(':header, p').widorph();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

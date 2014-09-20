@@ -1,32 +1,37 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.registerTask('default', [
-        'connect', 'sass',
-        'jshint:precat', 'concat', 'jshint:postcat',
-        'uglify', 'sync', 'watch',
+        'jshint:precat', 'concat:full', 'concat:bootstrap', 'jshint:postcat',
+        'uglify:full',
+        'sass:full',
+        'sync:full',
+        'connect:full',
+        'watch',
     ]);
 
     grunt.registerTask('easy', [
-        'connect', 'sass:base', 'watch',
+        'connect:base',
+        'watch',
     ]);
 
-    grunt.registerTask('custom', 'Say hello!', function() {
+    grunt.registerTask('custom', 'Say hello!', function () {
         grunt.log.writeln("Custom task log");
     });
 
     grunt.registerTask('dev', ['connect', 'watch']);
 
-    grunt.event.on('watch', function(action, filepath, target) {
-        grunt.log.writeln('\n\n\n\nWATCH >><< TARGET:', target, filepath);
-
-//        var cfgkey = ['copy', 'files'];
-//        grunt.config.set(cfgkey, [grunt.config.get(cfgkey)].map(function(file) {
-//            file.src = filepath;
-//            return file;
-//        }));
+        /*
+    grunt.event.on('watch', function (action, filepath, target) {
+        grunt.log.writeln('\n>>WATCH<< TARGET:', target, filepath);
+       var cfgkey = ['copy', 'files'];
+       grunt.config.set(cfgkey, [grunt.config.get(cfgkey)].map(function(file) {
+           file.src = filepath;
+           return file;
+       }));
     });
-
+        */
 };
+
 /*
 
 // You can specify single files:

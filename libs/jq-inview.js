@@ -33,7 +33,7 @@
     };
 
     function getPortSize() {
-        void (W.debug && C.debug('getPortSize'));
+        void (W.debug > 1 && C.debug('getPortSize'));
 
         var mode, domObject, size;
 
@@ -59,7 +59,7 @@
     }
 
     function getPortOffset() {
-        void (W.debug && C.debug('getPortOffset'));
+        void (W.debug > 1 && C.debug('getPortOffset'));
         return {
             top: W.pageYOffset || DE.scrollTop || D.body.scrollTop,
             left: W.pageXOffset || DE.scrollLeft || D.body.scrollLeft

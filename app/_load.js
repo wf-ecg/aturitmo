@@ -1,5 +1,6 @@
 /*jslint white:false */
-/*globals $, Global, Main, Modernizr, ROOT, _, jQuery, window */
+/*globals _, C, W, Glob:true, Util, jQuery,
+        Global, Modernizr, ROOT, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Data, Glob = new Global('Glob');
 
@@ -8,7 +9,7 @@ var Data, Glob = new Global('Glob');
     var U;
     W.G = G;
     W.Tests = $.Callbacks();
-    W.Load = {};
+    G.Load = {};
 
     _.defaults(G, { /// all stubs terminated
         top: ROOT.dir + '/',
@@ -36,7 +37,7 @@ var Data, Glob = new Global('Glob');
         W.debug++;
     }
 
-    Load.base = {
+    G.Load.base = {
         test: W.isIE,
         yep: [
             G.lib + 'ie/split.js',
@@ -55,8 +56,8 @@ var Data, Glob = new Global('Glob');
         },
     };
 
-    Load.font = {
-        test: ROOT.conf.nom === 'localhost' || ROOT.conf.nom === 'qla1',
+    G.Load.font = {
+        test: ROOT.conf.nom === 'localhost',
         yep: [
             G.lib + 'fonts/archer.ssm.css',
             G.lib + 'fonts/archer.ssm.itl.css',
@@ -65,9 +66,12 @@ var Data, Glob = new Global('Glob');
             '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal */
             '//cloud.typography.com/6819872/633184/css/fonts.css', // ScrnSmrt
         ],
+        both: [
+            G.lib + 'fonts/myriad.css',
+        ],
     };
 
-    Load.main = {
+    G.Load.main = {
         both: [
             'build/src.js',
         ],
@@ -79,7 +83,7 @@ var Data, Glob = new Global('Glob');
         },
     };
 
-    Load.test = {
+    G.Load.test = {
         test: W.debug >= 1,
         yep: [
             //G.src + 'tests.js'
@@ -88,7 +92,7 @@ var Data, Glob = new Global('Glob');
             'http://www.wellsfargomedia.com/lib/js/ecg-ga.js',
         ],
     };
-    M.load([Load.base, Load.font, Load.main, Load.test]);
+    M.load([G.Load.base, G.Load.font, G.Load.main, G.Load.test]);
 
 }(jQuery, Modernizr, Glob));
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

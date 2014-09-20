@@ -3,11 +3,30 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 .mini {
-    font-size: 75%;
+    font-size: 80%;
 
-    /* hide all... */
-    br, header .right, footer p, nav.pager {
+    footer nav, nav.pager {
         display: none;
+    }
+    header {
+        height: 10%;
+        max-height: 80px;
+
+        img.right {
+            margin-left: -3em;
+        }
+    }
+    #Legal {
+        article {
+            @include font-thin();
+            min-width: 66%;
+        }
+    }
+    .down {
+        bottom: 1em !important;
+    }
+    button {
+        @include font-thin();
     }
 }
 

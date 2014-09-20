@@ -23,11 +23,12 @@ module.exports = function(grunt) {
 
     // Load tasks from the tasks folder
     grunt.loadTasks('tasks');
+
     // Load tasks/options by the name: watch.js => watch{}
     grunt.util._.extend(config, synthobj('./tasks/options/'));
 
     grunt.initConfig(config);
-
+    console.log('\n* * * * * * * * Big old grunt load * * * * * * * * *');
     require('load-grunt-tasks')(grunt);
-    console.log('Big old grunt load');
+
 };

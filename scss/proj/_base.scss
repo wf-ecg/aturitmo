@@ -6,8 +6,8 @@ html {
 
     body {
         @include font-plain();
-        background-color: gray;
         background-attachment: fixed;
+        background-color: gray;
         color: white;
         font-weight: 400;
     }
@@ -29,12 +29,11 @@ html {
     }
     h1, h2, h3, h4, h5, h6 {
         font-weight: 700;
-        line-height: 1;
+        line-height: 1.1;
         margin: 0.5em 0;
     }
     h1, h2 {
         @include font-archer();
-        margin-bottom: 0.75em;
     }
     h1 {
         font-size: 180%;
@@ -45,9 +44,8 @@ html {
     }
     h3 {
         font-size: 120%;
-        font-weight: 600;
+        font-weight: 500;
         margin-top: 0.75em;
-        text-transform: uppercase;
     }
     h4 {
         font-size: 100%;
@@ -66,6 +64,10 @@ html {
     td {
         vertical-align: top;
         width: 50%;
+
+        img {
+            width: 100%
+        }
     }
 }
 

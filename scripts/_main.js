@@ -1,15 +1,15 @@
 /*jslint white:false, evil:true */
 /*globals _, C, W, Glob, ROOT, Util, jQuery,
-        IScroll, Main:true, */
+        IScroll, Main:true, Modal, Scroller, Stats, jsView, videojs, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Main = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Main',
         self = new G.constructor(name, '(kicker and binder)'),
-        Df, body, html, shape, agent;
+        Df, agent, body, html, modal, scroll, shape;
 
     Df = { // DEFAULTS
-        scroll: null,
+        delay: 400,
         inits: function () {
             shape = jsView.port.orientation();
             agent = jsView.mobile.agent();
@@ -20,14 +20,9 @@ var Main = (function ($, G, U) { // IIFE
                 html.addClass('mini');
                 jsView.mobile.addBug();
             }
-            body.removeClass('fillX fillY slim');
-            if (shape === 'landscape') {
-                body.addClass('fillY');
-            } else if (shape === 'square') {
-                body.addClass('fillX');
-            } else if (shape === 'portrait') {
-                body.addClass('slim');
-            }
+            shapeReset();
+            C.groupEnd(); // compensate for ROOT.loaded delay
+
             C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
         },
     };
@@ -52,6 +47,18 @@ var Main = (function ($, G, U) { // IIFE
         $('#Legal ' + sel).show().fitContents();
     }
 
+    function shapeReset() {
+        body.removeClass('fillX fillY slim');
+
+        if (_.contains(['landscape', 'wide'], shape)) {
+            body.addClass(agent ? 'fillX' : 'fillY');
+        } else if (shape === 'square') {
+            body.addClass('fillX');
+        } else if (_.contains(['portrait', 'thin'], shape)) {
+            body.addClass('slim');
+        }
+    }
+
     function vidplay(sel) {
 //        $('.modal').trigger('show');
 //        $(sel).show().click(function (evt) {
@@ -73,47 +80,38 @@ var Main = (function ($, G, U) { // IIFE
 
     function _hashListen(evt) {
         var L = W.location;
-        var H = L.hash;
+        var H = L.hash.slice(1);
 
-        switch (H) {
-            case '#EngLang':
-                switchLang('en');
-                break;
-            case '#EngDisc':
-                disclose('.eng.legal');
-                break;
-            case '#EngDown':
-                disclose('.eng.exit');
-                break;
-            case '#EspLang':
-                switchLang('es');
-                break;
-            case '#EspDisc':
-                disclose('.esp.legal');
-                break;
-            case '#EspDown':
-                disclose('.esp.exit');
-                break;
-            case '#EngVid1':
-                vidplay('#MobileDeposit_Demo');
-                break;
-            case '#EngVid2':
-                vidplay('#SurePay_Demo');
-                break;
-            case '#EspVid1':
-                vidplay('#MobileDeposit_Demo_Spanish');
-                break;
-            case '#EspVid2':
-                vidplay('#SurePay_Demo_Spanish');
-                break;
+        if (!H) {
+            return;
+        } else {
+            H = (parseInt(H) == H) ? H|0 : H; // coerce to number?
+
+            _.delay(function () {
+                L.hash = ''; // rehash soon
+            }, Df.delay * 10);
         }
-        _.delay(function () {
-            L.hash = '';
-        }, 3333);
+
+        if (typeof H === 'number') {
+            C.warn(H);
+            return scroll.setCurrentPage(H);
+        } else switch (H) {
+            case 'EngLang': return switchLang('en');
+            case 'EspLang': return switchLang('es');
+            case 'EngDisc': return disclose('.eng.legal');
+            case 'EngDown': return disclose('.eng.exit');
+            case 'EspDisc': return disclose('.esp.legal');
+            case 'EspDown': return disclose('.esp.exit');
+            case 'EngVid1': return vidplay('#MobileDeposit_Demo');
+            case 'EngVid2': return vidplay('#SurePay_Demo');
+            case 'EspVid1': return vidplay('#MobileDeposit_Demo_Spanish');
+            case 'EspVid2': return vidplay('#SurePay_Demo_Spanish');
+        }
     }
 
     function bindings() {
-                switchLang('es');
+        $(':header, p').widorph();
+        switchLang(U.debug() ? 'en': 'es');
 
         $(W).on('hashchange', _hashListen);
 
@@ -123,11 +121,16 @@ var Main = (function ($, G, U) { // IIFE
         });
 
         $(W).on('resize', _.debounce(function () {
-            W.location.reload();
+            var keepStill = modal.status(); // could be going fullscreen
+            var shapeChange = (shape !== jsView.port.orientation());
+
+            if (!keepStill && shapeChange) {
+                W.location.reload();
+            }
         }, 333, false));
 
         $('button').on('click', function (evt) {
-            var url = $(evt.target).data('url');
+            var url = $(evt.currentTarget).data('url');
 
             if (url.charAt(0) === '#') {
                 W.location.hash = url.slice(1);
@@ -136,13 +139,18 @@ var Main = (function ($, G, U) { // IIFE
             W.open(url, 'offsite');
         });
 
+        $('header img.left').on('click', function () {
+            scroll.setCurrentPage(1);
+            html.removeClass('dev');
+        });
 
         $('a.vid').on('click', function (evt) {
             evt.preventDefault();
 
-            var vid = $(evt.currentTarget).data('vid'),
-                vidjs = videojs(vid),
-                vidiv = $('#' + vid);
+            var vid, vidjs, vidiv;
+            vid = $(evt.currentTarget).data('vid');
+            vidjs = videojs(vid);
+            vidiv = $('#' + vid);
 
             $('#Video').children().hide();
 
@@ -158,7 +166,10 @@ var Main = (function ($, G, U) { // IIFE
 
             vidjs.currentTime(0).play();
         });
+
         duper();
+        Scroller.page(0);
+        Stats.init();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -171,9 +182,10 @@ var Main = (function ($, G, U) { // IIFE
         Df.inits();
         self.serv = W.location.hostname;
 
+        scroll = Scroller.init();
+        modal = Modal.init();
+        //genGAstrings();
         _.delay(bindings);
-        Df.scroll = Scroller.init();
-        Df.modal = Modal.init();
     }
 
     $.extend(self, {
@@ -182,6 +194,7 @@ var Main = (function ($, G, U) { // IIFE
         },
         __: Df,
         init: _init,
+        delay: Df.delay, // expose for other inits
         mode: eval(U.testrict),
     });
 
@@ -202,3 +215,23 @@ var Main = (function ($, G, U) { // IIFE
 
 
  */
+
+    function genGAstrings() { // google analytics
+        var all = $('a').not('[data-stat]'); // links without data-stat
+
+        all.each(function () {
+            var st, me = $(this);
+
+            // take nearest header and text value of link
+            st = me.closest('article').find(':header').first().text();
+            st = st + ' > ' + (me.text() || me.attr('title') || '[OX]');
+
+            // generate data-stat value
+            st = st.replace(/^\s|(\s){2,}|\s$/g, '$1');
+            me.attr('data-stat', st);
+        });
+
+        if (U.debug(1)) {
+            C.debug('genGAstrings', all);
+        }
+    }

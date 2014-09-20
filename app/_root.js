@@ -21,7 +21,7 @@ W.ROOT = ({
             nom: 'localhost',
             sub: '/wf-ecg/aturitmo/app',
         },
-        '127.0.0.1:8043': {
+        'localhost:8043': {
             nom: 'localhost',
             sub: '',
         },

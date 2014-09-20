@@ -8,7 +8,7 @@ nav.pager {
 
     @include nosel();
     * {
-        @include transition( opacity 0.5s );
+        @include transition( all 0.5s );
     }
     bottom: 0;
     height: $num * $h;
@@ -20,10 +20,7 @@ nav.pager {
     width: $w;
     z-index: 7;
 
-    &.active {
-        opacity: 0.8;
-    }
-    &:hover {
+    &.active, &:hover {
         opacity: 1;
     }
     a {
@@ -38,7 +35,32 @@ nav.pager {
             opacity: 1.0;
         }
         &:hover {
-            opacity: 1.6;
+            opacity: 0.8;
+
+            .tip {
+                max-width: 50em;
+                visibility: visible;
+            }
+        }
+        .tip {
+            background-color: rgb(44, 44, 44);
+            background-color: rgba(11, 11, 11, 0.5);
+            border-radius: 1em;
+            font-size: 10pt;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding: 2px 2em 4px 1em;
+            position: absolute;
+            right: -3px;
+            text-align: right;
+            visibility: hidden;
+            white-space: nowrap;
+            z-index: -1;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }

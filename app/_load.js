@@ -57,18 +57,25 @@ var Data, Glob = new Global('Glob');
     };
 
     G.Load.font = {
-        test: ROOT.conf.nom === 'localhost',
+        test: (ROOT.conf.nom === 'localhost' || ROOT.conf.nom === 'qla2'),
         yep: [
             G.lib + 'fonts/archer.ssm.css',
             G.lib + 'fonts/archer.ssm.itl.css',
+            G.lib + (!W.isIE ? 'fonts/myriad.otf.css' : 'fonts/myriad.eot.css'),
+            G.lib + (!W.isIE ? 'fonts/myriad.otf.con.css' : 'fonts/myriad.eot.con.css'),
         ],
         nope: [/*
             '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal */
             '//cloud.typography.com/6819872/633184/css/fonts.css', // ScrnSmrt
+            '//use.typekit.net/cqz6fet.js',
         ],
-        both: [
-            G.lib + 'fonts/myriad.css',
-        ],
+        complete: function () {
+            try {
+                (!G.Load.font.test) && Typekit.load();
+            } catch (e) {
+                C.error('typekit');
+            }
+        },
     };
 
     G.Load.main = {

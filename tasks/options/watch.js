@@ -3,6 +3,9 @@ module.exports = {
     // WATCH
     // https://github.com/gruntjs/grunt-contrib-watch
 
+    // revelation
+    // grunt is file centric rather than task???
+    // make sure rules don't double match files
     lib: {
         files: ['libs/*.js'],
         tasks: ['jshint:precat', 'concat:base'],

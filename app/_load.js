@@ -59,10 +59,9 @@ var Data, Glob = new Global('Glob');
     G.Load.font = {
         test: (ROOT.conf.nom === 'localhost' || ROOT.conf.nom === 'qla2'),
         yep: [
-            G.lib + 'fonts/archer.ssm.css',
-            G.lib + 'fonts/archer.ssm.itl.css',
-            G.lib + (!W.isIE ? 'fonts/myriad.otf.css' : 'fonts/myriad.eot.css'),
-            G.lib + (!W.isIE ? 'fonts/myriad.otf.con.css' : 'fonts/myriad.eot.con.css'),
+            G.lib + (!W.isIE ? 'fonts/archer.ssm.css'     : 'fonts/eot/archer.ssm.css'),
+            G.lib + (!W.isIE ? 'fonts/myriad.con.css'     : 'fonts/eot/myriad.con.css'),
+            G.lib + (!W.isIE ? 'fonts/myriad.css'         : 'fonts/eot/myriad.css'),
         ],
         nope: [/*
             '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal */

@@ -110,7 +110,9 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
-        $(':header, p').widorph();
+        $(':header').widorph()
+        $('p').widorph().widorph();
+
         switchLang(U.debug() ? 'en': 'es');
 
         $(W).on('hashchange', _hashListen);

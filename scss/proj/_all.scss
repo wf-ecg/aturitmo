@@ -17,9 +17,6 @@ $fracto: $num - (1 - ($fract));
     top: 0;
     width: $w;
 }
-.loading {
-    visibility: hidden;
-}
 @mixin shadgrad($clr1: rgba(11, 11, 11, 0.5), $clr2: rgba(0, 0, 0, 0) ) {
     .msie & {
         background-image: url(../images/masq.png);

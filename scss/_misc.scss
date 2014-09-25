@@ -37,3 +37,11 @@ html.eng {
 footer .legal.right {
     z-index: 9;
 }
+.loading {
+    @include ani(2s);
+
+    .wrapper {
+       //display: none;
+        visibility: hidden !important;
+    }
+}

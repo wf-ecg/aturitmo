@@ -34,3 +34,6 @@ html.eng {
 .squeeze {
     @include font-thin();
 }
+footer .legal.right {
+    z-index: 9;
+}

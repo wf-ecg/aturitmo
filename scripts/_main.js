@@ -111,7 +111,7 @@ var Main = (function ($, G, U) { // IIFE
 
     function bindings() {
         $(':header').widorph()
-        $('p').widorph().widorph();
+        $('h3, p').widorph().widorph();
 
         switchLang(U.debug() ? 'en': 'es');
 

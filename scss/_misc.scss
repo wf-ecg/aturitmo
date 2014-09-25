@@ -38,9 +38,9 @@ footer .legal.right {
     z-index: 9;
 }
 .loading {
-    @include ani(2s);
+    @include ani(1.5s, 0.5s);
 
-    .wrapper {
+    #Text, #Pics {
        //display: none;
         visibility: hidden !important;
     }

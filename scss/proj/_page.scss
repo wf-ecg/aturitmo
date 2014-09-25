@@ -76,6 +76,10 @@ nav.pager {
     text-align: left;
 
     #Pics {
+        outline-color: rgba(0, 0, 0, 1);
+        outline-offset: -2px;
+        outline-style: solid;
+        outline-width: 4px;
 
         > div {
             height: $num * 100%;

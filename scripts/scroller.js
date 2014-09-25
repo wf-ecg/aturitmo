@@ -13,7 +13,7 @@ var Scroller = (function ($, G, U) { // IIFE
     Df = { // DEFAULTS
         cfig: {
             momentum: true,
-            mouseWheel: false,
+            mouseWheel: !false,
             snap: !true,
             keyBindings: {
                 pageUp: 37,

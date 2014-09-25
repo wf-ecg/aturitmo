@@ -119,7 +119,7 @@ var Main = (function ($, G, U) { // IIFE
 
         $(W.document).on('touchmove', function (e) {
             e.preventDefault();
-            C.debug('touchmove');
+            C.debug(name, 'touchmove');
         });
 
         $(W).on('resize', _.debounce(function () {
@@ -217,23 +217,3 @@ var Main = (function ($, G, U) { // IIFE
 
 
  */
-
-    function genGAstrings() { // google analytics
-        var all = $('a').not('[data-stat]'); // links without data-stat
-
-        all.each(function () {
-            var st, me = $(this);
-
-            // take nearest header and text value of link
-            st = me.closest('article').find(':header').first().text();
-            st = st + ' > ' + (me.text() || me.attr('title') || '[OX]');
-
-            // generate data-stat value
-            st = st.replace(/^\s|(\s){2,}|\s$/g, '$1');
-            me.attr('data-stat', st);
-        });
-
-        if (U.debug(1)) {
-            C.debug('genGAstrings', all);
-        }
-    }

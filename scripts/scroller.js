@@ -134,9 +134,9 @@ var Scroller = (function ($, G, U) { // IIFE
         var page = $('.pager');
         var tip = $('<span>').addClass('tip');
 
-        //myScroll.on('beforeScrollStart', function () { C.debug('beforeScrollStart'); });
+        //myScroll.on('beforeScrollStart', function () { C.debug(name, 'beforeScrollStart'); });
 
-        //myScroll.on('scrollCancel', function () { C.debug('scrollCancel'); });
+        //myScroll.on('scrollCancel', function () { C.debug(name, 'scrollCancel'); });
 
         myScroll.on('scrollStart', function () {
             var page = myScroll.getCurrentPage();
@@ -222,7 +222,7 @@ var Scroller = (function ($, G, U) { // IIFE
         });
 
         if (U.debug(1)) {
-            C.debug(myScroll);
+            C.debug(name, myScroll);
         }
     }
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

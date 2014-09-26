@@ -24,11 +24,12 @@ var Scroller = (function ($, G, U) { // IIFE
             indicators: [{
                 el: $('#Pics')[0],
                 ignoreBoundaries: true,
-                // interactive: true,
+                interactive: true,
                 resize: false,
             }],
         },
         delay: 400,
+        dupe: 'Page8',
         obj: null,
         x: {
             eventPassthrough: false,
@@ -190,7 +191,7 @@ var Scroller = (function ($, G, U) { // IIFE
         $('section').on('inview', function (evt, vis, lr, tb) {
             var id = evt.currentTarget.id;
 
-            if (id === 'Page8') {
+            if (id === Df.dupe) {
                 myScroll.setCurrentPage(0.95, 0);
 
                 _.delay(function () {

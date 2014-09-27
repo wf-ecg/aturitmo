@@ -140,16 +140,18 @@ var Scroller = (function ($, G, U) { // IIFE
         //myScroll.on('scrollCancel', function () { C.debug(name, 'scrollCancel'); });
 
         myScroll.on('scrollStart', function () {
-            var page = myScroll.getCurrentPage();
+            var pg = myScroll.getCurrentPage();
 
-            activateNum(page);
+            activateNum(pg);
         });
 
         myScroll.on('scrollEnd', function () {
             var pg = myScroll.getCurrentPage();
 
             activateNum(pg);
-
+            if (!Main.isMobile()) {
+                self.rest();
+            }
             if (pg === 1) {
                 page.removeClass('active');
                 foot.addClass('active');
@@ -240,9 +242,16 @@ var Scroller = (function ($, G, U) { // IIFE
     $.extend(self, {
         __: Df,
         init: _init,
-        page: function (n) {
-            myScroll.setCurrentPage(n);
+        page: function (num, time) {
+            if (!U.undef(num)) {
+                return myScroll.setCurrentPage(num, time);
+            } else {
+                return myScroll.getCurrentPage();
+            }
         },
+        rest: _.debounce(function () {
+            self.page(Math.round(self.page()), Df.delay * 6);
+        }, Df.delay * 3, false),
     });
 
     return self;

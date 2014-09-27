@@ -23,7 +23,12 @@ var Main = (function ($, G, U) { // IIFE
             shapeReset();
             C.groupEnd(); // compensate for ROOT.loaded delay
 
-            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
+            C.info('Main init @ ' + Date(), {
+                aspect: shape,
+                debug: W.debug,
+                evil: ROOT.evil,
+                mobile: agent,
+            });
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -198,6 +203,9 @@ var Main = (function ($, G, U) { // IIFE
         init: _init,
         delay: Df.delay, // expose for other inits
         mode: eval(U.testrict),
+        isMobile: function () {
+            return !!agent;
+        },
     });
 
     return self;

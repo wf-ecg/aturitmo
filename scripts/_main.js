@@ -110,7 +110,7 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
-        $(':header').widorph()
+        $(':header').widorph();
         $('h3, p').widorph().widorph();
 
         switchLang(U.debug() ? 'en': 'es');

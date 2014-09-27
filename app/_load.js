@@ -70,7 +70,9 @@ var Data, Glob = new Global('Glob');
         ],
         complete: function () {
             try {
-                (!G.Load.font.test) && Typekit.load();
+                if (!G.Load.font.test) {
+                    Typekit.load();
+                }
             } catch (e) {
                 C.error('typekit');
             }
@@ -95,7 +97,7 @@ var Data, Glob = new Global('Glob');
             //G.src + 'tests.js'
         ],
         nope: [
-            'http://www.wellsfargomedia.com/lib/js/ecg-ga.js',
+            'http://www.wellsfargomedia.com/lib/js/ga-ecg.js',
         ],
     };
     M.load([G.Load.base, G.Load.font, G.Load.main, G.Load.test]);

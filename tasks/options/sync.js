@@ -21,6 +21,5 @@ module.exports = {
         }],
         //pretend: true,
         updateOnly: false, // Don't remove any files from `dest` (works around 30% faster)
-        verbose: true,
     },
 };

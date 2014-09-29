@@ -92,6 +92,13 @@ W.ROOT = ({
         }
         return R;
     },
+    reload: function () {
+        var u = this.L.host.split(':');
+        if (u.length == 2) {
+            u = u[0] + ':' + (u[1] - 1000) + '/livereload.js?snipver=1';
+            this.D.write('<script src="http://' + u + '"><\/script>');
+        }
+    },
 }.init());
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

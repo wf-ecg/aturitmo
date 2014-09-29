@@ -3,6 +3,12 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 body {
+    background-color: black;
+    background-image: url('../images/full.jpg');
+    background-position: 50% 999px;
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    @include background-size(cover);
     position: relative;
     text-align: center;
 
@@ -13,9 +19,7 @@ body {
     }
 
     &.fillY, &.slim {
-        background-image: url('../images/full.jpg');
-        background-position: 50% 0%;
-        background-size: auto 100%;
+        background-position: 50% 0px;
 
         .wrapper {
             height: 100%;
@@ -32,7 +36,6 @@ body {
         }
     }
     &.fillX {
-        background-image: url('../images/pages/p7.jpg');
         background-size: 100%;
 
         .wrapper {

@@ -7,7 +7,7 @@ var Scroller = (function ($, G, U) { // IIFE
     'use strict';
     var name = 'Scroller',
         self = new G.constructor(name, '(wrap iscroll controller)'),
-        myScroll, iscale = 2, total = 7,
+        myScroll, iscale = 2, total = 7, foot, pnav, fnav, tip,
         Df;
 
     Df = { // DEFAULTS
@@ -100,6 +100,7 @@ var Scroller = (function ($, G, U) { // IIFE
 
     IScroll.prototype.setCurrentPage = function (num, time) {
         var that = this;
+        C.warn('setCurrentPage', num, time);
 
         if (num > (total + 0.2)) {
             this._setCurrentPage(0.66, 0);
@@ -114,61 +115,65 @@ var Scroller = (function ($, G, U) { // IIFE
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// INTERNAL
 
-    function activate(jq) {
+    function _activate(jq) {
         jq.siblings().removeClass('active');
         jq.addClass('active');
     }
 
-    function activateNum(num) {
-        activate($('nav.pager a').eq(num - 1));
+    function _activateNum(num) {
+        _activate($('nav.pager a').eq(num - 1));
 
-        $('footer nav').each(function () {
-            activate($(this).find('a').eq(num - 1));
+        fnav.each(function () {
+            _activate($(this).find('a').eq(num - 1));
         });
+        if (num < 1.01) {
+            pnav.removeClass('active');
+            foot.addClass('active');
+        } else {
+            pnav.addClass('active');
+            foot.removeClass('active');
+        }
     }
 
+    function _loopback() {
+        var num = myScroll.getCurrentPage();
+        var dif = num - total;
+
+        if (U.debug(1)) {
+            C.debug(name, '_loopback', num, dif);
+        }
+
+        myScroll.setCurrentPage(1 - dif, 0);
+
+        _.delay(function () {
+            myScroll.setCurrentPage(1 + dif);
+        }, 99);
+
+        Stats.update('Loopback:Page1:scroll');
+    }
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     /// HANDLERS
 
     function bindings() {
-        var foot = $('footer');
-        var page = $('.pager');
-        var tip = $('<span>').addClass('tip');
+        foot = $('footer');
+        pnav = $('nav.pager');
+        fnav = foot.find('nav');
+        tip = $('<span>').addClass('tip');
 
-        //myScroll.on('beforeScrollStart', function () { C.debug(name, 'beforeScrollStart'); });
-
-        //myScroll.on('scrollCancel', function () { C.debug(name, 'scrollCancel'); });
-
-        myScroll.on('scrollStart', function () {
-            var pg = myScroll.getCurrentPage();
-
-            activateNum(pg);
-        });
+        //myScroll.on('beforeScrollStart', function () {});
+        //myScroll.on('scrollCancel', function () {});
+        //myScroll.on('scrollStart', function () {});
 
         myScroll.on('scrollEnd', function () {
-            var pg = myScroll.getCurrentPage();
+            var num = myScroll.getCurrentPage();
 
-            activateNum(pg);
+            _activateNum(num);
             if (!Main.isMobile()) {
                 self.rest();
             }
-            if (pg === 1) {
-                page.removeClass('active');
-                foot.addClass('active');
-            } else {
-                page.addClass('active');
-                foot.removeClass('active');
-            }
-            if (pg > total) {
-                myScroll.setCurrentPage(0.66, 0);
-
-                _.delay(function () {
-                    myScroll.setCurrentPage(1.0);
-                }, 99);
-            }
         });
 
-        foot.on('mouseover mouseout', 'section.touch', function (evt) { //      give bottom nav the "dock" feel
+        foot.on('mouseover mouseout', 'section.touch', function (evt) { ///     give bottom fnav the "dock" feel
             if (evt.type === 'mouseover') {
                 foot.addClass('active');
             } else {
@@ -176,48 +181,42 @@ var Scroller = (function ($, G, U) { // IIFE
             }
         });
 
-        $('nav.pager, footer nav').on('click', 'a', function () { //            set triggers directly to pages
+        fnav.add(pnav).on('click', 'a', function () { ///                       set triggers directly to pages
             var me = $(this), num = me.data('page');
 
             myScroll.setCurrentPage(num);
-            activateNum(num);
         });
 
-        $('img.down').on('click', function () { //                              scroll to next page /or/ jump to top and crawl
-            var num = (myScroll.getCurrentPage() | 0) + 1;
+        $('img.down').on('click', function () { ///                             scroll to next page /or/ jump to top and crawl
+            var num = Math.round(myScroll.getCurrentPage()) % (total + 1);
 
-            num = (num > 0) ? num : 1;
+            num += (num < total) ? 1 : 0.5;
             myScroll.setCurrentPage(num, num === 1 ? 0 : undefined);
         }).css('position', 'fixed');
 
-        $('section').on('inview', function (evt, vis, lr, tb) {
+        $('section').on('inview', function (evt, vis, lr, tb) { ///             evaluate each section
             var id = evt.currentTarget.id;
 
-            if (id === Df.dupe) {
-                myScroll.setCurrentPage(0.95, 0);
-
-                _.delay(function () {
-                    myScroll.setCurrentPage(1.1);
-                }, 99);
-
-                Stats.update('Loopback:Page1:scroll');
+            if (vis && id === Df.dupe) { // overlap area
+                _loopback();
             } else if (tb === 'top' && id) {
                 Stats.update('Viewing:' + evt.currentTarget.id + ':scroll');
             }
         });
 
-        $('nav.pager a').each(function () {
+        pnav.find('a').each(function () { // regenerate tool tipping
             var me, txt, eng, esp;
 
             me = $(this);
             txt = me.attr('title');
-            me.attr({
+
+            me.attr({ // turn title into tips/alt
                 title: '',
                 alt: txt,
             });
-
             txt = txt.split('/');
-            if (!W.msie) {
+
+            if (!W.msie) { // get fancy
                 eng = tip.clone().text(txt[0]).addClass('eng');
                 esp = tip.clone().text(txt[1]).addClass('esp');
                 me.append(eng, esp);
@@ -250,7 +249,10 @@ var Scroller = (function ($, G, U) { // IIFE
             }
         },
         rest: _.debounce(function () {
-            self.page(Math.round(self.page()), Df.delay * 6);
+            var num = Math.round(self.page());
+
+            self.page(num, Df.delay * 6);
+            _activateNum(num);
         }, Df.delay * 3, false),
     });
 

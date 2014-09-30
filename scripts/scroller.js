@@ -102,14 +102,7 @@ var Scroller = (function ($, G, U) { // IIFE
         var that = this;
         C.warn('setCurrentPage', num, time);
 
-        if (num > (total + 0.2)) {
-            this._setCurrentPage(0.66, 0);
-            _.delay(function () {
-                that._setCurrentPage(1.0);
-            }, 99);
-        } else {
-            this._setCurrentPage(num, time);
-        }
+        this._setCurrentPage(num, time);
     };
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -143,11 +136,7 @@ var Scroller = (function ($, G, U) { // IIFE
             C.debug(name, '_loopback', num, dif);
         }
 
-        myScroll.setCurrentPage(1 - dif, 0);
-
-        _.delay(function () {
-            myScroll.setCurrentPage(1 + dif);
-        }, 99);
+        myScroll.setCurrentPage(1, 0);
 
         Stats.update('Loopback:Page1:scroll');
     }
@@ -190,7 +179,7 @@ var Scroller = (function ($, G, U) { // IIFE
         $('img.down').on('click', function () { ///                             scroll to next page /or/ jump to top and crawl
             var num = Math.round(myScroll.getCurrentPage()) % (total + 1);
 
-            num += (num < total) ? 1 : 0.5;
+            num += (num < total) ? 1 : 0.44; // half step into loop
             myScroll.setCurrentPage(num, num === 1 ? 0 : undefined);
         }).css('position', 'fixed');
 

@@ -2,7 +2,9 @@
 /*globals _, C, W, Glob:true, Util, jQuery,
         Global, Modernizr, ROOT, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-var Data, Glob = new Global('Glob');
+var Data, Glob;
+
+Glob = new Global('Glob');
 
 (function ($, M, G) {
     'use strict';
@@ -12,11 +14,9 @@ var Data, Glob = new Global('Glob');
     G.Load = {};
 
     _.defaults(G, { /// all stubs terminated
-        top: ROOT.dir + '/',
         dir: ROOT.dir + '/',
         lib: ROOT.lib + '/',
-        loc: ROOT.dir + '/lib/',
-        src: ROOT.dir + '/scripts/',
+        ven: ROOT.dir + '/vendor/',
     });
 
     if ($.browser.msie) {
@@ -40,8 +40,8 @@ var Data, Glob = new Global('Glob');
     G.Load.base = {
         test: W.isIE,
         yep: [
-            G.lib + 'ie/split.js',
-            G.lib + 'iscroll/5.0.4/iscroll.js',
+            G.ven + 'msie/split.js',
+            G.ven + 'msie/iscroll.js',
         ],
         nope: [
             G.lib + 'iscroll/5.1.1/iscroll.js',
@@ -49,10 +49,12 @@ var Data, Glob = new Global('Glob');
         both: [
             G.lib + 'video-js/4.2.1/video-js.css',
             G.lib + 'video-js/4.2.1/video.dev.js',
-            'build/lib.js',
+            /* */
+            G.dir + 'build/lib.js',
         ],
         complete: function () {
             U = Util;
+            Data = new G.constructor('Data', '(catchall data fixture)');
         },
     };
 
@@ -81,21 +83,19 @@ var Data, Glob = new Global('Glob');
 
     G.Load.main = {
         both: [
-            'build/src.js',
+            G.dir + 'build/src.js',
         ],
         complete: function () {
             _.delay(function () {
                 ROOT.loaded($);
             }, 2e3);
-            evil(W.Main && W.Main.init());
+            eval(W.Main && W.Main.init());
         },
     };
 
     G.Load.test = {
         test: W.debug >= 1,
-        yep: [
-            //G.src + 'tests.js'
-        ],
+        //yep: ['_tests.js'],
         nope: [
             'http://www.wellsfargomedia.com/lib/js/ga-ecg.js',
         ],

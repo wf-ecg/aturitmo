@@ -42,7 +42,7 @@ var Main = (function ($, G, U) { // IIFE
         b = $('#Page8');
 
         a = a.find('article').clone().css({
-            top: '-33%',
+            top: '-45%',
         });
         b.empty().append(a);
     }

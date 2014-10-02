@@ -137,7 +137,10 @@ var Scroller = (function ($, G, U) { // IIFE
             C.debug(name, '_loopback', num, dif);
         }
 
-        myScroll.setCurrentPage(1, 0);
+        myScroll.setCurrentPage(0.9, 0);
+        _.defer(function () {
+            myScroll.setCurrentPage(1.1);
+        });
 
         Stats.update('Loopback:Page1:scroll');
     }

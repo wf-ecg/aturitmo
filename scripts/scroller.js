@@ -114,6 +114,7 @@ var Scroller = (function ($, G, U) { // IIFE
     }
 
     function _activateNum(num) {
+        num = num || myScroll.getCurrentPage();
         _activate($('nav.pager a').eq(num - 1));
 
         fnav.each(function () {
@@ -189,6 +190,7 @@ var Scroller = (function ($, G, U) { // IIFE
             if (vis && id === Df.dupe) { // overlap area
                 _loopback();
             } else if (tb === 'top' && id) {
+                _activateNum(parseInt(id, 10));
                 Stats.update('Viewing:' + evt.currentTarget.id + ':scroll');
             }
         });

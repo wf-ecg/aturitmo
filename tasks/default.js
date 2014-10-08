@@ -14,11 +14,11 @@ module.exports = function (grunt) {
         'watch',
     ]);
 
-    grunt.registerTask('custom', 'Say hello!', function () {
-        grunt.log.writeln("Custom task log");
-    });
-
-    grunt.registerTask('dev', ['connect', 'watch']);
+    // grunt.registerTask('custom', 'Say hello!', function () {
+    //     grunt.log.writeln("Custom task log");
+    // });
+    //
+    // grunt.registerTask('dev', ['connect', 'watch']);
 
         /*
     grunt.event.on('watch', function (action, filepath, target) {

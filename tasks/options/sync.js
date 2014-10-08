@@ -11,7 +11,6 @@ module.exports = {
         }],
         //pretend: true,
         updateOnly: true, // Don't remove any files from `dest` (works around 30% faster)
-        verbose: true,
     },
     full: {
         files: [ {
@@ -21,5 +20,6 @@ module.exports = {
         }],
         //pretend: true,
         updateOnly: false, // Don't remove any files from `dest` (works around 30% faster)
+        verbose: true,
     },
 };

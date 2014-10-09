@@ -1,6 +1,6 @@
 /*jslint white:false */
-/*globals _, C, W, Glob:true, Util, jQuery,
-        Global, Modernizr, ROOT, */
+/*globals _, C, W, Global, jQuery,
+    Glob:true, Main, Modernizr, ROOT, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 var Data, Glob;
 
@@ -8,10 +8,8 @@ Glob = new Global('Glob');
 
 (function ($, M, G) {
     'use strict';
-    var U;
-    W.G = G;
-    W.Tests = $.Callbacks();
     G.Load = {};
+    W.Tests = $.Callbacks();
 
     _.defaults(G, { /// all stubs terminated
         dir: ROOT.dir + '/',
@@ -53,7 +51,6 @@ Glob = new Global('Glob');
             G.dir + 'build/lib.js',
         ],
         complete: function () {
-            U = Util;
             Data = new G.constructor('Data', '(catchall data fixture)');
         },
     };
@@ -89,7 +86,7 @@ Glob = new Global('Glob');
             _.delay(function () {
                 ROOT.loaded($);
             }, 2e3);
-            eval(W.Main && W.Main.init());
+            Main.init();
         },
     };
 
@@ -104,3 +101,7 @@ Glob = new Global('Glob');
 
 }(jQuery, Modernizr, Glob));
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*
+Originally built by WF-ECG INTERACTIVE (Wells Fargo Enterprise Creative Group).
+        We design and develop with a focus on web standards and best practices.
+*/

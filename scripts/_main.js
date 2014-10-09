@@ -148,7 +148,7 @@ var Main = (function ($, G, U) { // IIFE
 
         $('header img.left').on('click', function () {
             scroll.setCurrentPage(1);
-            html.removeClass('dev');
+            html.removeClass('debug');
         });
 
         $('a.vid').on('click', function (evt) {

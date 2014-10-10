@@ -10,7 +10,7 @@ module.exports = {
     },
     base: {
         options: {
-            // {String}(Default: auto)
+            // sourcemap: {String}(Default: auto)
             //  auto - relative paths where possible, file URIs elsewhere
             //  file - always absolute file URIs
             //  inline - include the source text in the sourcemap
@@ -27,5 +27,18 @@ module.exports = {
         files: {
             'app/build/screen.css': 'scss/screen.scss',
         },
+    },
+    dyna: {
+        options: {
+            sourcemap: 'none',
+        },
+        files: [{
+            cwd: 'scss/',
+            dest: 'app/styles/',
+            expand: true,
+            ext: '.css',
+            extDot: 'last',
+            src: ['*.scss'],
+        }],
     },
 };

@@ -24,7 +24,7 @@ if (typeof Object.create !== 'function') { // SHIM _util.poly
     }());
 }
 //
-// Indexof IE8 polyfill
+// Array.indexOf  (IE8)
 //
 if (!Array.prototype.indexOf) { // SHIM _util.poly
     Array.prototype.indexOf = function (elt /*, from*/) {
@@ -67,7 +67,7 @@ W.getElementTreeXPath = function (element) { // SHIM _util.poly
             // Ignore document type declaration.
             if (sibling.nodeType == Node.DOCUMENT_TYPE_NODE) continue;
 
-            if (sibling.nodeName == element.nodeName)++index;
+            if (sibling.nodeName == element.nodeName) ++index;
         }
 
         var tagName = element.nodeName.toLowerCase();

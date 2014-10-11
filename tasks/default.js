@@ -33,6 +33,11 @@ module.exports = function (grunt) {
 };
 
 /*
+    * matches any number of characters, but not /
+    ? matches a single character, but not /
+    ** matches any number of characters, including /, as long as it's the only thing in a path part
+    {} allows for a comma-separated list of "or" expressions
+    ! at the beginning of a pattern will negate the match
 
 // You can specify single files:
 // Or arrays of files:
@@ -63,5 +68,28 @@ module.exports = function (grunt) {
 
     files: { 'dest/<%= basename %>.min.js': ['src/<%= basename %>.js'] }
     files: { 'dest/file': ['foo/*.js', '<%= jshint.all.src %>'] }
+
+    grunt.initConfig({
+        uglify: {
+            static_mappings: {
+                files: [
+                    {src: 'lib/a.js', dest: 'build/a.min.js'},
+                    {src: 'lib/b.js', dest: 'build/b.min.js'},
+                    {src: 'lib/subdir/c.js', dest: 'build/subdir/c.min.js'},
+                    {src: 'lib/subdir/d.js', dest: 'build/subdir/d.min.js'},
+                ],
+            },
+            dynamic_mappings: {
+                files: [{
+                    expand: true,     // Enable dynamic expansion.
+                    cwd: 'lib/',      // Src matches are relative to this path.
+                    src: ['**⁄*.js'], // Actual pattern(s) to match.
+                    dest: 'build/',   // Destination path prefix.
+                    ext: '.min.js',   // Dest filepaths will have this extension.
+                    extDot: 'first'   // Extensions in filenames begin after the first dot
+                }],
+            },
+        },
+    });
 
  */

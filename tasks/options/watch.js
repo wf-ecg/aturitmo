@@ -12,7 +12,7 @@ module.exports = {
     },
     css: {
         files: ['scss/**/*.scss'],
-        tasks: ['sass:base'],
+        tasks: ['sass:full'],
     },
     reloads: {
         options: {

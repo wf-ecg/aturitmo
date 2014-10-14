@@ -2,6 +2,9 @@
 /*globals _, C, W, Util */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /// POLYFILLS
+//
+// RequestAnimationFrame
+//
 Util.rafo = function (fnObj) {
     fnObj = fnObj || {};
 

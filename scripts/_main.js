@@ -42,7 +42,7 @@ var Main = (function ($, G, U) { // IIFE
         b = $('#Page8');
 
         a = a.find('article').clone().css({
-            top: '-33%',
+            top: '-45%',
         });
         b.empty().append(a);
     }
@@ -148,7 +148,7 @@ var Main = (function ($, G, U) { // IIFE
 
         $('header img.left').on('click', function () {
             scroll.setCurrentPage(1);
-            html.removeClass('dev');
+            html.removeClass('debug');
         });
 
         $('a.vid').on('click', function (evt) {

@@ -10,15 +10,16 @@ module.exports = {
         options: {
             sourceMap: false, // see uglify for map
         },
-        dest: 'app/build/boot.js',
-        src: [
-            'libs/bootstrap/jquery.js',
-            'libs/bootstrap/modernizr.js',
-            'libs/bootstrap/lodash.underscore.js',
-            'libs/bootstrap/console.js',
-            'libs/bootstrap/global.js',
-        ],
-//        tasks: ['sync'],
+        files: {
+            'app/build/boot.js': [
+                'libs/bootstrap/jquery.js',
+                'libs/bootstrap/modernizr.js',
+                'libs/bootstrap/lodash.underscore.js',
+                'libs/bootstrap/console.js',
+                'libs/bootstrap/global.js',
+                'libs/bootstrap/*.js',
+            ],
+        },
     },
     base: {
         options: { sourceMap: false, },

@@ -161,7 +161,8 @@ var Scroller = (function ($, G, U) { // IIFE
             var num = myScroll.getCurrentPage();
 
             _activateNum(num);
-            if (!Main.isMobile()) {
+
+            if (!W.isIE && !Main.isMobile()) {
                 self.rest();
             }
         });
@@ -208,9 +209,10 @@ var Scroller = (function ($, G, U) { // IIFE
                 title: '',
                 alt: txt,
             });
+
             txt = txt.split('/');
 
-            if (!W.msie) { // get fancy
+            if (!W.isIE) { // get fancy
                 eng = tip.clone().text(txt[0]).addClass('eng');
                 esp = tip.clone().text(txt[1]).addClass('esp');
                 me.append(eng, esp);

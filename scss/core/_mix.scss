@@ -1,7 +1,22 @@
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 /* mixins */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+//@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
+@mixin font-archer() {
+    //font-family: 'Archer A', 'Archer B', Georgia, serif;
+    font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
+}
+@mixin font-plain() {
+    font-family: 'myriad-pro', Helvetica, Arial, Geneva, sans-serif; // 'PT Sans'
+}
+@mixin font-thin() {
+    font-family: 'myriad-pro-condensed', 'Arial Narrow', ArialNarrow, 'Open Sans Condensed', sans-serif;
+}
+@mixin font-thick() {
+    font-family: Verdana, sans-serif;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 @mixin clearfix(){
     &:after {
         clear: both;
@@ -58,26 +73,6 @@
     background-color: setTrans($color, $opacity);
 }
 // - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
-@mixin font-archer() {
-    //font-family: 'Archer A', 'Archer B', Georgia, serif;
-    font-family: 'Archer SSm A', 'Archer SSm B', Archer, Georgia, serif;
-}
-@mixin font-plain() {
-    font-family: 'myriad-pro', Helvetica, Arial, Geneva, sans-serif; // 'PT Sans'
-}
-@mixin font-myriad() {
-    font-family: 'MyriadPro', 'Myriad Pro',
-    'MyriadProRegular', 'MyriadPro-Regular', 'Myriad Pro Regular',
-    'PT Sans', Helvetica, Arial, Geneva, sans-serif;
-}
-@mixin font-thin() {
-    font-family: 'Arial Narrow', ArialNarrow, 'Open Sans Condensed', sans-serif;
-}
-@mixin font-thick() {
-    font-family: Verdana, sans-serif;
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-// - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - - + - //
 // GRADS
 @mixin buttongrad1(){
     background-color: $button1;
@@ -107,8 +102,8 @@
     -o-text-size-adjust: $foo;
     text-size-adjust: $foo;
 }
-@mixin ani(){
-    @include transition( all 0.25s ease-in-out 0 );
+@mixin ani($time: 0.25s, $wait: 0s){
+    @include transition( all $time ease-in-out $wait);
 }
 @mixin bulge(){
     @include transform( translate(0px, 1px) scale(1.1)  );

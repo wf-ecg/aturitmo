@@ -13,7 +13,7 @@ var Scroller = (function ($, G, U) { // IIFE
     Df = { // DEFAULTS
         cfig: {
             momentum: true,
-            mouseWheel: false,
+            mouseWheel: !false,
             snap: !true,
             keyBindings: {
                 pageUp: 37,
@@ -24,11 +24,12 @@ var Scroller = (function ($, G, U) { // IIFE
             indicators: [{
                 el: $('#Pics')[0],
                 ignoreBoundaries: true,
-                // interactive: true,
+                interactive: true,
                 resize: false,
             }],
         },
         delay: 400,
+        dupe: 'Page8',
         obj: null,
         x: {
             eventPassthrough: false,
@@ -134,21 +135,23 @@ var Scroller = (function ($, G, U) { // IIFE
         var page = $('.pager');
         var tip = $('<span>').addClass('tip');
 
-        //myScroll.on('beforeScrollStart', function () { C.debug('beforeScrollStart'); });
+        //myScroll.on('beforeScrollStart', function () { C.debug(name, 'beforeScrollStart'); });
 
-        //myScroll.on('scrollCancel', function () { C.debug('scrollCancel'); });
+        //myScroll.on('scrollCancel', function () { C.debug(name, 'scrollCancel'); });
 
         myScroll.on('scrollStart', function () {
-            var page = myScroll.getCurrentPage();
+            var pg = myScroll.getCurrentPage();
 
-            activateNum(page);
+            activateNum(pg);
         });
 
         myScroll.on('scrollEnd', function () {
             var pg = myScroll.getCurrentPage();
 
             activateNum(pg);
-
+            if (!Main.isMobile()) {
+                self.rest();
+            }
             if (pg === 1) {
                 page.removeClass('active');
                 foot.addClass('active');
@@ -190,7 +193,7 @@ var Scroller = (function ($, G, U) { // IIFE
         $('section').on('inview', function (evt, vis, lr, tb) {
             var id = evt.currentTarget.id;
 
-            if (id === 'Page8') {
+            if (id === Df.dupe) {
                 myScroll.setCurrentPage(0.95, 0);
 
                 _.delay(function () {
@@ -222,7 +225,7 @@ var Scroller = (function ($, G, U) { // IIFE
         });
 
         if (U.debug(1)) {
-            C.debug(myScroll);
+            C.debug(name, myScroll);
         }
     }
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -239,9 +242,16 @@ var Scroller = (function ($, G, U) { // IIFE
     $.extend(self, {
         __: Df,
         init: _init,
-        page: function (n) {
-            myScroll.setCurrentPage(n);
+        page: function (num, time) {
+            if (!U.undef(num)) {
+                return myScroll.setCurrentPage(num, time);
+            } else {
+                return myScroll.getCurrentPage();
+            }
         },
+        rest: _.debounce(function () {
+            self.page(Math.round(self.page()), Df.delay * 6);
+        }, Df.delay * 3, false),
     });
 
     return self;

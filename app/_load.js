@@ -57,18 +57,26 @@ var Data, Glob = new Global('Glob');
     };
 
     G.Load.font = {
-        test: ROOT.conf.nom === 'localhost',
+        test: (ROOT.conf.nom === 'localhost' || ROOT.conf.nom === 'qla2'),
         yep: [
-            G.lib + 'fonts/archer.ssm.css',
-            G.lib + 'fonts/archer.ssm.itl.css',
+            G.lib + (!W.isIE ? 'fonts/archer.ssm.css'     : 'fonts/eot/archer.ssm.css'),
+            G.lib + (!W.isIE ? 'fonts/myriad.con.css'     : 'fonts/eot/myriad.con.css'),
+            G.lib + (!W.isIE ? 'fonts/myriad.css'         : 'fonts/eot/myriad.css'),
         ],
         nope: [/*
             '//cloud.typography.com/6819872/620964/css/fonts.css', // Normal */
             '//cloud.typography.com/6819872/633184/css/fonts.css', // ScrnSmrt
+            '//use.typekit.net/cqz6fet.js',
         ],
-        both: [
-            G.lib + 'fonts/myriad.css',
-        ],
+        complete: function () {
+            try {
+                if (!G.Load.font.test) {
+                    Typekit.load();
+                }
+            } catch (e) {
+                C.error('typekit');
+            }
+        },
     };
 
     G.Load.main = {
@@ -78,7 +86,7 @@ var Data, Glob = new Global('Glob');
         complete: function () {
             _.delay(function () {
                 ROOT.loaded($);
-            }, 333);
+            }, 2e3);
             evil(W.Main && W.Main.init());
         },
     };
@@ -89,7 +97,7 @@ var Data, Glob = new Global('Glob');
             //G.src + 'tests.js'
         ],
         nope: [
-            'http://www.wellsfargomedia.com/lib/js/ecg-ga.js',
+            'http://www.wellsfargomedia.com/lib/js/ga-ecg.js',
         ],
     };
     M.load([G.Load.base, G.Load.font, G.Load.main, G.Load.test]);

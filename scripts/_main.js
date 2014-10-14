@@ -23,7 +23,12 @@ var Main = (function ($, G, U) { // IIFE
             shapeReset();
             C.groupEnd(); // compensate for ROOT.loaded delay
 
-            C.info('Main init @ ' + Date() + ' debug:', W.debug, ROOT.evil, shape, agent);
+            C.info('Main init @ ' + Date(), {
+                aspect: shape,
+                debug: W.debug,
+                evil: ROOT.evil,
+                mobile: agent,
+            });
         },
     };
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -110,14 +115,16 @@ var Main = (function ($, G, U) { // IIFE
     }
 
     function bindings() {
-        $(':header, p').widorph();
+        $(':header').widorph();
+        $('h3, p').widorph().widorph();
+
         switchLang(U.debug() ? 'en': 'es');
 
         $(W).on('hashchange', _hashListen);
 
         $(W.document).on('touchmove', function (e) {
             e.preventDefault();
-            C.debug('touchmove');
+            C.debug(name, 'touchmove');
         });
 
         $(W).on('resize', _.debounce(function () {
@@ -196,6 +203,9 @@ var Main = (function ($, G, U) { // IIFE
         init: _init,
         delay: Df.delay, // expose for other inits
         mode: eval(U.testrict),
+        isMobile: function () {
+            return !!agent;
+        },
     });
 
     return self;
@@ -215,23 +225,3 @@ var Main = (function ($, G, U) { // IIFE
 
 
  */
-
-    function genGAstrings() { // google analytics
-        var all = $('a').not('[data-stat]'); // links without data-stat
-
-        all.each(function () {
-            var st, me = $(this);
-
-            // take nearest header and text value of link
-            st = me.closest('article').find(':header').first().text();
-            st = st + ' > ' + (me.text() || me.attr('title') || '[OX]');
-
-            // generate data-stat value
-            st = st.replace(/^\s|(\s){2,}|\s$/g, '$1');
-            me.attr('data-stat', st);
-        });
-
-        if (U.debug(1)) {
-            C.debug('genGAstrings', all);
-        }
-    }

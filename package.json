@@ -20,7 +20,7 @@
         "load-grunt-tasks": "~0.2.0"
     },
     "bases": ["app", ".", "../.."],
-    "group": "wf-ecg/aturitmo/3",
+    "group": "wf-ecg/aturitmo/0",
     "port0": 7043,
     "port1": 8043,
     "zzzzz": 0

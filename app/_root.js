@@ -14,7 +14,7 @@ W.ROOT = ({
         },
         'www.wellsfargomedia.com': {
             nom: 'wfmedia',
-            sub: '/aturitmo/test',
+            sub: '/atupasion',
         },
         'ecg.hosting.wellsfargo.com': {
             lib: '//www.wellsfargomedia.com/lib',

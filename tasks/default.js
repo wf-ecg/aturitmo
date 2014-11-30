@@ -1,10 +1,12 @@
 module.exports = function (grunt) {
 
     grunt.registerTask('default', [
-        'jshint:precat', 'concat:full', 'concat:bootstrap', 'jshint:postcat',
-        'uglify:full',
+        'jshint:precat',
+        'concat',
+        'jshint:postcat',
+        'uglify',
         'sass:full',
-        'sync:full',
+        'sync:clean',
         'connect:full',
         'watch',
     ]);
@@ -13,6 +15,36 @@ module.exports = function (grunt) {
         'connect:base',
         'watch',
     ]);
+
+    grunt.registerMultiTask('wrap', 'Wraps source files with specified header and footer', function () {
+        var data = this.data,
+            path = require('path'),
+            dest = grunt.template.process(data.dest),
+            files = grunt.file.expandFiles(this.file.src),
+            header = grunt.file.read(grunt.template.process(data.header)),
+            footer = grunt.file.read(grunt.template.process(data.footer)),
+            sep = grunt.utils.linefeed;
+
+        files.forEach(function (f) {
+            var p = dest + '/' + path.basename(f),
+                contents = grunt.file.read(f);
+
+            grunt.file.write(p, header + sep + contents + sep + footer);
+            grunt.log.writeln('File "' + p + '" created.');
+        });
+    });
+
+    grunt.foo = (function () {
+        var out = {};
+        grunt.file.expand({
+            cwd: 'libs',
+            filter: 'isDirectory'
+        }, '*').map(function (nom) {
+            out['app/build/' + nom + '.js'] = ['libs/' + nom + '/*.js'];
+        });
+        console.log('GRUNT.FOO', out);
+        return out;
+    }());
 
     // grunt.registerTask('custom', 'Say hello!', function () {
     //     grunt.log.writeln("Custom task log");

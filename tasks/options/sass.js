@@ -13,7 +13,7 @@ module.exports = {
         compass: true,
         require: 'animation',
         style: 'compact',
-        update: !false, /// {Boolean}(Default: false) Only compile changed files.
+        update: false, /// {Boolean}(Default: false) Only compile changed files.
     },
     full: {
         files: [{

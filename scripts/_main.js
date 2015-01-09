@@ -26,7 +26,6 @@ var Main = (function ($, G, U) { // IIFE
             C.info('Main init @ ' + Date(), {
                 aspect: shape,
                 debug: W.debug,
-                evil: ROOT.evil,
                 mobile: agent,
             });
         },

@@ -21,14 +21,7 @@ module.exports = {
             sourceMap: false, // see uglify for map
         },
         files: {
-            'app/build/boot.js': [
-                'libs/boot/jquery.js',
-                'libs/boot/modernizr.js',
-                'libs/boot/lodash.underscore.js',
-                'libs/boot/console.js',
-                'libs/boot/global.js',
-                'libs/boot/*.js',
-            ],
+            'app/build/boot.js': ['libs/boot/*.js'],
         },
     },
     libs: {

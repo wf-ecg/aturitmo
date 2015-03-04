@@ -2,11 +2,11 @@
 // PATCHED for IE from: stackoverflow?
 /*! iScroll v5.0.4 ~ (c) 2008-2013 Matteo Spinelli ~ http://cubiq.org/license */
 var IScroll = (function (window, document, Math) {
-    var rAF = window.requestAnimationFrame	||
-    window.webkitRequestAnimationFrame	||
-    window.mozRequestAnimationFrame		||
-    window.oRequestAnimationFrame		||
-    window.msRequestAnimationFrame		||
+    var rAF = window.requestAnimationFrame  ||
+    window.webkitRequestAnimationFrame  ||
+    window.mozRequestAnimationFrame     ||
+    window.oRequestAnimationFrame       ||
+    window.msRequestAnimationFrame      ||
     function (callback) {
         window.setTimeout(callback, 1000 / 60);
     };
@@ -125,7 +125,7 @@ var IScroll = (function (window, document, Math) {
                         fn.handleEvent.call(fn);
                     });
                 //      el[type + fn] = null;
-                //	    el["e" + type + fn] = null;
+                //      el["e" + type + fn] = null;
                 } else {
                     el.detachEvent('on' + evt, fn);
                 }
@@ -240,7 +240,7 @@ var IScroll = (function (window, document, Math) {
                 }
             },
             circular: {
-                style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',	// Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
+                style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',   // Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
                 fn: function (k) {
                     return Math.sqrt( 1 - ( --k * k ) );
                 }
@@ -314,7 +314,7 @@ var IScroll = (function (window, document, Math) {
     function IScroll (el, options) {
         this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
         this.scroller = this.wrapper.children[0];
-        this.scrollerStyle = this.scroller.style;		// cache style for better performance
+        this.scrollerStyle = this.scroller.style;       // cache style for better performance
 
         this.options = {
 
@@ -455,10 +455,10 @@ var IScroll = (function (window, document, Math) {
             var point = e.touches ? e.touches[0] : e,
             pos;
 
-            this.initiated	= utils.eventType[e.type];
-            this.moved		= false;
-            this.distX		= 0;
-            this.distY		= 0;
+            this.initiated  = utils.eventType[e.type];
+            this.moved      = false;
+            this.distX      = 0;
+            this.distY      = 0;
             this.directionX = 0;
             this.directionY = 0;
             this.directionLocked = 0;
@@ -490,24 +490,24 @@ var IScroll = (function (window, document, Math) {
                 return;
             }
 
-            if ( this.options.preventDefault ) {	// increases performance on Android? TODO: check!
+            if ( this.options.preventDefault ) {    // increases performance on Android? TODO: check!
                 (e.preventDefault) ? e.preventDefault() : e.returnValue = false;
             }
 
-            var point		= e.touches ? e.touches[0] : e,
-            deltaX		= this.hasHorizontalScroll ? point.pageX - this.pointX : 0,
-            deltaY		= this.hasVerticalScroll   ? point.pageY - this.pointY : 0,
-            timestamp	= utils.getTime(),
+            var point       = e.touches ? e.touches[0] : e,
+            deltaX      = this.hasHorizontalScroll ? point.pageX - this.pointX : 0,
+            deltaY      = this.hasVerticalScroll   ? point.pageY - this.pointY : 0,
+            timestamp   = utils.getTime(),
             newX, newY,
             absDistX, absDistY;
 
-            this.pointX		= point.pageX;
-            this.pointY		= point.pageY;
+            this.pointX     = point.pageX;
+            this.pointY     = point.pageY;
 
-            this.distX		+= deltaX;
-            this.distY		+= deltaY;
-            absDistX		= Math.abs(this.distX);
-            absDistY		= Math.abs(this.distY);
+            this.distX      += deltaX;
+            this.distY      += deltaY;
+            absDistX        = Math.abs(this.distX);
+            absDistY        = Math.abs(this.distY);
 
             // We need to move at least 10 pixels for the scrolling to initiate
             if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
@@ -517,11 +517,11 @@ var IScroll = (function (window, document, Math) {
             // If you are scrolling in one direction lock the other
             if ( !this.directionLocked && !this.options.freeScroll ) {
                 if ( absDistX > absDistY + this.options.directionLockThreshold ) {
-                    this.directionLocked = 'h';		// lock horizontally
+                    this.directionLocked = 'h';     // lock horizontally
                 } else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
-                    this.directionLocked = 'v';		// lock vertically
+                    this.directionLocked = 'v';     // lock vertically
                 } else {
-                    this.directionLocked = 'n';		// no lock
+                    this.directionLocked = 'n';     // no lock
                 }
             }
 
@@ -581,7 +581,7 @@ var IScroll = (function (window, document, Math) {
             }
 
             if ( this.options.preventDefault ) {
-                (e.preventDefault) ? e.preventDefault() : e.returnValue = false;		// TODO: check if needed
+                (e.preventDefault) ? e.preventDefault() : e.returnValue = false;        // TODO: check if needed
             }
 
             var point = e.changedTouches ? e.changedTouches[0] : e,
@@ -595,7 +595,7 @@ var IScroll = (function (window, document, Math) {
             time = 0,
             easing = '';
 
-            this.scrollTo(newX, newY);	// ensures that the last position is rounded
+            this.scrollTo(newX, newY);  // ensures that the last position is rounded
 
             this.isInTransition = 0;
             this.initiated = 0;
@@ -715,23 +715,23 @@ var IScroll = (function (window, document, Math) {
         },
 
         refresh: function () {
-            var rf = this.wrapper.offsetHeight;		// Force reflow
+            var rf = this.wrapper.offsetHeight;     // Force reflow
 
-            this.wrapperWidth	= this.wrapper.clientWidth;
-            this.wrapperHeight	= this.wrapper.clientHeight;
+            this.wrapperWidth   = this.wrapper.clientWidth;
+            this.wrapperHeight  = this.wrapper.clientHeight;
 
             /* REPLACE START: refresh */
 
-            this.scrollerWidth	= this.scroller.offsetWidth;
-            this.scrollerHeight	= this.scroller.offsetHeight;
+            this.scrollerWidth  = this.scroller.offsetWidth;
+            this.scrollerHeight = this.scroller.offsetHeight;
 
             /* REPLACE END: refresh */
 
-            this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
-            this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
+            this.maxScrollX     = this.wrapperWidth - this.scrollerWidth;
+            this.maxScrollY     = this.wrapperHeight - this.scrollerHeight;
 
-            this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
-            this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
+            this.hasHorizontalScroll    = this.options.scrollX && this.maxScrollX < 0;
+            this.hasVerticalScroll      = this.options.scrollY && this.maxScrollY < 0;
 
             if ( !this.hasHorizontalScroll ) {
                 this.maxScrollX = 0;
@@ -896,7 +896,7 @@ var IScroll = (function (window, document, Math) {
             this.y = y;
 
 
-            if ( this.indicator1 ) {	// usually the vertical
+            if ( this.indicator1 ) {    // usually the vertical
                 this.indicator1.updatePosition();
             }
 
@@ -1375,7 +1375,7 @@ var IScroll = (function (window, document, Math) {
                 return;
             }
 
-            var snap = this.options.snap,	// we are using this alot, better to cache it
+            var snap = this.options.snap,   // we are using this alot, better to cache it
             newX = snap ? this.currentPage.pageX : this.x,
             newY = snap ? this.currentPage.pageY : this.y,
             now = utils.getTime(),
@@ -1656,10 +1656,10 @@ var IScroll = (function (window, document, Math) {
 
             this.initiated = true;
             this.moved = false;
-            this.lastPointX	= point.pageX;
-            this.lastPointY	= point.pageY;
+            this.lastPointX = point.pageX;
+            this.lastPointY = point.pageY;
 
-            this.startTime	= utils.getTime();
+            this.startTime  = utils.getTime();
 
             utils.addEvent(window, 'touchmove', this);
             utils.addEvent(window, 'MSPointerMove', this);
@@ -1754,7 +1754,7 @@ var IScroll = (function (window, document, Math) {
                 }
             }
 
-            var r = this.wrapper.offsetHeight;	// force refresh
+            var r = this.wrapper.offsetHeight;  // force refresh
 
             if ( this.options.listenX ) {
                 this.wrapperWidth = this.wrapper.clientWidth;

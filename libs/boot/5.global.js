@@ -1,8 +1,6 @@
 /*jslint white:false */
-/*globals debug, window */
+/*globals W, C, Global:true */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-var W = window,
-    C = W.console;
 
 function Global(name, desc) {
     var self = this,

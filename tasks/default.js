@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         }, '*').map(function (nom) {
             out['app/build/' + nom + '.js'] = ['libs/' + nom + '/*.js'];
         });
-        console.log('GRUNT.FOO', out);
+        //console.log('GRUNT.FOO', out);
         return out;
     }());
 

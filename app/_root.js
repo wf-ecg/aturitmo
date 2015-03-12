@@ -83,7 +83,7 @@ W.ROOT = ({
         if (C && C.groupCollapsed) {
             C.groupEnd();
         }
-        delete this.reload;
+        delete this.reload; /// retain reload if async needed
         delete this.loaded;
     },
     init: function () {

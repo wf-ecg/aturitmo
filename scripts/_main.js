@@ -1,4 +1,4 @@
-/*jslint white:false, evil:true */
+/*jslint white:false */
 /*globals _, C, W, Glob, ROOT, Util, jQuery,
         IScroll, Main:true, Modal, Scroller, Stats, jsView, videojs, */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -182,7 +182,7 @@ var Main = (function ($, G, U) { // IIFE
     /// INTERNAL
 
     function _init() {
-        if (self.inited(true)) {
+        if (self.isInited(true)) {
             return null;
         }
         Df.inits();
@@ -201,7 +201,6 @@ var Main = (function ($, G, U) { // IIFE
         __: Df,
         init: _init,
         delay: Df.delay, // expose for other inits
-        mode: eval(U.testrict),
         isMobile: function () {
             return !!agent;
         },

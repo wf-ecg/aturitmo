@@ -6,8 +6,12 @@ module.exports = {
     options: {
         debounceDelay: 333,
     },
+    cap: {
+        files: ['libs/**/*.js'],
+        tasks: ['jshint:precat', 'concat:libs', 'concat:boot', 'uglify'],
+    },
     cat: {
-        files: ['libs/*.js', 'scripts/*.js'],
+        files: ['scripts/*.js'],
         tasks: ['jshint:precat', 'concat:main'],
     },
     css: {

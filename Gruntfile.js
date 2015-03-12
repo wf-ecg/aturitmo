@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 
         return obj;
     }
-    console.log('EVALJS', [evaljs('./tasks/options/')]);
+    //console.log('EVALJS', [evaljs('./tasks/options/')]);
 
     // Start initial config object
     conf.pkg = grunt.file.readJSON('./package.json');
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     grunt.initConfig(conf);
 
     //console.log('1', grunt.config.get('connect.base.options'));
-    console.log('* * * * * * * * Big old grunt load * * * * * * * * *');
+    console.log('\n\n\n\n* * * * * * * * Big old grunt load * * * * * * * * *');
     //console.log('2', conf === grunt.config.data, dirlist());
 
     require('load-grunt-tasks')(grunt);
